@@ -375,4 +375,53 @@ class ApiControllerApi extends JControllerLegacy {
 		curl_close($ch);
 		print_r($response);exit;
 	}
+	
+	public function getTerm(){
+		$db = JFactory::getDBO();
+		$db->setQuery("SELECT title, introtext FROM #__content WHERE id = 20");
+		$data = $db->loadObject();
+
+		$return['title'] = $data->title;
+		$return['text'] = $data->introtext;
+		die(json_encode($return));
+	}
+	
+	public function getNearest(){
+		$lat = JRequest::getVar("lat");
+		$long = JRequest::getVar("long");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT id, businessName, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 25 ORDER BY distance LIMIT 0 , 20;";
+		$db->setQuery($q);
+		$stores = $db->loadAssocList();
+		if($stores){
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $stores;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "No result";
+		}
+		die(json_encode($return));
+	}
+	
+	public function getBoutique(){
+		$keyword = JRequest::getVar("keyword");
+		$keyword = strtolower($keyword);
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT id, businessName FROM #__business WHERE LOWER(`businessName`) LIKE '%".$keyword."%'";
+		$db->setQuery($q);
+		$stores = $db->loadAssocList();
+		
+		if($stores){
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $stores;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "No result";
+		}
+		die(json_encode($return));
+	}
 }
