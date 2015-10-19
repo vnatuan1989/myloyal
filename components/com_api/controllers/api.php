@@ -110,11 +110,13 @@ class ApiControllerApi extends JControllerLegacy {
 		if($avatar){
 			$user = JFactory::getUser($userId);
 			$userAvatar = $user->avatar;
-			unlink(JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'avatar'.DIRECTORY_SEPARATOR.$userAvatar);
+			if($userAvatar){
+				unlink(JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'avatar'.DIRECTORY_SEPARATOR.$userAvatar);
+			}
 			$fileName = sha1(uniqid()).".jpg";
 			$decoded_img=base64_decode($avatar);
 			file_put_contents(JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'avatar'.DIRECTORY_SEPARATOR.$fileName,$decoded_img);
-			$avatarStr = ", avatar = '".$firstName."'";
+			$avatarStr = ", avatar = '".$fileName."'";
 		} else {
 			$avatarStr = "";
 		}
@@ -122,31 +124,35 @@ class ApiControllerApi extends JControllerLegacy {
 		if($removeAvatar){
 			$user = JFactory::getUser($userId);
 			$userAvatar = $user->avatar;
-			unlink(JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'avatar'.DIRECTORY_SEPARATOR.$userAvatar);
+			if($userAvatar){
+				unlink(JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'avatar'.DIRECTORY_SEPARATOR.$userAvatar);
+			}
 			$avatarStr = ", avatar = ''";
 		}
 		
+		$db = JFactory::getDBO();
 		$name = $firstName." ".$lastName;
-		$q = "UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."'".$passStr.$avatarStr;
+		$q = "UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."'".$passStr.$avatarStr." WHERE id = ".$userId;
 		$db->setQuery($q);
 		if($db->execute()){
-			$user = JFactory::getUser($userId);
+			$user1 = JFactory::getUser($userId);
 			$return["result"] = 1;
 			$return["error"] = "";
-			$return['userId'] = $user->id;
-			$return['firstName'] = $user->firstName;
-			$return['lastName'] = $user->lastName;
-			$return['email'] = $user->email;
+			$return['userId'] = $user1->id;
+			$return['firstName'] = $user1->firstName;
+			$return['lastName'] = $user1->lastName;
+			$return['email'] = $user1->email;
 			if($user->avatar){
-				$return['avatar'] = JURI::base()."images/avatar/".$user->avatar;
+				$return['avatar'] = JURI::base()."images/avatar/".$user1->avatar;
 			} else {
 				$return['avatar'] = "";
 			}
-			$return['facebookId'] = $user->facebookId;
+			$return['facebookId'] = $user1->facebookId;
 		} else {
 			$return["result"] = 0;
 			$return["error"] = "Can't update profile";
 		}
+		die(json_encode($return));
 	}
 	
 	public function facebookLogin(){
