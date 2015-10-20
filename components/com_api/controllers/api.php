@@ -160,18 +160,22 @@ class ApiControllerApi extends JControllerLegacy {
 		$email = JRequest::getVar("email");
 		$firstName = JRequest::getVar("firstName");
 		$lastName = JRequest::getVar("lastName");
+		$name = $firstName." ".$lastName;
 		
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT id FROM #__users WHERE facebookId = '".$facebookId."'");	
 		$userId = $db->loadResult();
 		
 		if($userId){
+			$db->setQuery("UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."' WHERE id = ".$userId);
+			$db->execute();
+			
 			$user = JFactory::getUser($userId);		
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['userId'] = $user->id;
-			$return['firstName'] = $user->firstName;
-			$return['lastName'] = $user->lastName;
+			$return['firstName'] = $firstName;
+			$return['lastName'] = $lastName;
 			$return['email'] = $user->email;
 			$return['avatar'] = "";
 			$return['facebook_id'] = $facebookId;
@@ -181,7 +185,6 @@ class ApiControllerApi extends JControllerLegacy {
 				$return["result"] = 0;
 				$return["error"] = "You can't use this email, it is in use";
 			} else {
-				$name = $firstName." ".$lastName;
 				$q = "INSERT INTO #__users(name, username, email, sendEmail, registerDate, lastName, firstName, facebookId) VALUES ('".$name."', '".$email."', '".$email."', 1, NOW(), '".$firstName."', '".$lastName."', '".$facebookId."')";
 				$db->setQuery($q);
 				$db->execute();
@@ -227,16 +230,17 @@ class ApiControllerApi extends JControllerLegacy {
 			$pass = JUserHelper::hashPassword($new_pass);
 			$db->setQuery("UPDATE #__users SET password = '".$pass."' WHERE email = '".$email."'");
 			if($db->query()){
-				$result = array("result" => 1);
+				$return["result"] = 1;
+				$return["error"] = "";
 			} else {
-				$data["result"] = 0;
-				$data["error"] = "Can not update new password";
+				$return["result"] = 0;
+				$return["error"] = "Can not update new password";
 			}
 		} else {
-			$data["result"] = 0;
-			$data["error"] = "Can not send email";
+			$return["result"] = 0;
+			$return["error"] = "Can not send email";
 		}
-		die(json_encode($result));
+		die(json_encode($return));
 	}
 	
 	private function _generateRandomString($length = 10) {
@@ -280,7 +284,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		//register device
 		$url = 'https://cp.pushwoosh.com/json/1.3/registerDevice';
-		$send['request'] = array('application' => '64BD1-55924', 'push_token'=>$token, 'language'=>'da', 'hwid'=>$hwId, 'timezone'=>3600, 'device_type'=>$type);
+		$send['request'] = array('application' => '', 'push_token'=>$token, 'language'=>'da', 'hwid'=>$hwId, 'timezone'=>3600, 'device_type'=>$type);
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -297,11 +301,9 @@ class ApiControllerApi extends JControllerLegacy {
 		$return["api_register_device"] = $response;
 		
 		//set tags
-		$user = JFactory::getUser( $userId );
-		$email = $user->email;
 		
 		$url = 'https://cp.pushwoosh.com/json/1.3/setTags';
-		$send['request'] = array('application' => '64BD1-55924', 'hwid'=>$hwId, 'tags'=>array('email'=>$email));
+		$send['request'] = array('application' => '', 'hwid'=>$hwId, 'tags'=>array('userId'=>$userId));
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -321,11 +323,10 @@ class ApiControllerApi extends JControllerLegacy {
 	}
 	
 	public function deleteToken(){
-		$userId = JRequest::getVar("userId");
 		$hwId = JRequest::getVar("hwId");
 		
 		$db = JFactory::getDBO();
-		$q = "DELETE FROM #__user_tokens WHERE userId = ".(int)$userId." AND hwId = '".$hwId."'";
+		$q = "DELETE FROM #__user_tokens WHERE hwId = '".$hwId."'";
 		$db->setQuery($q);
 		if($db->query()){
 			$return["result"] = 1;
@@ -337,7 +338,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		//unregister device
 		$url = 'https://cp.pushwoosh.com/json/1.3/unregisterDevice';
-		$send['request'] = array('application' => '64BD1-55924', 'hwid'=>$hwId);
+		$send['request'] = array('application' => '', 'hwid'=>$hwId);
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -405,7 +406,7 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
-	public function getBoutique(){
+	public function searchBusiness(){
 		$keyword = JRequest::getVar("keyword");
 		$keyword = strtolower($keyword);
 		
