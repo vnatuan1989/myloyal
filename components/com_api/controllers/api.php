@@ -284,7 +284,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		//register device
 		$url = 'https://cp.pushwoosh.com/json/1.3/registerDevice';
-		$send['request'] = array('application' => '', 'push_token'=>$token, 'language'=>'da', 'hwid'=>$hwId, 'timezone'=>3600, 'device_type'=>$type);
+		$send['request'] = array('application' => '234F7-B24E8', 'push_token'=>$token, 'language'=>'da', 'hwid'=>$hwId, 'timezone'=>3600, 'device_type'=>$type);
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -303,7 +303,7 @@ class ApiControllerApi extends JControllerLegacy {
 		//set tags
 		
 		$url = 'https://cp.pushwoosh.com/json/1.3/setTags';
-		$send['request'] = array('application' => '', 'hwid'=>$hwId, 'tags'=>array('userId'=>$userId));
+		$send['request'] = array('application' => '234F7-B24E8', 'hwid'=>$hwId, 'tags'=>array('userId'=>$userId));
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -338,7 +338,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		//unregister device
 		$url = 'https://cp.pushwoosh.com/json/1.3/unregisterDevice';
-		$send['request'] = array('application' => '', 'hwid'=>$hwId);
+		$send['request'] = array('application' => '234F7-B24E8', 'hwid'=>$hwId);
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -379,10 +379,9 @@ class ApiControllerApi extends JControllerLegacy {
 	
 	public function getTerm(){
 		$db = JFactory::getDBO();
-		$db->setQuery("SELECT title, introtext FROM #__content WHERE id = 20");
+		$db->setQuery("SELECT introtext FROM #__content WHERE id = 20");
 		$data = $db->loadObject();
 
-		$return['title'] = $data->title;
 		$return['text'] = $data->introtext;
 		die(json_encode($return));
 	}
@@ -392,7 +391,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$long = JRequest::getVar("long");
 		
 		$db = JFactory::getDBO();
-		$q = "SELECT id, businessName, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 25 ORDER BY distance LIMIT 0 , 20;";
+		$q = "SELECT businessId, businessName, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 25 ORDER BY distance LIMIT 0 , 20;";
 		$db->setQuery($q);
 		$stores = $db->loadAssocList();
 		if($stores){
@@ -411,7 +410,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$keyword = strtolower($keyword);
 		
 		$db = JFactory::getDBO();
-		$q = "SELECT id, businessName FROM #__business WHERE LOWER(`businessName`) LIKE '%".$keyword."%'";
+		$q = "SELECT businessId, businessName FROM #__business WHERE LOWER(`businessName`) LIKE '%".$keyword."%'";
 		$db->setQuery($q);
 		$stores = $db->loadAssocList();
 		
@@ -422,6 +421,23 @@ class ApiControllerApi extends JControllerLegacy {
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "No result";
+		}
+		die(json_encode($return));
+	}
+	
+	public function checkIn(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		
+		$db = JFactory::getDBO();
+		$q = "INSERT INTO #__checkin (customerId, businessId, createdAt) VALUES ($customerId, $businessId, ".time().")";
+		$db->setQuery($q);
+		if($db->execute()){
+			$return['result'] = 1;
+			$return['error'] = "";
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Error when checkin";
 		}
 		die(json_encode($return));
 	}
