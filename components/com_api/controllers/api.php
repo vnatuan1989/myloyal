@@ -441,4 +441,10 @@ class ApiControllerApi extends JControllerLegacy {
 		}
 		die(json_encode($return));
 	}
+	
+	public function getCheckIn(){
+		$businessId = JRequest::getVar("businessId");
+		$page = JRequest::getVar("page", 1);
+		
+	}
 }
