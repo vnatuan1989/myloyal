@@ -446,5 +446,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
 		
+		
+		
 	}
 }
