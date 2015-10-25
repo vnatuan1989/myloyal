@@ -439,6 +439,27 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 0;
 			$return['error'] = "Error when checkin";
 		}
+		
+		/*$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
+		$send['request'] = array('auth' => '8PaXOfTn9dzkNuqiMmup9jcmAKDppghCgAgvKqG5u0ArjTBgedOhVxMtzZIT0tibOUFJ3oPilAY1gWbSIt4E', 'send_date'=>'now', 'content'=>$customerId.' checked in your business', 'devices_filter'=>'A("234F7-B24E8") * T("userId", EQ, '.$businessId.')');
+
+		$request = json_encode($send);
+	 
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+		curl_setopt($ch, CURLOPT_HEADER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+	 
+		$response = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		curl_close($ch);*/
+		//print "[PW] request: $request\n";
+        //print "[PW] response: $response\n";
+        //print "[PW] info: " . print_r($info, true);
+		
 		die(json_encode($return));
 	}
 	
@@ -446,7 +467,59 @@ class ApiControllerApi extends JControllerLegacy {
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
 		
-		
-		
+		$limitstart = ($page-1)*20;
+		$db = JFactory::getDBO();
+		$q = "SELECT customerId, createdAt FROM (SELECT customerId, createdAt FROM #__checkin ORDER BY createdAt DESC) a GROUP BY customerId ORDER BY createdAt DESC LIMIT ".$limitstart.", 20";
+		$db->setQuery($q);
+		$users = $db->loadAssocList();
+		if($users){
+			$i = 0;
+			foreach($users as $user){
+				$q = "SELECT firstname, lastname, avatar FROM #__users WHERE id = ".$user['customerId'];
+				$db->setQuery($q);
+				$tmp = $db->loadObject();
+				$users[$i]['firstname'] = $tmp->firstname;
+				$users[$i]['lastname'] = $tmp->lastname;
+				if($tmp->avatar){
+					$users[$i]['avatar'] = JURI::base()."images/avatar/".$tmp->avatar;
+				} else {
+					$users[$i]['avatar'] = "";
+				}
+				$users[$i]['elapsed'] = $this->_timeElapsedString($user['createdAt']);
+				$i++;
+			}
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $users;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "No result";
+			$return['data'] = "";
+		}
+		die(json_encode($return));
 	}
+	
+	function _timeElapsedString($ptime){
+		$etime = time() - $ptime;
+		if ($etime < 10)
+		{
+			return 'just now';
+		}
+		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
+					30 * 24 * 60 * 60       =>  'month',
+					24 * 60 * 60            =>  'day',
+					60 * 60                 =>  'hour',
+					60                      =>  'minute',
+					1                       =>  'second'
+					);
+		foreach ($a as $secs => $str){
+			$d = $etime / $secs;
+			if ($d >= 1){
+				$r = round($d);
+				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
+			}
+		}
+	}
+	
+	
 }
