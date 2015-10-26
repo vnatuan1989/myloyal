@@ -439,7 +439,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 0;
 			$return['error'] = "Error when checkin";
 		}
-		
+
 		/*$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
 		$send['request'] = array('auth' => '8PaXOfTn9dzkNuqiMmup9jcmAKDppghCgAgvKqG5u0ArjTBgedOhVxMtzZIT0tibOUFJ3oPilAY1gWbSIt4E', 'send_date'=>'now', 'content'=>$customerId.' checked in your business', 'devices_filter'=>'A("234F7-B24E8") * T("userId", EQ, '.$businessId.')');
 
