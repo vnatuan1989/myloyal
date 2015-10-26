@@ -521,5 +521,43 @@ class ApiControllerApi extends JControllerLegacy {
 		}
 	}
 	
+	public function searchCustomer(){
+		$keyword = JRequest::getVar("keyword");
+		$keyword = strtolower($keyword);
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT id, firstname, lastname, avatar FROM #__users WHERE LOWER(`firstname`) LIKE '%".$keyword."%' OR LOWER(`lastname`) LIKE '%".$keyword."%'";
+		$db->setQuery($q);
+		$users = $db->loadAssocList();
+		
+		if($users){
+			$i = 0;
+			foreach($users as $user){
+				if($user['avatar']){
+					$users[$i]['avatar'] = JURI::base()."images/avatar/".$user['avatar'];
+				} else {
+					$users[$i]['avatar'] = "";
+				}
+				
+				$db->setQuery("SELECT createdAt FROM #__checkin WHERE customerId = ".$user['id']." ORDER BY createdAt DESC LIMIT 1");
+				$users[$i]['createdAt'] = $db->loadResult();
+				$users[$i]['elapsed'] = $this->_timeElapsedString($users[$i]['createdAt']);
+				$users[$i]['customerId'] = $user['id'];
+				$i++;
+			}
+			function cmp_by_createdAt($a, $b) {
+				return $b["createdAt"] - $a["createdAt"];
+			}
+			usort($users, "cmp_by_createdAt");
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $users;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "No result";
+		}
+		die(json_encode($return));
+	}
+	
 	
 }
