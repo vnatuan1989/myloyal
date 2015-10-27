@@ -452,23 +452,26 @@ class ApiControllerApi extends JControllerLegacy {
 		return ($miles * 1.609344);
 	}
 	
-	public function getBusinessWorkingTime(){
-		$businessId = JRequest::getVar("businessId");
-		
-		$db = JFactory::getDBO();
-		$q = "SELECT dateType, fromTime, toTime, close FROM #__workingtime WHERE businessId = ".$businessId." ORDER BY dateType";
-		$db->setQuery($q);
-		$times = $db->loadAssocList();
-		
-		if($times){
-			$return['result'] = 1;
-			$return['error'] = "";
-			$return['data'] = $times;
-		} else {
-			$return['result'] = 0;
-			$return['error'] = "No result";
+	function _timeElapsedString($ptime){
+		$etime = time() - $ptime;
+		if ($etime < 10)
+		{
+			return 'just now';
 		}
-		die(json_encode($return));
+		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
+					30 * 24 * 60 * 60       =>  'month',
+					24 * 60 * 60            =>  'day',
+					60 * 60                 =>  'hour',
+					60                      =>  'minute',
+					1                       =>  'second'
+					);
+		foreach ($a as $secs => $str){
+			$d = $etime / $secs;
+			if ($d >= 1){
+				$r = round($d);
+				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
+			}
+		}
 	}
 	
 	public function getFavouriteBusiness(){
@@ -538,6 +541,33 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
+	public function getBusinessWorkingTime(){
+		$businessId = JRequest::getVar("businessId");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT dateType, fromTime, toTime, close FROM #__workingtime WHERE businessId = ".$businessId." ORDER BY dateType";
+		$db->setQuery($q);
+		$times = $db->loadAssocList();
+		
+		if($times){
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $times;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "No result";
+		}
+		die(json_encode($return));
+	}
+	
+	public function getPoint(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		
+		
+	}
+	
+	// Business
 	public function getCheckIn(){
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
@@ -572,28 +602,6 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['data'] = "";
 		}
 		die(json_encode($return));
-	}
-	
-	function _timeElapsedString($ptime){
-		$etime = time() - $ptime;
-		if ($etime < 10)
-		{
-			return 'just now';
-		}
-		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
-					30 * 24 * 60 * 60       =>  'month',
-					24 * 60 * 60            =>  'day',
-					60 * 60                 =>  'hour',
-					60                      =>  'minute',
-					1                       =>  'second'
-					);
-		foreach ($a as $secs => $str){
-			$d = $etime / $secs;
-			if ($d >= 1){
-				$r = round($d);
-				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
-			}
-		}
 	}
 	
 	public function searchCustomer(){
