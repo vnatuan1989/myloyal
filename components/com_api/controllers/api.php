@@ -391,10 +391,17 @@ class ApiControllerApi extends JControllerLegacy {
 		$long = JRequest::getVar("long");
 		
 		$db = JFactory::getDBO();
-		$q = "SELECT businessId, businessName, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 25 ORDER BY distance LIMIT 0 , 20;";
+		$q = "SELECT id as businessId, businessName, icon, type, businessEmail, address, city, latitude, longitude, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 25 ORDER BY distance LIMIT 0 , 20;";
 		$db->setQuery($q);
 		$stores = $db->loadAssocList();
 		if($stores){
+			$i = 0;
+			foreach($stores as $store){
+				if($store['icon']){
+					$stores[$i]['icon'] = JURI::base().$store['icon'];
+				}
+				$i++;
+			}
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['data'] = $stores;
@@ -406,15 +413,83 @@ class ApiControllerApi extends JControllerLegacy {
 	}
 	
 	public function searchBusiness(){
+		$lat = JRequest::getVar("lat");
+		$long = JRequest::getVar("long");
 		$keyword = JRequest::getVar("keyword");
 		$keyword = strtolower($keyword);
 		
 		$db = JFactory::getDBO();
-		$q = "SELECT businessId, businessName FROM #__business WHERE LOWER(`businessName`) LIKE '%".$keyword."%'";
+		$q = "SELECT id as businessId, businessName, icon, type, businessEmail, address, city, latitude, longitude FROM #__business WHERE LOWER(`businessName`) LIKE '%".$keyword."%'";
 		$db->setQuery($q);
 		$stores = $db->loadAssocList();
 		
 		if($stores){
+			$i = 0;
+			foreach($stores as $store){
+				$stores[$i]['distance'] = $this->distance($store['latitude'], $store['longitude'], $lat, $long);
+				if($store['icon']){
+					$stores[$i]['icon'] = JURI::base().$store['icon'];
+				}
+				$i++;
+			}
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $stores;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "No result";
+		}
+		die(json_encode($return));
+	}
+	
+	function distance($lat1, $lon1, $lat2, $lon2) {
+		$theta = $lon1 - $lon2;
+		$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+		$dist = acos($dist);
+		$dist = rad2deg($dist);
+		$miles = $dist * 60 * 1.1515;
+		
+		return ($miles * 1.609344);
+	}
+	
+	public function getBusinessWorkingTime(){
+		$businessId = JRequest::getVar("businessId");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT dateType, fromTime, toTime, close FROM #__workingtime WHERE businessId = ".$businessId." ORDER BY dateType";
+		$db->setQuery($q);
+		$times = $db->loadAssocList();
+		
+		if($times){
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $times;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "No result";
+		}
+		die(json_encode($return));
+	}
+	
+	public function getFavouriteBusiness(){
+		$customerId = JRequest::getVar("customerId");
+		$lat = JRequest::getVar("lat");
+		$long = JRequest::getVar("long");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT c.businessId, c.createdAt, b.businessName, b.icon, b.type, b.businessEmail, b.address, b.city, b.latitude, b.longitude FROM #__checkin c INNER JOIN #__business b ON c.businessId = b.id WHERE c.customerId = ".$customerId." GROUP BY c.businessId ORDER BY c.createdAt LIMIT 20";
+		$db->setQuery($q);
+		$stores = $db->loadAssocList();
+		
+		if($stores){
+			$i = 0;
+			foreach($stores as $store){
+				$stores[$i]['distance'] = $this->distance($store['latitude'], $store['longitude'], $lat, $long);
+				if($store['icon']){
+					$stores[$i]['icon'] = JURI::base().$store['icon'];
+				}
+				$i++;
+			}
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['data'] = $stores;
@@ -469,7 +544,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		$limitstart = ($page-1)*20;
 		$db = JFactory::getDBO();
-		$q = "SELECT customerId, createdAt FROM (SELECT customerId, createdAt FROM #__checkin ORDER BY createdAt DESC) a GROUP BY customerId ORDER BY createdAt DESC LIMIT ".$limitstart.", 20";
+		$q = "SELECT customerId, createdAt FROM (SELECT customerId, createdAt FROM #__checkin WHERE businessId = ".$businessId." ORDER BY createdAt DESC) a GROUP BY customerId ORDER BY createdAt DESC LIMIT ".$limitstart.", 20";
 		$db->setQuery($q);
 		$users = $db->loadAssocList();
 		if($users){
