@@ -549,7 +549,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$db->setQuery($q);
 		$times = $db->loadAssocList();
 		
-		$q = "SELECT businessNam, businessEmail, address, city, icon, latitude, longitude FROM #__business WHERE id = ".$businessId;
+		$q = "SELECT businessNam, businessEmail, address, city, icon, latitude, longitude, type FROM #__business WHERE id = ".$businessId;
 		$db->setQuery($q);
 		$data = $db->loadAssoc();
 		
@@ -564,17 +564,53 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
-	public function getPromotion(){
+	public function getPromotions(){
 		$customerId = JRequest::getVar("customerId");
 		$businessId = JRequest::getVar("businessId");
+		$businessType = JRequest::getVar("businessType");
 		
 		$db = JFactory::getDBO();
-		$db->setQuery("SELECT type FROM #__business WHERE id = ".$businessId);
-		if($db->loadResult() == 1){
-			$return['point'] = $this->_getPoint($customerId, $businessId);
+		/*$db->setQuery("SELECT type FROM #__business WHERE id = ".$businessId);*/
+		if($businessType == 1){
+			$return['myPoint'] = $this->_getPoint($customerId, $businessId);
+			
+			$q = "SELECT id, title, content, point, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
+			$db->setQuery($q);
+			$promotions = $db->loadAssocList();
+			
+			if($promotions){
+				$return['result'] = 1;
+				$return['error'] = "";
+				for($i=0; $i<count($promotions); $i++){
+					$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+				}
+				$return['promotions'] = $promotions;
+			} else {
+				$return['result'] = 0;
+				$return['error'] = "No result";
+			}
 		} else {
+			$q = "SELECT id, title, content, stamp, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
+			$db->setQuery($q);
+			$promotions = $db->loadAssocList();
+			
+			if($promotions){
+				$return['result'] = 1;
+				$return['error'] = "";
+				$i = 0;
+				foreach($promotions as $promotion){
+					$db->setQuery("SELECT numStamp FROM #__stamp WHERE promotionId = ".$promotion['id']." AND customerId = ".$customerId);
+					$promotions[$i]['myStamp'] = $db->loadResult();
+					$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+					$i++;
+				}
+				$return['promotions'] = $promotions;
+			} else {
+				$return['result'] = 0;
+				$return['error'] = "No result";
+			}
 		}
-		print_r($return);exit;
+		die(json_encode($return));
 	}
 	public function _getPoint($customerId, $businessId){
 		$db = JFactory::getDBO();
