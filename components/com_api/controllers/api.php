@@ -541,7 +541,7 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
-	public function getBusinessWorkingTime(){
+	public function getBusinessDetail(){
 		$businessId = JRequest::getVar("businessId");
 		
 		$db = JFactory::getDBO();
@@ -549,23 +549,43 @@ class ApiControllerApi extends JControllerLegacy {
 		$db->setQuery($q);
 		$times = $db->loadAssocList();
 		
-		if($times){
-			$return['result'] = 1;
-			$return['error'] = "";
-			$return['data'] = $times;
-		} else {
-			$return['result'] = 0;
-			$return['error'] = "No result";
+		$q = "SELECT businessNam, businessEmail, address, city, icon, latitude, longitude FROM #__business WHERE id = ".$businessId;
+		$db->setQuery($q);
+		$data = $db->loadAssoc();
+		
+		$return['result'] = 1;
+		$return['error'] = "";
+		if($data['icon']){
+			$data['icon'] = JURI::base().$data['icon'];
 		}
+		$return['data'] = $data;
+		$return['data']['workingTime'] = $times;
+		
 		die(json_encode($return));
 	}
 	
-	public function getPoint(){
+	public function getPromotion(){
 		$customerId = JRequest::getVar("customerId");
 		$businessId = JRequest::getVar("businessId");
 		
-		
+		$db = JFactory::getDBO();
+		$db->setQuery("SELECT type FROM #__business WHERE id = ".$businessId);
+		if($db->loadResult() == 1){
+			$return['point'] = $this->_getPoint($customerId, $businessId);
+		} else {
+		}
+		print_r($return);exit;
 	}
+	public function _getPoint($customerId, $businessId){
+		$db = JFactory::getDBO();
+		$db->setQuery("SELECT point FROM #__point WHERE customerId = ".$customerId." AND businessId = ".$businessId);
+		if($db->loadResult()){
+			return $db->loadResult();
+		} else {
+			return 0;
+		}
+	}
+	
 	
 	// Business
 	public function getCheckIn(){
