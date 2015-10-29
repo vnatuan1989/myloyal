@@ -549,7 +549,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$db->setQuery($q);
 		$times = $db->loadAssocList();
 		
-		$q = "SELECT businessNam, businessEmail, address, city, icon, latitude, longitude, type FROM #__business WHERE id = ".$businessId;
+		$q = "SELECT businessName, businessEmail, address, city, icon, latitude, longitude, type FROM #__business WHERE id = ".$businessId;
 		$db->setQuery($q);
 		$data = $db->loadAssoc();
 		
@@ -624,6 +624,39 @@ class ApiControllerApi extends JControllerLegacy {
 	
 	
 	// Business
+	public function businessLogin() {
+		$app    = JFactory::getApplication();
+		$email = JRequest::getVar("email");
+		$password = JRequest::getVar("password");
+		
+		$credentials["username"] = $email;
+		$credentials["password"] = $password;
+		
+		$options['remember'] = false;
+		$options['return']   = '';
+		
+		$result = $app->login($credentials, $options);
+		if($result == true){
+			$db = JFactory::getDBO();
+			
+			$user = JFactory::getUser();
+			
+			$db->setQuery("SELECT businessName, businessEmail, type FROM #__business WHERE userId = ".$user->id);
+			$data = $db->loadObject();
+			
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['businessName'] = $data->businessName;
+			$return['businessEmail'] = $data->businessEmail;
+			$return['businessType'] = $data->type;
+			
+		} else {
+			$return["result"] = 0;
+			$return["error"] = "Email or password is incorrect";
+		}
+        die(json_encode($return));
+    }
+	
 	public function getCheckIn(){
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
