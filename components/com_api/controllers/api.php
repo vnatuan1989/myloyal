@@ -452,28 +452,6 @@ class ApiControllerApi extends JControllerLegacy {
 		return ($miles * 1.609344);
 	}
 	
-	function _timeElapsedString($ptime){
-		$etime = time() - $ptime;
-		if ($etime < 10)
-		{
-			return 'just now';
-		}
-		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
-					30 * 24 * 60 * 60       =>  'month',
-					24 * 60 * 60            =>  'day',
-					60 * 60                 =>  'hour',
-					60                      =>  'minute',
-					1                       =>  'second'
-					);
-		foreach ($a as $secs => $str){
-			$d = $etime / $secs;
-			if ($d >= 1){
-				$r = round($d);
-				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
-			}
-		}
-	}
-	
 	public function getFavouriteBusiness(){
 		$customerId = JRequest::getVar("customerId");
 		$lat = JRequest::getVar("lat");
@@ -657,7 +635,29 @@ class ApiControllerApi extends JControllerLegacy {
         die(json_encode($return));
     }
 	
-	public function getCheckIn(){
+	function _timeElapsedString($ptime){
+		$etime = time() - $ptime;
+		if ($etime < 10)
+		{
+			return 'just now';
+		}
+		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
+					30 * 24 * 60 * 60       =>  'month',
+					24 * 60 * 60            =>  'day',
+					60 * 60                 =>  'hour',
+					60                      =>  'minute',
+					1                       =>  'second'
+					);
+		foreach ($a as $secs => $str){
+			$d = $etime / $secs;
+			if ($d >= 1){
+				$r = round($d);
+				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
+			}
+		}
+	}
+	
+	public function getCheckInList(){
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
 		
@@ -731,5 +731,85 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
+	public function getCustomerDetail(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		$businessType = JRequest::getVar("businessType");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT firstname, lastname, avatar FROM #__users WHERE id = ".$customerId;
+		$db->setQuery($q);
+		$customer = $db->loadAssoc();
+		if($customer['avatar']){
+			$customer['avatar'] = JURI::base().$customer['avatar'];
+		}
+		$q = "SELECT createdAt FROM #__checkin WHERE customerId = ".$customerId." AND businessId = ".$businessId." ORDER BY createdAt DESC LIMIT 1";
+		$db->setQuery($q);
+		$createdAt = $db->loadResult();
+		$customer['elapsed'] = $this->_timeElapsedString($createdAt);
+		
+		if($businessType == 1){
+			$q = "SELECT point FROM #__point WHERE customerId = ".$customerId." AND businessId = ".$businessId;
+			$db->setQuery($q);
+			$customer['customerPoint'] = $db->loadResult();	
+			$return['customer'] = $customer;
+			
+			$q = "SELECT id, title, content, point, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
+			$db->setQuery($q);
+			$promotions = $db->loadAssocList();
+			
+			for($i=0; $i<count($promotions); $i++){
+				$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+			}
+			$return['promotions'] = $promotions;
+		} else {
+			$return['customer'] = $customer;
+			$q = "SELECT id, title, content, stamp, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
+			$db->setQuery($q);
+			$promotions = $db->loadAssocList();
+			
+			if($promotions){
+				$i = 0;
+				foreach($promotions as $promotion){
+					$db->setQuery("SELECT numStamp FROM #__stamp WHERE promotionId = ".$promotion['id']." AND customerId = ".$customerId);
+					$promotions[$i]['customerStamp'] = $db->loadResult();
+					$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+					$i++;
+				}
+				$return['promotions'] = $promotions;
+			}
+			print_r($return);exit;
+		}
+		die(json_encode($return));
+	}
+	
+	public function givePoint(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		$point = JRequest::getVar("point");
+		
+		$db = JFactory::getDBO();
+		$q = "INSERT INTO #__log_point(point, customerId, businessId, type, createdAt) VALUES ($point, $customerId, $businessId, 1, '".time()."')";
+		$db->setQuery($q);
+		if($db->execute()){
+			$q = "SELECT id FROM #__point WHERE customerId = $customerId AND businessId = $businessId";
+			$db->setQuery($q);
+			$id = $db->loadResult();
+			if($id){
+				$q = "UPDATE #__point SET point = point + $point WHERE id = ".$id;
+				$db->setQuery($q);
+				$db->execute();
+			} else {
+				$q = "INSERT INTO #__point(customerId, businessId, point) VALUES ($customerId, $businessId, $point)";
+				$db->setQuery($q);
+				$db->execute();
+			}
+			$return['result'] = 1;
+			$return['error'] = "";
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Insert fail";
+		}		
+	}
 	
 }
