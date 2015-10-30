@@ -452,28 +452,6 @@ class ApiControllerApi extends JControllerLegacy {
 		return ($miles * 1.609344);
 	}
 	
-	function _timeElapsedString($ptime){
-		$etime = time() - $ptime;
-		if ($etime < 10)
-		{
-			return 'just now';
-		}
-		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
-					30 * 24 * 60 * 60       =>  'month',
-					24 * 60 * 60            =>  'day',
-					60 * 60                 =>  'hour',
-					60                      =>  'minute',
-					1                       =>  'second'
-					);
-		foreach ($a as $secs => $str){
-			$d = $etime / $secs;
-			if ($d >= 1){
-				$r = round($d);
-				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
-			}
-		}
-	}
-	
 	public function getFavouriteBusiness(){
 		$customerId = JRequest::getVar("customerId");
 		$lat = JRequest::getVar("lat");
@@ -549,7 +527,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$db->setQuery($q);
 		$times = $db->loadAssocList();
 		
-		$q = "SELECT businessNam, businessEmail, address, city, icon, latitude, longitude, type FROM #__business WHERE id = ".$businessId;
+		$q = "SELECT businessName, businessEmail, address, city, icon, latitude, longitude, type FROM #__business WHERE id = ".$businessId;
 		$db->setQuery($q);
 		$data = $db->loadAssoc();
 		
@@ -641,14 +619,14 @@ class ApiControllerApi extends JControllerLegacy {
 			
 			$user = JFactory::getUser();
 			
+			$db->setQuery("SELECT businessName, businessEmail, type FROM #__business WHERE userId = ".$user->id);
+			$data = $db->loadObject();
+			
 			$return['result'] = 1;
 			$return['error'] = "";
-			$return['userId'] = $user->id;
-			$return['firstName'] = $user->firstName;
-			$return['lastName'] = $user->lastName;
-			$return['email'] = $user->email;
-			$return['avatar'] = JURI::base()."images/avatar/".$user->avatar;
-			$return['facebookId'] = "";
+			$return['businessName'] = $data->businessName;
+			$return['businessEmail'] = $data->businessEmail;
+			$return['businessType'] = $data->type;
 			
 		} else {
 			$return["result"] = 0;
@@ -657,7 +635,29 @@ class ApiControllerApi extends JControllerLegacy {
         die(json_encode($return));
     }
 	
-	public function getCheckIn(){
+	function _timeElapsedString($ptime){
+		$etime = time() - $ptime;
+		if ($etime < 10)
+		{
+			return 'just now';
+		}
+		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
+					30 * 24 * 60 * 60       =>  'month',
+					24 * 60 * 60            =>  'day',
+					60 * 60                 =>  'hour',
+					60                      =>  'minute',
+					1                       =>  'second'
+					);
+		foreach ($a as $secs => $str){
+			$d = $etime / $secs;
+			if ($d >= 1){
+				$r = round($d);
+				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
+			}
+		}
+	}
+	
+	public function getCheckInList(){
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
 		
@@ -731,15 +731,83 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
-	public function getCustomer(){
+	public function getCustomerDetail(){
 		$customerId = JRequest::getVar("customerId");
 		$businessId = JRequest::getVar("businessId");
+		$businessType = JRequest::getVar("businessType");
 		
 		$db = JFactory::getDBO();
-		$q = "SELECT u.id, u.firstname, u.lastname, u.avatar, p.point FROM #__users u INNER JOIN #__point p ON u.id = p.customerId WHERE p.customerId = ".$customerId." AND p.businessId = ".$businessId;
+		$q = "SELECT firstname, lastname, avatar FROM #__users WHERE id = ".$customerId;
 		$db->setQuery($q);
 		$customer = $db->loadAssoc();
-		print_r($customer);exit;
+		if($customer['avatar']){
+			$customer['avatar'] = JURI::base().$customer['avatar'];
+		}
+		$q = "SELECT createdAt FROM #__checkin WHERE customerId = ".$customerId." AND businessId = ".$businessId." ORDER BY createdAt DESC LIMIT 1";
+		$db->setQuery($q);
+		$createdAt = $db->loadResult();
+		$customer['elapsed'] = $this->_timeElapsedString($createdAt);
 		
+		if($businessType == 1){
+			$q = "SELECT point FROM #__point WHERE customerId = ".$customerId." AND businessId = ".$businessId;
+			$db->setQuery($q);
+			$customer['customerPoint'] = $db->loadResult();	
+			$return['customer'] = $customer;
+			
+			$q = "SELECT id, title, content, point, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
+			$db->setQuery($q);
+			$promotions = $db->loadAssocList();
+			
+			for($i=0; $i<count($promotions); $i++){
+				$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+			}
+			$return['promotions'] = $promotions;
+		} else {
+			$return['customer'] = $customer;
+			$q = "SELECT id, title, content, stamp, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
+			$db->setQuery($q);
+			$promotions = $db->loadAssocList();
+			
+			if($promotions){
+				$i = 0;
+				foreach($promotions as $promotion){
+					$db->setQuery("SELECT numStamp FROM #__stamp WHERE promotionId = ".$promotion['id']." AND customerId = ".$customerId);
+					$promotions[$i]['customerStamp'] = $db->loadResult();
+					$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+					$i++;
+				}
+				$return['promotions'] = $promotions;
+			}
+		}
+		die(json_encode($return));
+	}
+	
+	public function givePoint(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		$point = JRequest::getVar("point");
+		
+		$db = JFactory::getDBO();
+		$q = "INSERT INTO #__log_point(point, customerId, businessId, type, createdAt) VALUES ($point, $customerId, $businessId, 1, '".time()."')";
+		$db->setQuery($q);
+		if($db->execute()){
+			$q = "SELECT id FROM #__point WHERE customerId = $customerId AND businessId = $businessId";
+			$db->setQuery($q);
+			$id = $db->loadResult();
+			if($id){
+				$q = "UPDATE #__point SET point = point + $point WHERE id = ".$id;
+				$db->setQuery($q);
+				$db->execute();
+			} else {
+				$q = "INSERT INTO #__point(customerId, businessId, point) VALUES ($customerId, $businessId, $point)";
+				$db->setQuery($q);
+				$db->execute();
+			}
+			$return['result'] = 1;
+			$return['error'] = "";
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Insert fail";
+		}		
 	}
 }
