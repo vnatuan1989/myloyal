@@ -624,6 +624,39 @@ class ApiControllerApi extends JControllerLegacy {
 	
 	
 	// Business
+	public function businessLogin() {
+		$app    = JFactory::getApplication();
+		$email = JRequest::getVar("email");
+		$password = JRequest::getVar("password");
+		
+		$credentials["username"] = $email;
+		$credentials["password"] = $password;
+		
+		$options['remember'] = false;
+		$options['return']   = '';
+		
+		$result = $app->login($credentials, $options);
+		if($result == true){
+			$db = JFactory::getDBO();
+			
+			$user = JFactory::getUser();
+			
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['userId'] = $user->id;
+			$return['firstName'] = $user->firstName;
+			$return['lastName'] = $user->lastName;
+			$return['email'] = $user->email;
+			$return['avatar'] = JURI::base()."images/avatar/".$user->avatar;
+			$return['facebookId'] = "";
+			
+		} else {
+			$return["result"] = 0;
+			$return["error"] = "Email or password is incorrect";
+		}
+        die(json_encode($return));
+    }
+	
 	public function getCheckIn(){
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
@@ -698,5 +731,15 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
-	
+	public function getCustomer(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT u.id, u.firstname, u.lastname, u.avatar, p.point FROM #__users u INNER JOIN #__point p ON u.id = p.customerId WHERE p.customerId = ".$customerId." AND p.businessId = ".$businessId;
+		$db->setQuery($q);
+		$customer = $db->loadAssoc();
+		print_r($customer);exit;
+		
+	}
 }
