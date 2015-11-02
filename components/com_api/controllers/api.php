@@ -135,14 +135,15 @@ class ApiControllerApi extends JControllerLegacy {
 		$q = "UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."'".$passStr.$avatarStr." WHERE id = ".$userId;
 		$db->setQuery($q);
 		if($db->execute()){
-			$user1 = JFactory::getUser($userId);
+			$db->setQuery("SELECT * FROM #__users WHERE id = $userId");
+			$user1 = $db->loadObject();
 			$return["result"] = 1;
 			$return["error"] = "";
-			$return['userId'] = $user1->id;
+			$return['userId'] = $userId;
 			$return['firstName'] = $user1->firstName;
 			$return['lastName'] = $user1->lastName;
 			$return['email'] = $user1->email;
-			if($user->avatar){
+			if($user1->avatar){
 				$return['avatar'] = JURI::base()."images/avatar/".$user1->avatar;
 			} else {
 				$return['avatar'] = "";
@@ -483,6 +484,8 @@ class ApiControllerApi extends JControllerLegacy {
 	
 	public function checkIn(){
 		$customerId = JRequest::getVar("customerId");
+		$customerFirstName = JRequest::getVar("customerFirstName");
+		$customerLastName = JRequest::getVar("customerLastName");
 		$businessId = JRequest::getVar("businessId");
 		
 		$db = JFactory::getDBO();
@@ -491,30 +494,13 @@ class ApiControllerApi extends JControllerLegacy {
 		if($db->execute()){
 			$return['result'] = 1;
 			$return['error'] = "";
+			$db->setQuery("SELECT userId FROM #__business WHERE id = $businessId");
+			$businessUserId = $db->loadResult();
+			$this->pushNotification($businessUserId, $customerFirstName." ".$customerLastName." have checked in your store.");
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Error when checkin";
 		}
-
-		/*$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
-		$send['request'] = array('auth' => '8PaXOfTn9dzkNuqiMmup9jcmAKDppghCgAgvKqG5u0ArjTBgedOhVxMtzZIT0tibOUFJ3oPilAY1gWbSIt4E', 'send_date'=>'now', 'content'=>$customerId.' checked in your business', 'devices_filter'=>'A("234F7-B24E8") * T("userId", EQ, '.$businessId.')');
-
-		$request = json_encode($send);
-	 
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-		curl_setopt($ch, CURLOPT_HEADER, true);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-	 
-		$response = curl_exec($ch);
-		$info = curl_getinfo($ch);
-		curl_close($ch);*/
-		//print "[PW] request: $request\n";
-        //print "[PW] response: $response\n";
-        //print "[PW] info: " . print_r($info, true);
 		
 		die(json_encode($return));
 	}
@@ -619,13 +605,13 @@ class ApiControllerApi extends JControllerLegacy {
 			
 			$user = JFactory::getUser();
 			
-			$db->setQuery("SELECT businessName, businessEmail, type FROM #__business WHERE userId = ".$user->id);
+			$db->setQuery("SELECT id, businessName, type FROM #__business WHERE userId = ".$user->id);
 			$data = $db->loadObject();
 			
 			$return['result'] = 1;
 			$return['error'] = "";
+			$return['businessId'] = $data->id;
 			$return['businessName'] = $data->businessName;
-			$return['businessEmail'] = $data->businessEmail;
 			$return['businessType'] = $data->type;
 			
 		} else {
@@ -785,6 +771,7 @@ class ApiControllerApi extends JControllerLegacy {
 	public function givePoint(){
 		$customerId = JRequest::getVar("customerId");
 		$businessId = JRequest::getVar("businessId");
+		$businessName = JRequest::getVar("businessName");
 		$point = JRequest::getVar("point");
 		
 		$db = JFactory::getDBO();
@@ -803,11 +790,136 @@ class ApiControllerApi extends JControllerLegacy {
 				$db->setQuery($q);
 				$db->execute();
 			}
+			$q = "SELECT point FROM #__point WHERE customerId = $customerId AND businessId = $businessId";
+			$db->setQuery($q);
+			$newPoint = $db->loadResult();
 			$return['result'] = 1;
 			$return['error'] = "";
+			$return['newPoint'] = $newPoint;
+			$this->pushNotification($customerId, "You have received ".$point." points from ".$businessName);
 		} else {
 			$return['result'] = 0;
-			$return['error'] = "Insert fail";
-		}		
+			$return['error'] = "Give point fail";
+		}
+		
+		die(json_encode($return));	
+	}
+	
+	public function redeemPoint(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		$businessName = JRequest::getVar("businessName");
+		$point = JRequest::getVar("point");
+		
+		$db = JFactory::getDBO();
+		$q = "INSERT INTO #__log_point(point, customerId, businessId, type, createdAt) VALUES ($point, $customerId, $businessId, 2, '".time()."')";
+		$db->setQuery($q);
+		if($db->execute()){
+			$q = "UPDATE #__point SET point = point - $point WHERE customerId = $customerId AND businessId = $businessId";
+			$db->setQuery($q);
+			$db->execute();
+			
+			$q = "SELECT point FROM #__point WHERE customerId = $customerId AND businessId = $businessId";
+			$db->setQuery($q);
+			$newPoint = $db->loadResult();
+			
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['newPoint'] = $newPoint;
+			$this->pushNotification($customerId, "You have redeemed ".$point." points from ".$businessName);
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Redeem point fail";
+		}
+		die(json_encode($return));
+	}
+	
+	public function giveStamp(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		$businessName = JRequest::getVar("businessName");
+		$promotionId = JRequest::getVar("promotionId");
+		
+		$db = JFactory::getDBO();
+		$q = "INSERT INTO #__log_stamp(businessId, customerId, promotionId, type, numStamp, createdAt) VALUES ($businessId, $customerId, $promotionId, 1, 1, '".time()."')";
+		$db->setQuery($q);
+		if($db->execute()){
+			$q = "SELECT id FROM #__stamp WHERE customerId = $customerId AND businessId = $businessId AND promotionId = $promotionId";
+			$db->setQuery($q);
+			$id = $db->loadResult();
+			if($id){
+				$q = "UPDATE #__stamp SET numStamp = numStamp + 1 WHERE id = ".$id;
+				$db->setQuery($q);
+				$db->execute();
+			} else {
+				$q = "INSERT INTO #__stamp(promotionId, customerId, businessId, numStamp) VALUES ($promotionId, $customerId, $businessId, 1)";
+				$db->setQuery($q);
+				$db->execute();
+			}
+			$q = "SELECT numStamp FROM #__stamp WHERE customerId = $customerId AND businessId = $businessId AND promotionId = $promotionId";
+			$db->setQuery($q);
+			$newNumStamp = $db->loadResult();
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['newNumStamp'] = $newNumStamp;
+			$this->pushNotification($customerId, "You have received 1 stamp from ".$businessName);
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Give stamp fail";
+		}
+		
+		die(json_encode($return));
+	}
+	
+	public function redeemStamp(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		$businessName = JRequest::getVar("businessName");
+		$promotionId = JRequest::getVar("promotionId");
+		$promotionStamp = JRequest::getVar("promotionStamp");
+		
+		$db = JFactory::getDBO();
+		$q = "INSERT INTO #__log_stamp(customerId, businessId, promotionId, type, numStamp, createdAt) VALUES ($customerId, $businessId, $promotionId, 2, $promotionStamp, '".time()."')";
+		$db->setQuery($q);
+		if($db->execute()){
+			$q = "UPDATE #__stamp SET numStamp = numStamp - $promotionStamp WHERE customerId = $customerId AND businessId = $businessId AND promotionId = $promotionId";
+			$db->setQuery($q);
+			$db->execute();
+			
+			$q = "SELECT numStamp FROM #__stamp WHERE customerId = $customerId AND businessId = $businessId AND promotionId = $promotionId";
+			$db->setQuery($q);
+			$newNumStamp = $db->loadResult();
+			
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['newNumStamp'] = $newNumStamp;
+			$this->pushNotification($customerId, "You have redeemed ".$promotionStamp." stamps from ".$businessName);
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Redeem stamp fail";
+		}
+		die(json_encode($return));
+	}
+	
+	public function pushNotification($userId, $msg){
+		/*$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
+		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("234F7-B24E8") * T("userId", EQ, '.$userId.')');
+
+		$request = json_encode($send);
+	 
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+		curl_setopt($ch, CURLOPT_HEADER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+	 
+		$response = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		curl_close($ch);*/
+		//print "[PW] request: $request\n";
+        //print "[PW] response: $response\n";
+        //print "[PW] info: " . print_r($info, true);
 	}
 }
