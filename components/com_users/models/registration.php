@@ -213,7 +213,7 @@ class UsersModelRegistration extends JModelForm
 
 			// Override the base user data with any data in the session.
 			$temp = (array) $app->getUserState('com_users.registration.data', array());
-
+                          
 			foreach ($temp as $k => $v)
 			{
 				$this->data->$k = $v;
@@ -344,23 +344,28 @@ class UsersModelRegistration extends JModelForm
 	 *
 	 * @since   1.6
 	 */
-	public function register($temp)
+	public function register($temp,$business)
 	{
+            
 		$params = JComponentHelper::getParams('com_users');
-
+                
 		// Initialise the table with JUser.
+                
 		$user = new JUser;
 		$data = (array) $this->getData();
-
+                
+                
 		// Merge in the registration data.
 		foreach ($temp as $k => $v)
 		{
 			$data[$k] = $v;
 		}
-
+                
+                
 		// Prepare the data for the user object.
 		$data['email'] = JStringPunycode::emailToPunycode($data['email1']);
 		$data['password'] = $data['password1'];
+                
 		$useractivation = $params->get('useractivation');
 		$sendpassword = $params->get('sendpassword', 1);
 
@@ -375,10 +380,9 @@ class UsersModelRegistration extends JModelForm
 		if (!$user->bind($data))
 		{
 			$this->setError(JText::sprintf('COM_USERS_REGISTRATION_BIND_FAILED', $user->getError()));
-
 			return false;
 		}
-
+                
 		// Load the users plugin group.
 		JPluginHelper::importPlugin('user');
 
@@ -400,7 +404,7 @@ class UsersModelRegistration extends JModelForm
 		$data['mailfrom'] = $config->get('mailfrom');
 		$data['sitename'] = $config->get('sitename');
 		$data['siteurl'] = JUri::root();
-
+                
 		// Handle account activation/confirmation emails.
 		if ($useractivation == 2)
 		{
@@ -505,7 +509,21 @@ class UsersModelRegistration extends JModelForm
 				);
 			}
 		}
-
+                
+                
+                //get and insert business data
+                $business_data = array();
+                foreach ($business as $k => $v)
+		{
+			$business_data[$k] = $v;
+		}
+                $datetime = time();
+                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude) "
+                        . " values ($user->id , '{$business_data['businessName']}' , '{$business_data['phone']}', '{$business_data['cvrNumber']}' , "
+                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}') ";
+                $db = JFactory::getDbo();
+                $db->setQuery($querybusiness);
+                $db->execute();
 		// Send the registration email.
 		$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
 

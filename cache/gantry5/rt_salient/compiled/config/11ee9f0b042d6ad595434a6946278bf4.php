@@ -1,13 +1,13 @@
 <?php
 return [
     '@class' => 'Gantry\\Component\\Config\\CompiledConfig',
-    'timestamp' => 1444635574,
-    'checksum' => '39939d0d4336e4c704411ab6789bec6b',
+    'timestamp' => 1445507827,
+    'checksum' => 'a60a7a7c3bfbee7752ade7d7e569c983',
     'files' => [
         'templates/rt_salient/custom/config/default' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/default/index.yaml',
-                'modified' => 1444634924
+                'modified' => 1444636956
             ],
             'particles/analytics' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/analytics.yaml',

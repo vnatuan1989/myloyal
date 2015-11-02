@@ -122,6 +122,32 @@ children:
                 title: Social
                 attributes: {  }
                 children: {  }
+      -
+        id: fe2408ce-3dfc-492d-9494-b214baa84fa6
+        type: grid
+        subtype: false
+        title: Untitled
+        attributes: {  }
+        children:
+          -
+            id: 42828e6a-ff3d-4a84-8954-cf88f32c31d0
+            type: block
+            subtype: false
+            title: Untitled
+            attributes:
+              extra: {  }
+              size: 100
+            children:
+              -
+                id: 24fe01c7-ed4e-4458-b9ae-26be3039eaf4
+                type: position
+                subtype: module
+                title: 'Module Instance'
+                attributes:
+                  enabled: 1
+                  module_id: '283'
+                  chrome: ''
+                children: {  }
   -
     id: a875dce8-82c8-88cb-88cc-888f7c9828f8
     type: section
@@ -205,9 +231,9 @@ children:
                         subtype: false
                         title: Untitled
                         attributes:
+                          size: 100
                           variations: nopaddingall
                           extra: {  }
-                          size: 100
                         children:
                           -
                             id: 832cc644-f6c5-14d9-96ce-c0b3d2cbf7d8
@@ -217,6 +243,7 @@ children:
                             attributes:
                               enabled: 1
                               key: slideshow-a
+                              title: 'Slideshow A'
                             children: {  }
                   -
                     id: eab1e898-ac82-4819-bd24-5c3a5197c083
@@ -258,9 +285,9 @@ children:
                         subtype: false
                         title: Untitled
                         attributes:
+                          size: 100
                           variations: nopaddingall
                           extra: {  }
-                          size: 100
                         children:
                           -
                             id: 4d713c5a-5f87-4b7c-a02e-836de7baaf2b
@@ -270,6 +297,7 @@ children:
                             attributes:
                               enabled: 1
                               key: slideshow-a
+                              title: 'Module Position'
                             children: {  }
           -
             id: b186da4c-b8f1-67ae-c725-47dc7f8f80ef
@@ -837,8 +865,8 @@ children:
                         subtype: false
                         title: Untitled
                         attributes:
-                          extra: {  }
                           size: 100
+                          extra: {  }
                         children:
                           -
                             id: 2f084134-21d1-4231-2e68-6a38dcbb0c5d
@@ -848,6 +876,7 @@ children:
                             attributes:
                               enabled: 0
                               key: aside
+                              title: Aside
                             children: {  }
   -
     id: 28a0de88-8f18-8bf8-84b8-c5a67880f9d8

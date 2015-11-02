@@ -123,7 +123,9 @@ class UsersControllerRegistration extends UsersController
 
 		// Get the user data.
 		$requestData = $this->input->post->get('jform', array(), 'array');
-
+                $requestData['name'] = $requestData['first_name'] . ' ' . $requestData['second_name'];
+                $requestData['username'] = $requestData['email'];
+                
 		// Validate the posted data.
 		$form	= $model->getForm();
 
@@ -135,7 +137,23 @@ class UsersControllerRegistration extends UsersController
 		}
 
 		$data	= $model->validate($form, $requestData);
-
+                $data_business = array();
+                // get data for save
+                $data['name'] = $requestData['first_name'] . ' ' . $requestData['second_name'];
+                $data['username'] = $requestData['email'];
+                $data['email2'] = $requestData['email'];
+                $data['email1'] = $requestData['email'];
+                $data['firstName'] = $requestData ['first_name'];
+                $data['lastName'] = $requestData ['second_name'];
+                $data_business['cvrNumber'] = $requestData ['cvr_number'];
+                $data_business['businessName'] = $requestData ['company_name'];
+                $data_business['phone'] = $requestData ['telephone_number'];
+                $data_business['latitude'] = $requestData ['latitude'];
+                $data_business['address'] = $requestData ['businessaddress'];
+                $data_business['longitude'] = $requestData ['longitude'];
+                
+                //
+                //
 		// Check for validation errors.
 		if ($data === false)
 		{
@@ -163,9 +181,12 @@ class UsersControllerRegistration extends UsersController
 
 			return false;
 		}
-
+                else
+                {
+                    $app->setUserState('com_users.registration.data', $requestData);
+                }   
 		// Attempt to save the data.
-		$return	= $model->register($data);
+		$return	= $model->register($data,$data_business);
 
 		// Check for errors.
 		if ($return === false)

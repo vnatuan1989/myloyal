@@ -1,23 +1,23 @@
 <?php
 return [
     '@class' => 'Gantry\\Component\\Config\\CompiledConfig',
-    'timestamp' => 1444637896,
-    'checksum' => 'd7e3e363752aae2af7032163063e2e9b',
+    'timestamp' => 1445508250,
+    'checksum' => '4292dbff2a7c3f58397110206b25346b',
     'files' => [
         'templates/rt_salient/custom/config/24' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/24/index.yaml',
-                'modified' => 1444636956
+                'modified' => 1445508246
             ],
             'layout' => [
                 'file' => 'templates/rt_salient/custom/config/24/layout.yaml',
-                'modified' => 1444636956
+                'modified' => 1445508245
             ]
         ],
         'templates/rt_salient/custom/config/default' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/default/index.yaml',
-                'modified' => 1444636956
+                'modified' => 1445508245
             ],
             'particles/analytics' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/analytics.yaml',
@@ -764,6 +764,45 @@ return [
                                     ]
                                 ]
                             ]
+                        ],
+                        1 => [
+                            'id' => 'fe2408ce-3dfc-492d-9494-b214baa84fa6',
+                            'type' => 'grid',
+                            'subtype' => false,
+                            'title' => 'Untitled',
+                            'attributes' => [
+                                
+                            ],
+                            'children' => [
+                                0 => [
+                                    'id' => '42828e6a-ff3d-4a84-8954-cf88f32c31d0',
+                                    'type' => 'block',
+                                    'subtype' => false,
+                                    'title' => 'Untitled',
+                                    'attributes' => [
+                                        'extra' => [
+                                            
+                                        ],
+                                        'size' => 100
+                                    ],
+                                    'children' => [
+                                        0 => [
+                                            'id' => '24fe01c7-ed4e-4458-b9ae-26be3039eaf4',
+                                            'type' => 'position',
+                                            'subtype' => 'module',
+                                            'title' => 'Module Instance',
+                                            'attributes' => [
+                                                'enabled' => 1,
+                                                'module_id' => '283',
+                                                'chrome' => ''
+                                            ],
+                                            'children' => [
+                                                
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
                         ]
                     ]
                 ],
@@ -877,11 +916,11 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
+                                                                'size' => 100,
                                                                 'variations' => 'nopaddingall',
                                                                 'extra' => [
                                                                     
-                                                                ],
-                                                                'size' => 100
+                                                                ]
                                                             ],
                                                             'children' => [
                                                                 0 => [
@@ -891,7 +930,8 @@ return [
                                                                     'title' => 'Slideshow A',
                                                                     'attributes' => [
                                                                         'enabled' => 1,
-                                                                        'key' => 'slideshow-a'
+                                                                        'key' => 'slideshow-a',
+                                                                        'title' => 'Slideshow A'
                                                                     ],
                                                                     'children' => [
                                                                         
@@ -956,11 +996,11 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
+                                                                'size' => 100,
                                                                 'variations' => 'nopaddingall',
                                                                 'extra' => [
                                                                     
-                                                                ],
-                                                                'size' => 100
+                                                                ]
                                                             ],
                                                             'children' => [
                                                                 0 => [
@@ -970,7 +1010,8 @@ return [
                                                                     'title' => 'Module Position',
                                                                     'attributes' => [
                                                                         'enabled' => 1,
-                                                                        'key' => 'slideshow-a'
+                                                                        'key' => 'slideshow-a',
+                                                                        'title' => 'Module Position'
                                                                     ],
                                                                     'children' => [
                                                                         
@@ -1813,10 +1854,10 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
+                                                                'size' => 100,
                                                                 'extra' => [
                                                                     
-                                                                ],
-                                                                'size' => 100
+                                                                ]
                                                             ],
                                                             'children' => [
                                                                 0 => [
@@ -1826,7 +1867,8 @@ return [
                                                                     'title' => 'Aside',
                                                                     'attributes' => [
                                                                         'enabled' => 0,
-                                                                        'key' => 'aside'
+                                                                        'key' => 'aside',
+                                                                        'title' => 'Aside'
                                                                     ],
                                                                     'children' => [
                                                                         
