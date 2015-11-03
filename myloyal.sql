@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2015 at 12:47 PM
+-- Generation Time: Nov 02, 2015 at 08:14 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -55,14 +55,14 @@ CREATE TABLE IF NOT EXISTS `bxnaz_assets` (
   UNIQUE KEY `idx_asset_name` (`name`),
   KEY `idx_lft_rgt` (`lft`,`rgt`),
   KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=277 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=279 ;
 
 --
 -- Dumping data for table `bxnaz_assets`
 --
 
 INSERT INTO `bxnaz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-(1, 0, 0, 295, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(1, 0, 0, 299, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
@@ -85,7 +85,7 @@ INSERT INTO `bxnaz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (21, 1, 267, 268, 1, 'com_redirect', 'com_redirect', '{"core.admin":{"7":1},"core.manage":[]}'),
 (22, 1, 269, 270, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
 (23, 1, 271, 272, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(24, 1, 273, 276, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(24, 1, 273, 276, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.options":[],"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (26, 1, 277, 278, 1, 'com_wrapper', 'com_wrapper', '{}'),
 (27, 8, 20, 21, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
@@ -209,7 +209,9 @@ INSERT INTO `bxnaz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (273, 18, 252, 253, 2, 'com_modules.module.279', 'Social', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"module.edit.frontend":[]}'),
 (274, 18, 254, 255, 2, 'com_modules.module.280', 'Off Canvas Toggle', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"module.edit.frontend":[]}'),
 (275, 18, 256, 257, 2, 'com_modules.module.281', 'Menu', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"module.edit.frontend":[]}'),
-(276, 18, 258, 259, 2, 'com_modules.module.282', 'Logo', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"module.edit.frontend":[]}');
+(276, 18, 258, 259, 2, 'com_modules.module.282', 'Logo', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"module.edit.frontend":[]}'),
+(277, 1, 295, 296, 1, 'com_business', 'COM_BUSINESS', '{}'),
+(278, 1, 297, 298, 1, 'com_helloworld', 'COM_HELLOWORLD', '{}');
 
 -- --------------------------------------------------------
 
@@ -324,24 +326,40 @@ CREATE TABLE IF NOT EXISTS `bxnaz_banner_tracks` (
 --
 
 CREATE TABLE IF NOT EXISTS `bxnaz_business` (
-  `id` int(11) NOT NULL,
-  `idStore` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
   `businessName` varchar(255) DEFAULT NULL,
   `businessEmail` text,
   `shortName` text,
+  `type` tinyint(4) DEFAULT NULL,
   `icon` text,
   `address` text,
   `city` text,
   `state` text,
   `country` text,
-  `latitude` float DEFAULT NULL,
-  `longitude` float DEFAULT NULL,
+  `latitude` text,
+  `longitude` text,
   `phone` text,
   `website` text,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+  `createdAt` varchar(20) DEFAULT NULL,
+  `updatedAt` varchar(20) DEFAULT NULL,
+  `timeExpired` datetime DEFAULT NULL,
+  `typeOfPayment` tinyint(4) DEFAULT NULL,
+  `numMonthPayment` int(11) DEFAULT NULL,
+  `transactionPayment` text,
+  `cvrNumber` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `bxnaz_business`
+--
+
+INSERT INTO `bxnaz_business` (`id`, `userId`, `businessName`, `businessEmail`, `shortName`, `type`, `icon`, `address`, `city`, `state`, `country`, `latitude`, `longitude`, `phone`, `website`, `createdAt`, `updatedAt`, `timeExpired`, `typeOfPayment`, `numMonthPayment`, `transactionPayment`, `cvrNumber`) VALUES
+(1, 431, 'Business 5', 'business1@aaa.com', 'B1', 1, 'images/business/coffee.png', 'Test address 1', 'HCM 1', NULL, NULL, '10.78', '106.672', '123456789', 'business1.com', '1445212800', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 432, 'Business 10', 'business2@aaa.com', 'B2', 2, 'images/business/fitness.png', 'Test address 2', 'HCM 2', NULL, NULL, '10.7719', '106.698', '123456789', 'business2.com', '1445212800', NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 436, '1', NULL, NULL, NULL, NULL, '111, Ultimo Road, Ultimo, New South Wales, Úc', NULL, NULL, NULL, '-33.881381', '151.20113200000003', '1', NULL, '1446028540', '1446028540', NULL, NULL, NULL, NULL, '1'),
+(5, 437, '1', NULL, NULL, NULL, NULL, '111, Ultimo Road, Ultimo, New South Wales, Úc', NULL, NULL, NULL, '-33.881381', '151.20113200000003', '1', NULL, '1446028682', '1446028682', NULL, NULL, NULL, NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -410,13 +428,25 @@ INSERT INTO `bxnaz_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `le
 --
 
 CREATE TABLE IF NOT EXISTS `bxnaz_checkin` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `customerId` int(11) DEFAULT NULL,
-  `storeId` int(11) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
+  `createdAt` varchar(20) DEFAULT NULL,
+  `updatedAt` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `bxnaz_checkin`
+--
+
+INSERT INTO `bxnaz_checkin` (`id`, `customerId`, `businessId`, `createdAt`, `updatedAt`) VALUES
+(1, 430, 1, '1445795087', NULL),
+(2, 430, 1, '1445795138', NULL),
+(3, 431, 1, '1445795149', NULL),
+(4, 431, 1, '1445795156', NULL),
+(5, 430, 1, '1445795572', NULL),
+(6, 430, 2, '1445795086', NULL);
 
 -- --------------------------------------------------------
 
@@ -679,7 +709,7 @@ CREATE TABLE IF NOT EXISTS `bxnaz_extensions` (
   KEY `element_clientid` (`element`,`client_id`),
   KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
   KEY `extension` (`type`,`element`,`folder`,`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10083 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10088 ;
 
 --
 -- Dumping data for table `bxnaz_extensions`
@@ -709,7 +739,7 @@ INSERT INTO `bxnaz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (22, 'com_content', 'component', 'com_content', '', 1, 1, 0, 1, '{"name":"com_content","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CONTENT_XML_DESCRIPTION","group":"","filename":"content"}', '{"article_layout":"_:default","show_title":"1","link_titles":"1","show_intro":"1","info_block_position":"0","show_category":"0","link_category":"0","show_parent_category":"0","link_parent_category":"0","show_author":"0","link_author":"0","show_create_date":"0","show_modify_date":"0","show_publish_date":"0","show_item_navigation":"0","show_vote":"0","show_readmore":"0","show_readmore_title":"0","readmore_limit":"100","show_tags":"0","show_icons":"0","show_print_icon":"0","show_email_icon":"0","show_hits":"0","show_noauth":"0","urls_position":"0","show_publishing_options":"1","show_article_options":"1","save_history":"1","history_limit":10,"show_urls_images_frontend":"0","show_urls_images_backend":"1","targeta":0,"targetb":0,"targetc":0,"float_intro":"left","float_fulltext":"left","category_layout":"_:blog","show_category_heading_title_text":"1","show_category_title":"0","show_description":"0","show_description_image":"0","maxLevel":"1","show_empty_categories":"0","show_no_articles":"1","show_subcat_desc":"1","show_cat_num_articles":"0","show_cat_tags":"1","show_base_description":"1","maxLevelcat":"-1","show_empty_categories_cat":"0","show_subcat_desc_cat":"1","show_cat_num_articles_cat":"1","num_leading_articles":"1","num_intro_articles":"4","num_columns":"2","num_links":"4","multi_column_order":"0","show_subcategory_content":"0","show_pagination_limit":"1","filter_field":"hide","show_headings":"1","list_show_date":"0","date_format":"","list_show_hits":"1","list_show_author":"1","orderby_pri":"order","orderby_sec":"rdate","order_date":"published","show_pagination":"2","show_pagination_results":"1","show_featured":"show","show_feed_link":"1","feed_summary":"0","feed_show_readmore":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (23, 'com_config', 'component', 'com_config', '', 1, 1, 0, 1, '{"name":"com_config","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CONFIG_XML_DESCRIPTION","group":""}', '{"filters":{"1":{"filter_type":"NH","filter_tags":"","filter_attributes":""},"9":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"6":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"7":{"filter_type":"NONE","filter_tags":"","filter_attributes":""},"2":{"filter_type":"NH","filter_tags":"","filter_attributes":""},"3":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"4":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"5":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"8":{"filter_type":"NONE","filter_tags":"","filter_attributes":""}}}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (24, 'com_redirect', 'component', 'com_redirect', '', 1, 1, 0, 1, '{"name":"com_redirect","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_REDIRECT_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(25, 'com_users', 'component', 'com_users', '', 1, 1, 0, 1, '{"name":"com_users","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_USERS_XML_DESCRIPTION","group":"","filename":"users"}', '{"allowUserRegistration":"0","new_usertype":"2","guest_usergroup":"9","sendpassword":"1","useractivation":"1","mail_to_admin":"0","captcha":"","frontend_userparams":"1","site_language":"0","change_login_name":"0","reset_count":"10","reset_time":"1","minimum_length":"4","minimum_integers":"0","minimum_symbols":"0","minimum_uppercase":"0","save_history":"1","history_limit":5,"mailSubjectPrefix":"","mailBodySuffix":""}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(25, 'com_users', 'component', 'com_users', '', 1, 1, 0, 1, '{"name":"com_users","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_USERS_XML_DESCRIPTION","group":"","filename":"users"}', '{"allowUserRegistration":"1","new_usertype":"2","guest_usergroup":"9","sendpassword":"1","useractivation":"1","mail_to_admin":"0","captcha":"","frontend_userparams":"1","site_language":"0","change_login_name":"0","reset_count":"10","reset_time":"1","minimum_length":"4","minimum_integers":"0","minimum_symbols":"0","minimum_uppercase":"0","save_history":"1","history_limit":5,"mailSubjectPrefix":"","mailBodySuffix":""}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (27, 'com_finder', 'component', 'com_finder', '', 1, 1, 0, 0, '{"name":"com_finder","type":"component","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_FINDER_XML_DESCRIPTION","group":"","filename":"finder"}', '{"show_description":"1","description_length":255,"allow_empty_query":"0","show_url":"1","show_advanced":"1","expand_advanced":"0","show_date_filters":"0","highlight_terms":"1","opensearch_name":"","opensearch_description":"","batch_size":"50","memory_table_limit":30000,"title_multiplier":"1.7","text_multiplier":"0.7","meta_multiplier":"1.2","path_multiplier":"2.0","misc_multiplier":"0.3","stemmer":"snowball"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (28, 'com_joomlaupdate', 'component', 'com_joomlaupdate', '', 1, 1, 0, 1, '{"name":"com_joomlaupdate","type":"component","creationDate":"February 2012","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_JOOMLAUPDATE_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (29, 'com_tags', 'component', 'com_tags', '', 1, 1, 1, 1, '{"name":"com_tags","type":"component","creationDate":"December 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.1.0","description":"COM_TAGS_XML_DESCRIPTION","group":"","filename":"tags"}', '{"tag_layout":"_:default","save_history":"1","history_limit":5,"show_tag_title":"0","tag_list_show_tag_image":"0","tag_list_show_tag_description":"0","tag_list_image":"","show_tag_num_items":"0","tag_list_orderby":"title","tag_list_orderby_direction":"ASC","show_headings":"0","tag_list_show_date":"0","tag_list_show_item_image":"0","tag_list_show_item_description":"0","tag_list_item_maximum_characters":0,"return_any_or_all":"1","include_children":"0","maximum":200,"tag_list_language_filter":"all","tags_layout":"_:default","all_tags_orderby":"title","all_tags_orderby_direction":"ASC","all_tags_show_tag_image":"0","all_tags_show_tag_descripion":"0","all_tags_tag_maximum_characters":20,"all_tags_show_tag_hits":"0","filter_field":"1","show_pagination_limit":"1","show_pagination":"2","show_pagination_results":"1","tag_field_ajax_mode":"1","show_feed_link":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -718,7 +748,7 @@ INSERT INTO `bxnaz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (32, 'com_postinstall', 'component', 'com_postinstall', '', 1, 1, 1, 1, '{"name":"com_postinstall","type":"component","creationDate":"September 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_POSTINSTALL_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (101, 'SimplePie', 'library', 'simplepie', '', 0, 1, 1, 1, '{"name":"SimplePie","type":"library","creationDate":"2004","author":"SimplePie","copyright":"Copyright (c) 2004-2009, Ryan Parman and Geoffrey Sneddon","authorEmail":"","authorUrl":"http:\\/\\/simplepie.org\\/","version":"1.2","description":"LIB_SIMPLEPIE_XML_DESCRIPTION","group":"","filename":"simplepie"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (102, 'phputf8', 'library', 'phputf8', '', 0, 1, 1, 1, '{"name":"phputf8","type":"library","creationDate":"2006","author":"Harry Fuecks","copyright":"Copyright various authors","authorEmail":"hfuecks@gmail.com","authorUrl":"http:\\/\\/sourceforge.net\\/projects\\/phputf8","version":"0.5","description":"LIB_PHPUTF8_XML_DESCRIPTION","group":"","filename":"phputf8"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(103, 'Joomla! Platform', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"Joomla! Platform","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"http:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"8989a43297eff19a6557dd3dd0db82a5"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(103, 'Joomla! Platform', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"Joomla! Platform","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"http:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"f8aa1ff13e3c15aa82e9ad1a318f730c"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 'IDNA Convert', 'library', 'idna_convert', '', 0, 1, 1, 1, '{"name":"IDNA Convert","type":"library","creationDate":"2004","author":"phlyLabs","copyright":"2004-2011 phlyLabs Berlin, http:\\/\\/phlylabs.de","authorEmail":"phlymail@phlylabs.de","authorUrl":"http:\\/\\/phlylabs.de","version":"0.8.0","description":"LIB_IDNA_XML_DESCRIPTION","group":"","filename":"idna_convert"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 'FOF', 'library', 'fof', '', 0, 1, 1, 1, '{"name":"FOF","type":"library","creationDate":"2015-04-22 13:15:32","author":"Nicholas K. Dionysopoulos \\/ Akeeba Ltd","copyright":"(C)2011-2015 Nicholas K. Dionysopoulos","authorEmail":"nicholas@akeebabackup.com","authorUrl":"https:\\/\\/www.akeebabackup.com","version":"2.4.3","description":"LIB_FOF_XML_DESCRIPTION","group":"","filename":"fof"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (106, 'PHPass', 'library', 'phpass', '', 0, 1, 1, 1, '{"name":"PHPass","type":"library","creationDate":"2004-2006","author":"Solar Designer","copyright":"","authorEmail":"solar@openwall.com","authorUrl":"http:\\/\\/www.openwall.com\\/phpass\\/","version":"0.3","description":"LIB_PHPASS_XML_DESCRIPTION","group":"","filename":"phpass"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -839,7 +869,12 @@ INSERT INTO `bxnaz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (10049, 'pkg_gantry5', 'package', 'pkg_gantry5', '', 0, 1, 1, 0, '{"name":"pkg_gantry5","type":"package","creationDate":"August 31, 2015","author":"RocketTheme, LLC","copyright":"(C) 2005 - 2015 RocketTheme, LLC. All rights reserved.","authorEmail":"support@rockettheme.com","authorUrl":"http://www.rockettheme.com","version":"5.1.2","description":"PKG_GANTRY5_DESCRIPTION","group":"","filename":"pkg_gantry5"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10079, 'rt_salient', 'template', 'rt_salient', '', 0, 1, 1, 0, '{"name":"rt_salient","type":"template","creationDate":"September 11, 2015","author":"RocketTheme, LLC","copyright":"(C) 2007 - 2015 RocketTheme, LLC. All rights reserved.","authorEmail":"support@rockettheme.com","authorUrl":"http:\\/\\/www.rockettheme.com","version":"1.0.2","description":"TPL_RT_SALIENT_DESC","group":"","filename":"templateDetails"}', '[]', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10080, 'Gantry 5 Framework', 'library', 'gantry5', '', 0, 1, 1, 1, '{"name":"Gantry 5 Framework","type":"library","creationDate":"August 31, 2015","author":"RocketTheme, LLC","copyright":"(C) 2005 - 2015 RocketTheme, LLC. All rights reserved.","authorEmail":"support@rockettheme.com","authorUrl":"http://www.rockettheme.com","version":"5.1.2","description":"LIB_GANTRY5_DESCRIPTION","group":"","filename":"gantry5"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10082, 'RokCommon', 'library', 'lib_rokcommon', '', 0, 1, 1, 0, '{"name":"RokCommon","type":"library","creationDate":"March 4, 2015","author":"RocketTheme, LLC","copyright":"(C) 2005 - 2015 RocketTheme, LLC. All rights reserved.","authorEmail":"support@rockettheme.com","authorUrl":"http:\\/\\/www.rockettheme.com","version":"3.2.0","description":"RokCommon Shared Library","group":"","filename":"lib_rokcommon"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(10082, 'RokCommon', 'library', 'lib_rokcommon', '', 0, 1, 1, 0, '{"name":"RokCommon","type":"library","creationDate":"March 4, 2015","author":"RocketTheme, LLC","copyright":"(C) 2005 - 2015 RocketTheme, LLC. All rights reserved.","authorEmail":"support@rockettheme.com","authorUrl":"http:\\/\\/www.rockettheme.com","version":"3.2.0","description":"RokCommon Shared Library","group":"","filename":"lib_rokcommon"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10083, 'com_api', 'component', 'com_api', '', 0, 1, 1, 1, '{"name":"com_api","type":"component","creationDate":"Sep 2015","author":"T.Trung","copyright":"T.Trung.\\t","authorEmail":"nttrung211@gmail.com","authorUrl":"www.joomla.org","version":"1.0.0","description":"Api","group":"","filename":"api"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10084, 'COM_BUSINESS', 'component', 'com_business', '', 1, 1, 0, 0, '{"name":"COM_BUSINESS","type":"component","creationDate":"10 2014","author":"Tuan Vo","copyright":"","authorEmail":"tuan@mywebcreations.dk","authorUrl":"","version":"0.0.1","description":"","group":"","filename":"business"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10085, 'COM_HELLOWORLD', 'component', 'com_helloworld', '', 1, 1, 0, 0, '{"name":"COM_HELLOWORLD","type":"component","creationDate":"January 2014","author":"John Doe","copyright":"Copyright Info","authorEmail":"john.doe@example.org","authorUrl":"http:\\/\\/www.example.org","version":"0.0.10","description":"COM_HELLOWORLD_DESCRIPTION","group":"","filename":"helloworld"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10086, 'da-DK', 'language', 'da-DK', '', 0, 1, 1, 0, '{"name":"Danish (da-DK)","type":"language","creationDate":"2013-03-07","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"","authorUrl":"www.danskjoomla.dk","version":"3.4.4.1","description":"da-DK site language","group":""}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, -1),
+(10087, 'da-DK', 'language', 'da-DK', '', 1, 1, 1, 0, '{"name":"Danish (da-DK)","type":"language","creationDate":"2012-09-21","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"dansk@danskjoomla.dk","authorUrl":"www.danskjoomla.dk","version":"3.4.4.1","description":"da-DK administrator language","group":""}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, -1);
 
 -- --------------------------------------------------------
 
@@ -1396,6 +1431,28 @@ CREATE TABLE IF NOT EXISTS `bxnaz_finder_types` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bxnaz_helloworld`
+--
+
+CREATE TABLE IF NOT EXISTS `bxnaz_helloworld` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `greeting` varchar(25) NOT NULL,
+  `published` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `bxnaz_helloworld`
+--
+
+INSERT INTO `bxnaz_helloworld` (`id`, `greeting`, `published`) VALUES
+(1, 'Hello World!', 0),
+(2, 'test', 0),
+(3, 'abc', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bxnaz_languages`
 --
 
@@ -1436,7 +1493,7 @@ INSERT INTO `bxnaz_languages` (`lang_id`, `lang_code`, `title`, `title_native`, 
 
 CREATE TABLE IF NOT EXISTS `bxnaz_log_payment` (
   `id` int(11) NOT NULL,
-  `storeId` int(11) DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
   `paymentMoney` float DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
@@ -1455,13 +1512,20 @@ CREATE TABLE IF NOT EXISTS `bxnaz_log_point` (
   `content` varchar(255) DEFAULT NULL,
   `point` int(11) DEFAULT NULL,
   `customerId` int(11) DEFAULT NULL,
-  `storeId` int(11) DEFAULT NULL,
-  `idPromotion` int(11) DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
+  `promotionId` int(11) DEFAULT NULL,
   `type` tinyint(4) DEFAULT NULL COMMENT '1 : increase point ; 2 : decrease point',
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+  `createdAt` varchar(20) DEFAULT NULL,
+  `updatedAt` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `bxnaz_log_point`
+--
+
+INSERT INTO `bxnaz_log_point` (`id`, `content`, `point`, `customerId`, `businessId`, `promotionId`, `type`, `createdAt`, `updatedAt`) VALUES
+(1, 'test content', 50, 430, 1, NULL, 1, '1445967305', NULL);
 
 -- --------------------------------------------------------
 
@@ -1471,15 +1535,27 @@ CREATE TABLE IF NOT EXISTS `bxnaz_log_point` (
 
 CREATE TABLE IF NOT EXISTS `bxnaz_log_stamp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idStore` int(11) DEFAULT NULL,
-  `idCustomer` int(11) DEFAULT NULL,
-  `idPromotion` int(11) DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
+  `customerId` int(11) DEFAULT NULL,
+  `promotionId` int(11) DEFAULT NULL,
   `type` tinyint(4) DEFAULT NULL COMMENT '1 : increase stamp ; 2 : decreases stamp',
   `numStamp` int(11) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+  `createdAt` varchar(20) DEFAULT NULL,
+  `updatedAt` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `bxnaz_log_stamp`
+--
+
+INSERT INTO `bxnaz_log_stamp` (`id`, `businessId`, `customerId`, `promotionId`, `type`, `numStamp`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 430, 3, 1, 1, '1445967473', NULL),
+(2, 2, 430, 3, 1, 1, '1445967479', NULL),
+(3, 2, 430, 4, 1, 1, '1445967480', NULL),
+(4, 2, 430, 4, 1, 1, '1445967481', NULL),
+(5, 2, 430, 4, 1, 1, '1445967482', NULL),
+(6, 2, 430, 4, 1, 1, '1445967483', NULL);
 
 -- --------------------------------------------------------
 
@@ -1520,14 +1596,14 @@ CREATE TABLE IF NOT EXISTS `bxnaz_menu` (
   KEY `idx_alias` (`alias`),
   KEY `idx_path` (`path`(255)),
   KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=149 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=151 ;
 
 --
 -- Dumping data for table `bxnaz_menu`
 --
 
 INSERT INTO `bxnaz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
-(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 85, 0, '*', 0),
+(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 89, 0, '*', 0),
 (2, 'menu', 'com_banners', 'Banners', '', 'Banners', 'index.php?option=com_banners', 'component', 0, 1, 1, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 1, 10, 0, '*', 1),
 (3, 'menu', 'com_banners', 'Banners', '', 'Banners/Banners', 'index.php?option=com_banners', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 2, 3, 0, '*', 1),
 (4, 'menu', 'com_banners_categories', 'Categories', '', 'Banners/Categories', 'index.php?option=com_categories&extension=com_banners', 'component', 0, 2, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-cat', 0, '', 4, 5, 0, '*', 1),
@@ -1565,10 +1641,12 @@ INSERT INTO `bxnaz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (121, 'mainmenu', 'Coming Soon', 'coming-soon', '', 'pages/coming-soon', 'index.php?option=com_gantry5&view=custom', 'component', 1, 110, 2, 10048, 0, '0000-00-00 00:00:00', 0, 1, '', 27, '{"particle":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 68, 69, 0, '*', 0),
 (122, 'mainmenu', 'Offline', 'offline', '', 'pages/offline', 'index.php?option=com_content&view=article&id=11', 'component', 1, 110, 2, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"0","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"0","show_print_icon":"0","show_email_icon":"0","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 70, 71, 0, '*', 0),
 (123, 'mainmenu', 'Styles', 'styles', '', 'styles', '', 'separator', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu_image":"","menu_text":1,"menu-anchor_title":"","menu-anchor_css":""}', 73, 74, 0, '*', 0),
-(124, 'mainmenu', 'Download', 'registration', '', 'registration', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 79, 80, 0, '*', 0),
+(124, 'mainmenu', 'Download', 'registration', '', 'registration', 'index.php?option=com_users&view=registration', 'component', 0, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 79, 80, 0, '*', 0),
 (146, 'salient-theme', 'Home', 'salient', '', 'salient', 'index.php?option=com_gantry5&view=custom', 'component', 1, 1, 1, 10048, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{}', 77, 78, 0, '*', 0),
 (147, 'main', 'COM_GANTRY5', 'com-gantry5', '', 'com-gantry5', 'index.php?option=com_gantry5', 'component', 0, 1, 1, 10048, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 81, 82, 0, '', 1),
-(148, 'mainmenu', 'Registration', 'register', '', 'register', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 83, 84, 0, '*', 0);
+(148, 'mainmenu', 'Registration', 'register', '', 'register', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 83, 84, 0, '*', 0),
+(149, 'main', 'COM_business_MENU', 'com-business-menu', '', 'com-business-menu', 'index.php?option=com_business', 'component', 0, 1, 1, 10084, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_business/images/tux-16x16.png', 0, '', 85, 86, 0, '', 1),
+(150, 'main', 'COM_HELLOWORLD_MENU', 'com-helloworld-menu', '', 'com-helloworld-menu', 'index.php?option=com_helloworld', 'component', 0, 1, 1, 10085, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_helloworld/images/tux-16x16.png', 0, '', 87, 88, 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -1611,7 +1689,16 @@ CREATE TABLE IF NOT EXISTS `bxnaz_messages` (
   `message` text NOT NULL,
   PRIMARY KEY (`message_id`),
   KEY `useridto_state` (`user_id_to`,`state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `bxnaz_messages`
+--
+
+INSERT INTO `bxnaz_messages` (`message_id`, `user_id_from`, `user_id_to`, `folder_id`, `date_time`, `state`, `priority`, `subject`, `message`) VALUES
+(1, 0, 0, 0, '2015-10-28 10:38:03', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: 1@fbasf.com'),
+(2, 0, 0, 0, '2015-10-28 10:38:03', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: 1@fbasf.com'),
+(3, 0, 0, 0, '2015-10-28 10:38:03', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: 1@fbasf.com');
 
 -- --------------------------------------------------------
 
@@ -2002,15 +2089,19 @@ CREATE TABLE IF NOT EXISTS `bxnaz_overrider` (
 --
 
 CREATE TABLE IF NOT EXISTS `bxnaz_point` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `customerId` int(11) DEFAULT NULL,
-  `storeId` int(11) DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
   `point` int(11) DEFAULT NULL,
-  `numTime` int(11) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `bxnaz_point`
+--
+
+INSERT INTO `bxnaz_point` (`id`, `customerId`, `businessId`, `point`) VALUES
+(1, 430, 1, 50);
 
 -- --------------------------------------------------------
 
@@ -2052,18 +2143,29 @@ INSERT INTO `bxnaz_postinstall_messages` (`postinstall_message_id`, `extension_i
 
 CREATE TABLE IF NOT EXISTS `bxnaz_promotion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `storeId` int(11) DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
   `title` text,
   `content` text,
   `point` int(11) DEFAULT NULL,
-  `numTime` int(11) DEFAULT NULL,
-  `startDate` date DEFAULT NULL,
-  `endDate` date DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+  `stamp` int(11) DEFAULT NULL,
+  `icon` varchar(255) NOT NULL,
+  `startDate` varchar(20) DEFAULT NULL,
+  `endDate` varchar(20) DEFAULT NULL,
+  `createdAt` varchar(20) DEFAULT NULL,
+  `updatedAt` varchar(20) DEFAULT NULL,
   `type` tinyint(4) DEFAULT NULL COMMENT '1 : point to get free , 2 : numTime to get free',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `bxnaz_promotion`
+--
+
+INSERT INTO `bxnaz_promotion` (`id`, `businessId`, `title`, `content`, `point`, `stamp`, `icon`, `startDate`, `endDate`, `createdAt`, `updatedAt`, `type`) VALUES
+(1, 1, 'Point 1', 'Test point 1 Test point 1 Test point 1', 20, NULL, 'images/business/coffee.png', '1443657600', '1451520000', '1445845460 ', NULL, 1),
+(2, 1, 'Point 2', 'Test point 2 Test point 2 Test point 2', 100, NULL, 'images/business/coffee.png', '1443657600', '1451520000', '1445845460 ', NULL, 1),
+(3, 2, 'Stamp 2', 'Test stamp 1 Test stamp 1 Test stamp 1 Test stamp 1 ', 0, 8, 'images/business/fitness.png', '1443657600', '1451520000', '1445845460 ', NULL, 2),
+(4, 2, 'Stamp 2', 'Test stamp 2 Test stamp 2 Test stamp 2 Test stamp 2 ', NULL, 4, 'images/business/fitness.png', '1443657600', '1451520000', '1445845460 ', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -2219,7 +2321,8 @@ CREATE TABLE IF NOT EXISTS `bxnaz_schemas` (
 --
 
 INSERT INTO `bxnaz_schemas` (`extension_id`, `version_id`) VALUES
-(700, '3.4.0-2015-02-26');
+(700, '3.4.0-2015-02-26'),
+(10085, '0.0.6');
 
 -- --------------------------------------------------------
 
@@ -2245,8 +2348,7 @@ CREATE TABLE IF NOT EXISTS `bxnaz_session` (
 --
 
 INSERT INTO `bxnaz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('flsg12mmnvlas4hfdv2r0a90m5', 1, 0, '1444642211', '__default|a:8:{s:15:"session.counter";i:13;s:19:"session.timer.start";i:1444641988;s:18:"session.timer.last";i:1444642207;s:17:"session.timer.now";i:1444642208;s:22:"session.client.browser";s:73:"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":2:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:5:"en-GB";}s:9:"com_menus";O:8:"stdClass":2:{s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:8:"mainmenu";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":1:{s:4:"item";O:8:"stdClass":5:{s:2:"id";a:1:{i:0;i:148;}s:4:"data";N;s:4:"type";N;s:4:"link";N;s:8:"menutype";s:8:"mainmenu";}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":34:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"427";s:4:"name";s:10:"Super User";s:8:"username";s:7:"myloyal";s:5:"email";s:22:"tuan@mywebcreations.dk";s:8:"password";s:60:"$2y$10$YANdVzT4LAXSQM84Lirm7umX.KyxFsdA9B9yBe.anm1zN6v9K2vNK";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"1";s:12:"registerDate";s:19:"2015-10-08 11:11:49";s:13:"lastvisitDate";s:19:"2015-10-12 09:02:41";s:10:"activation";s:1:"0";s:6:"params";s:0:"";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:8:"lastName";N;s:9:"firstName";N;s:11:"timeExpired";N;s:13:"typeOfPayment";N;s:15:"numMonthPayment";N;s:18:"transactionPayment";N;}s:13:"session.token";s:32:"88fefbb51c2413f73644a627a02dc59c";}', 427, 'myloyal'),
-('spf398ho0kb6dk7c73qhoh33m4', 0, 1, '1444642253', '__default|a:8:{s:15:"session.counter";i:82;s:19:"session.timer.start";i:1444634358;s:18:"session.timer.last";i:1444642246;s:17:"session.timer.now";i:1444642251;s:22:"session.client.browser";s:73:"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:4:"data";a:5:{s:6:"return";s:39:"index.php?option=com_users&view=profile";s:8:"username";s:6:"adadsa";s:8:"password";s:6:"dadada";s:9:"secretkey";s:0:"";s:8:"remember";i:0;}s:6:"return";s:39:"index.php?option=com_users&view=profile";}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":26:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";i:0;s:4:"name";N;s:8:"username";N;s:5:"email";N;s:8:"password";N;s:14:"password_clear";s:0:"";s:5:"block";N;s:9:"sendEmail";i:0;s:12:"registerDate";N;s:13:"lastvisitDate";N;s:10:"activation";N;s:6:"params";N;s:6:"groups";a:1:{i:0;s:1:"9";}s:5:"guest";i:1;s:13:"lastResetTime";N;s:10:"resetCount";N;s:12:"requireReset";N;s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:9;}s:14:"\\0\\0\\0_authLevels";a:3:{i:0;i:1;i:1;i:1;i:2;i:5;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;}s:13:"session.token";s:32:"08de6da1aba4fa5ed1d6d686f50e1dc6";}', 0, '');
+('ttfav85tv6gtel9d975sere346', 1, 0, '1446448195', '__default|a:8:{s:15:"session.counter";i:18;s:19:"session.timer.start";i:1446437720;s:18:"session.timer.last";i:1446448192;s:17:"session.timer.now";i:1446448194;s:22:"session.client.browser";s:73:"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":2:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:5:"en-GB";}s:12:"com_business";O:8:"stdClass":4:{s:4:"edit";O:8:"stdClass":1:{s:9:"promotion";O:8:"stdClass":1:{s:4:"data";N;}}s:10:"promotions";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}s:8:"checkins";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}s:10:"businesses";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":32:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"427";s:4:"name";s:12:"Adminstrator";s:8:"username";s:7:"myloyal";s:5:"email";s:22:"tuan@mywebcreations.dk";s:8:"password";s:60:"$2y$10$YANdVzT4LAXSQM84Lirm7umX.KyxFsdA9B9yBe.anm1zN6v9K2vNK";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"1";s:12:"registerDate";s:19:"2015-10-08 11:11:49";s:13:"lastvisitDate";s:19:"2015-11-02 03:31:19";s:10:"activation";s:1:"0";s:6:"params";s:92:"{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":6:{s:11:"admin_style";s:0:"";s:14:"admin_language";s:0:"";s:8:"language";s:0:"";s:6:"editor";s:0:"";s:8:"helpsite";s:0:"";s:8:"timezone";s:0:"";}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:8:"lastName";s:3:"ccc";s:9:"firstName";s:3:"aaa";s:6:"avatar";s:0:"";s:10:"facebookId";s:0:"";}s:13:"session.token";s:32:"db934af2d7b36077bbc2ddd7f25f7a96";}', 427, 'myloyal');
 
 -- --------------------------------------------------------
 
@@ -2256,14 +2358,20 @@ INSERT INTO `bxnaz_session` (`session_id`, `client_id`, `guest`, `time`, `data`,
 
 CREATE TABLE IF NOT EXISTS `bxnaz_stamp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idPromotion` int(11) DEFAULT NULL,
-  `idStore` int(11) DEFAULT NULL,
-  `idCustomer` int(11) DEFAULT NULL,
+  `promotionId` int(11) DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
+  `customerId` int(11) DEFAULT NULL,
   `numStamp` int(11) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `bxnaz_stamp`
+--
+
+INSERT INTO `bxnaz_stamp` (`id`, `promotionId`, `businessId`, `customerId`, `numStamp`) VALUES
+(1, 3, 2, 430, 2),
+(2, 4, 2, 430, 4);
 
 -- --------------------------------------------------------
 
@@ -2335,7 +2443,7 @@ CREATE TABLE IF NOT EXISTS `bxnaz_template_styles` (
   PRIMARY KEY (`id`),
   KEY `idx_template` (`template`),
   KEY `idx_home` (`home`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `bxnaz_template_styles`
@@ -2466,71 +2574,88 @@ CREATE TABLE IF NOT EXISTS `bxnaz_updates` (
   `infourl` text NOT NULL,
   `extra_query` varchar(1000) DEFAULT '',
   PRIMARY KEY (`update_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Available Updates' AUTO_INCREMENT=59 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Available Updates' AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data for table `bxnaz_updates`
 --
 
 INSERT INTO `bxnaz_updates` (`update_id`, `update_site_id`, `extension_id`, `name`, `description`, `element`, `type`, `folder`, `client_id`, `version`, `data`, `detailsurl`, `infourl`, `extra_query`) VALUES
-(1, 3, 0, 'Belarusian', '', 'pkg_be-BY', 'package', '', 0, '3.2.1.1', '', 'http://update.joomla.org/language/details3/be-BY_details.xml', '', ''),
-(2, 3, 0, 'Bulgarian', '', 'pkg_bg-BG', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/bg-BG_details.xml', '', ''),
-(3, 3, 0, 'Catalan', '', 'pkg_ca-ES', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/ca-ES_details.xml', '', ''),
-(4, 3, 0, 'Chinese Simplified', '', 'pkg_zh-CN', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/zh-CN_details.xml', '', ''),
-(5, 3, 0, 'Croatian', '', 'pkg_hr-HR', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/hr-HR_details.xml', '', ''),
-(6, 1, 700, 'Joomla', '', 'joomla', 'file', '', 0, '3.4.4', '', 'http://update.joomla.org/core/sts/extension_sts.xml', '', ''),
-(7, 3, 0, 'Czech', '', 'pkg_cs-CZ', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/cs-CZ_details.xml', '', ''),
-(8, 3, 0, 'Danish', '', 'pkg_da-DK', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/da-DK_details.xml', '', ''),
-(9, 3, 0, 'Dutch', '', 'pkg_nl-NL', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/nl-NL_details.xml', '', ''),
-(10, 3, 0, 'Estonian', '', 'pkg_et-EE', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/et-EE_details.xml', '', ''),
-(11, 3, 0, 'Italian', '', 'pkg_it-IT', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/it-IT_details.xml', '', ''),
-(12, 3, 0, 'Khmer', '', 'pkg_km-KH', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/km-KH_details.xml', '', ''),
-(13, 3, 0, 'Korean', '', 'pkg_ko-KR', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/ko-KR_details.xml', '', ''),
-(14, 3, 0, 'Latvian', '', 'pkg_lv-LV', 'package', '', 0, '3.4.3.1', '', 'http://update.joomla.org/language/details3/lv-LV_details.xml', '', ''),
-(15, 3, 0, 'Macedonian', '', 'pkg_mk-MK', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/mk-MK_details.xml', '', ''),
-(16, 3, 0, 'Norwegian Bokmal', '', 'pkg_nb-NO', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/nb-NO_details.xml', '', ''),
-(17, 3, 0, 'Norwegian Nynorsk', '', 'pkg_nn-NO', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/nn-NO_details.xml', '', ''),
-(18, 3, 0, 'Persian', '', 'pkg_fa-IR', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/fa-IR_details.xml', '', ''),
-(19, 3, 0, 'Polish', '', 'pkg_pl-PL', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/pl-PL_details.xml', '', ''),
-(20, 3, 0, 'Portuguese', '', 'pkg_pt-PT', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/pt-PT_details.xml', '', ''),
-(21, 3, 0, 'Russian', '', 'pkg_ru-RU', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/ru-RU_details.xml', '', ''),
-(22, 3, 0, 'Slovak', '', 'pkg_sk-SK', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/sk-SK_details.xml', '', ''),
-(23, 3, 0, 'Swedish', '', 'pkg_sv-SE', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sv-SE_details.xml', '', ''),
-(24, 3, 0, 'Syriac', '', 'pkg_sy-IQ', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sy-IQ_details.xml', '', ''),
-(25, 3, 0, 'Tamil', '', 'pkg_ta-IN', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/ta-IN_details.xml', '', ''),
-(26, 3, 0, 'Thai', '', 'pkg_th-TH', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/th-TH_details.xml', '', ''),
-(27, 3, 0, 'Turkish', '', 'pkg_tr-TR', 'package', '', 0, '3.4.3.1', '', 'http://update.joomla.org/language/details3/tr-TR_details.xml', '', ''),
-(28, 3, 0, 'Ukrainian', '', 'pkg_uk-UA', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/uk-UA_details.xml', '', ''),
-(29, 3, 0, 'Uyghur', '', 'pkg_ug-CN', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/ug-CN_details.xml', '', ''),
-(30, 3, 0, 'Albanian', '', 'pkg_sq-AL', 'package', '', 0, '3.1.1.1', '', 'http://update.joomla.org/language/details3/sq-AL_details.xml', '', ''),
-(31, 3, 0, 'Hindi', '', 'pkg_hi-IN', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/hi-IN_details.xml', '', ''),
-(32, 3, 0, 'Portuguese Brazil', '', 'pkg_pt-BR', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/pt-BR_details.xml', '', ''),
-(33, 3, 0, 'Serbian Latin', '', 'pkg_sr-YU', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sr-YU_details.xml', '', ''),
-(34, 3, 0, 'Spanish', '', 'pkg_es-ES', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/es-ES_details.xml', '', ''),
-(35, 3, 0, 'Bosnian', '', 'pkg_bs-BA', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/bs-BA_details.xml', '', ''),
-(36, 3, 0, 'Serbian Cyrillic', '', 'pkg_sr-RS', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sr-RS_details.xml', '', ''),
-(37, 3, 0, 'Vietnamese', '', 'pkg_vi-VN', 'package', '', 0, '3.2.1.1', '', 'http://update.joomla.org/language/details3/vi-VN_details.xml', '', ''),
-(38, 3, 0, 'Bahasa Indonesia', '', 'pkg_id-ID', 'package', '', 0, '3.3.0.2', '', 'http://update.joomla.org/language/details3/id-ID_details.xml', '', ''),
-(39, 3, 0, 'Finnish', '', 'pkg_fi-FI', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/fi-FI_details.xml', '', ''),
-(40, 3, 0, 'Swahili', '', 'pkg_sw-KE', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sw-KE_details.xml', '', ''),
-(41, 3, 0, 'Montenegrin', '', 'pkg_srp-ME', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/srp-ME_details.xml', '', ''),
-(42, 3, 0, 'EnglishCA', '', 'pkg_en-CA', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/en-CA_details.xml', '', ''),
-(43, 3, 0, 'FrenchCA', '', 'pkg_fr-CA', 'package', '', 0, '3.4.4.3', '', 'http://update.joomla.org/language/details3/fr-CA_details.xml', '', ''),
-(44, 3, 0, 'Welsh', '', 'pkg_cy-GB', 'package', '', 0, '3.3.0.2', '', 'http://update.joomla.org/language/details3/cy-GB_details.xml', '', ''),
-(45, 3, 0, 'Sinhala', '', 'pkg_si-LK', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/si-LK_details.xml', '', ''),
-(46, 3, 0, 'Dari Persian', '', 'pkg_prs-AF', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/prs-AF_details.xml', '', ''),
-(47, 5, 0, 'RokGallery Extension', '', 'mod_rokgallery', 'module', '', 0, '2.31', '0802', 'http://updates.rockettheme.com/joomla/286/21ffe006', '', ''),
-(48, 5, 0, 'RokWeather Module', '', 'mod_rokweather', 'module', '', 0, '2.0.4', '0802', 'http://updates.rockettheme.com/joomla/292/a0cbba72', '', ''),
-(49, 5, 0, 'RokStock Module', '', 'mod_rokstock', 'module', '', 0, '2.0.2', '0802', 'http://updates.rockettheme.com/joomla/295/87c1121c', '', ''),
-(50, 5, 0, 'RokFeatureTable Module', '', 'mod_rokfeaturetable', 'module', '', 0, '1.7', '0802', 'http://updates.rockettheme.com/joomla/296/fb9111b3', '', ''),
-(51, 5, 0, 'RokMiniEvents3 Module', '', 'mod_rokminievents3', 'module', '', 0, '3.0.2', '0802', 'http://updates.rockettheme.com/joomla/297/1686051690', '', ''),
-(52, 5, 0, 'RokQuickCart Extension', '', 'com_rokquickcart', 'component', '', 1, '2.1.4', '0802', 'http://updates.rockettheme.com/joomla/298/ddfa10eb', '', ''),
-(53, 5, 0, 'RokNavMenu Module', '', 'mod_roknavmenu', 'module', '', 0, '2.0.8', '0802', 'http://updates.rockettheme.com/joomla/300/5a9aa468', '', ''),
-(54, 5, 0, 'RokCandy Extension', '', 'rokcandy', 'plugin', 'system', 0, '2.0.2', '0802', 'http://updates.rockettheme.com/joomla/302/2df8a4e2', '', ''),
-(55, 5, 0, 'RokComments Plugin', '', 'rokcomments', 'plugin', 'content', 0, '2.0.3', '0802', 'http://updates.rockettheme.com/joomla/303/d1fd7b76', '', ''),
-(56, 5, 0, 'RokSocialButtons Plugin', '', 'roksocialbuttons', 'plugin', 'content', 0, '1.5.3', '0802', 'http://updates.rockettheme.com/joomla/381/269989291', '', ''),
-(57, 10, 10049, 'pkg_gantry5', 'Gantry Framework', 'pkg_gantry5', 'package', '', 0, '5.1.5', '', 'http://updates.gantry.org/5.0/joomla/pkg_gantry5.xml', 'http://docs.gantry.org/gantry5', ''),
-(58, 11, 0, 'Hydrogen', 'Hydrogen Template', 'g5_hydrogen', 'template', '', 0, '5.1.5', '', 'http://updates.gantry.org/5.0/joomla/tpl_g5_hydrogen.xml', '', '');
+(1, 1, 700, 'Joomla', '', 'joomla', 'file', '', 0, '3.4.5', '', 'http://update.joomla.org/core/sts/extension_sts.xml', '', ''),
+(2, 3, 0, 'Armenian', '', 'pkg_hy-AM', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/hy-AM_details.xml', '', ''),
+(3, 3, 0, 'Malay', '', 'pkg_ms-MY', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/ms-MY_details.xml', '', ''),
+(4, 3, 0, 'Romanian', '', 'pkg_ro-RO', 'package', '', 0, '3.4.3.1', '', 'http://update.joomla.org/language/details3/ro-RO_details.xml', '', ''),
+(5, 3, 0, 'Flemish', '', 'pkg_nl-BE', 'package', '', 0, '3.4.5.2', '', 'http://update.joomla.org/language/details3/nl-BE_details.xml', '', ''),
+(6, 3, 0, 'Chinese Traditional', '', 'pkg_zh-TW', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/zh-TW_details.xml', '', ''),
+(7, 3, 0, 'French', '', 'pkg_fr-FR', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/fr-FR_details.xml', '', ''),
+(8, 3, 0, 'Galician', '', 'pkg_gl-ES', 'package', '', 0, '3.3.1.2', '', 'http://update.joomla.org/language/details3/gl-ES_details.xml', '', ''),
+(9, 3, 0, 'German', '', 'pkg_de-DE', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/de-DE_details.xml', '', ''),
+(10, 3, 0, 'Greek', '', 'pkg_el-GR', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/el-GR_details.xml', '', ''),
+(11, 3, 0, 'Japanese', '', 'pkg_ja-JP', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/ja-JP_details.xml', '', ''),
+(12, 3, 0, 'Hebrew', '', 'pkg_he-IL', 'package', '', 0, '3.1.1.1', '', 'http://update.joomla.org/language/details3/he-IL_details.xml', '', ''),
+(13, 3, 0, 'EnglishAU', '', 'pkg_en-AU', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/en-AU_details.xml', '', ''),
+(14, 3, 0, 'EnglishUS', '', 'pkg_en-US', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/en-US_details.xml', '', ''),
+(15, 3, 0, 'Hungarian', '', 'pkg_hu-HU', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/hu-HU_details.xml', '', ''),
+(16, 3, 0, 'Afrikaans', '', 'pkg_af-ZA', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/af-ZA_details.xml', '', ''),
+(17, 3, 0, 'Arabic Unitag', '', 'pkg_ar-AA', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/ar-AA_details.xml', '', ''),
+(18, 3, 0, 'Belarusian', '', 'pkg_be-BY', 'package', '', 0, '3.2.1.1', '', 'http://update.joomla.org/language/details3/be-BY_details.xml', '', ''),
+(19, 3, 0, 'Bulgarian', '', 'pkg_bg-BG', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/bg-BG_details.xml', '', ''),
+(20, 3, 0, 'Catalan', '', 'pkg_ca-ES', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/ca-ES_details.xml', '', ''),
+(21, 3, 0, 'Chinese Simplified', '', 'pkg_zh-CN', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/zh-CN_details.xml', '', ''),
+(22, 3, 0, 'Croatian', '', 'pkg_hr-HR', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/hr-HR_details.xml', '', ''),
+(23, 3, 0, 'Czech', '', 'pkg_cs-CZ', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/cs-CZ_details.xml', '', ''),
+(24, 3, 0, 'Danish', '', 'pkg_da-DK', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/da-DK_details.xml', '', ''),
+(25, 3, 0, 'Dutch', '', 'pkg_nl-NL', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/nl-NL_details.xml', '', ''),
+(26, 3, 0, 'Estonian', '', 'pkg_et-EE', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/et-EE_details.xml', '', ''),
+(27, 3, 0, 'Italian', '', 'pkg_it-IT', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/it-IT_details.xml', '', ''),
+(28, 3, 0, 'Khmer', '', 'pkg_km-KH', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/km-KH_details.xml', '', ''),
+(29, 3, 0, 'Korean', '', 'pkg_ko-KR', 'package', '', 0, '3.4.4.2', '', 'http://update.joomla.org/language/details3/ko-KR_details.xml', '', ''),
+(30, 3, 0, 'Latvian', '', 'pkg_lv-LV', 'package', '', 0, '3.4.3.1', '', 'http://update.joomla.org/language/details3/lv-LV_details.xml', '', ''),
+(31, 3, 0, 'Macedonian', '', 'pkg_mk-MK', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/mk-MK_details.xml', '', ''),
+(32, 3, 0, 'Norwegian Bokmal', '', 'pkg_nb-NO', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/nb-NO_details.xml', '', ''),
+(33, 3, 0, 'Norwegian Nynorsk', '', 'pkg_nn-NO', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/nn-NO_details.xml', '', ''),
+(34, 3, 0, 'Persian', '', 'pkg_fa-IR', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/fa-IR_details.xml', '', ''),
+(35, 3, 0, 'Polish', '', 'pkg_pl-PL', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/pl-PL_details.xml', '', ''),
+(36, 3, 0, 'Portuguese', '', 'pkg_pt-PT', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/pt-PT_details.xml', '', ''),
+(37, 3, 0, 'Russian', '', 'pkg_ru-RU', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/ru-RU_details.xml', '', ''),
+(38, 3, 0, 'Slovak', '', 'pkg_sk-SK', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/sk-SK_details.xml', '', ''),
+(39, 3, 0, 'Swedish', '', 'pkg_sv-SE', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sv-SE_details.xml', '', ''),
+(40, 3, 0, 'Syriac', '', 'pkg_sy-IQ', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sy-IQ_details.xml', '', ''),
+(41, 3, 0, 'Tamil', '', 'pkg_ta-IN', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/ta-IN_details.xml', '', ''),
+(42, 3, 0, 'Thai', '', 'pkg_th-TH', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/th-TH_details.xml', '', ''),
+(43, 3, 0, 'Turkish', '', 'pkg_tr-TR', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/tr-TR_details.xml', '', ''),
+(44, 3, 0, 'Ukrainian', '', 'pkg_uk-UA', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/uk-UA_details.xml', '', ''),
+(45, 3, 0, 'Uyghur', '', 'pkg_ug-CN', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/ug-CN_details.xml', '', ''),
+(46, 3, 0, 'Albanian', '', 'pkg_sq-AL', 'package', '', 0, '3.1.1.1', '', 'http://update.joomla.org/language/details3/sq-AL_details.xml', '', ''),
+(47, 3, 0, 'Hindi', '', 'pkg_hi-IN', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/hi-IN_details.xml', '', ''),
+(48, 3, 0, 'Portuguese Brazil', '', 'pkg_pt-BR', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/pt-BR_details.xml', '', ''),
+(49, 3, 0, 'Serbian Latin', '', 'pkg_sr-YU', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sr-YU_details.xml', '', ''),
+(50, 3, 0, 'Spanish', '', 'pkg_es-ES', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/es-ES_details.xml', '', ''),
+(51, 3, 0, 'Bosnian', '', 'pkg_bs-BA', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/bs-BA_details.xml', '', ''),
+(52, 3, 0, 'Serbian Cyrillic', '', 'pkg_sr-RS', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/sr-RS_details.xml', '', ''),
+(53, 3, 0, 'Vietnamese', '', 'pkg_vi-VN', 'package', '', 0, '3.2.1.1', '', 'http://update.joomla.org/language/details3/vi-VN_details.xml', '', ''),
+(54, 3, 0, 'Bahasa Indonesia', '', 'pkg_id-ID', 'package', '', 0, '3.3.0.2', '', 'http://update.joomla.org/language/details3/id-ID_details.xml', '', ''),
+(55, 3, 0, 'Finnish', '', 'pkg_fi-FI', 'package', '', 0, '3.4.2.1', '', 'http://update.joomla.org/language/details3/fi-FI_details.xml', '', ''),
+(56, 3, 0, 'Swahili', '', 'pkg_sw-KE', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/sw-KE_details.xml', '', ''),
+(57, 3, 0, 'Montenegrin', '', 'pkg_srp-ME', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/srp-ME_details.xml', '', ''),
+(58, 3, 0, 'EnglishCA', '', 'pkg_en-CA', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/en-CA_details.xml', '', ''),
+(59, 3, 0, 'FrenchCA', '', 'pkg_fr-CA', 'package', '', 0, '3.4.4.3', '', 'http://update.joomla.org/language/details3/fr-CA_details.xml', '', ''),
+(60, 3, 0, 'Welsh', '', 'pkg_cy-GB', 'package', '', 0, '3.3.0.2', '', 'http://update.joomla.org/language/details3/cy-GB_details.xml', '', ''),
+(61, 3, 0, 'Sinhala', '', 'pkg_si-LK', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/si-LK_details.xml', '', ''),
+(62, 3, 0, 'Dari Persian', '', 'pkg_prs-AF', 'package', '', 0, '3.4.4.1', '', 'http://update.joomla.org/language/details3/prs-AF_details.xml', '', ''),
+(63, 3, 0, 'Turkmen', '', 'pkg_tk-TM', 'package', '', 0, '3.4.5.1', '', 'http://update.joomla.org/language/details3/tk-TM_details.xml', '', ''),
+(64, 5, 0, 'RokGallery Extension', '', 'mod_rokgallery', 'module', '', 0, '2.31', '0802', 'http://updates.rockettheme.com/joomla/286/21ffe006', '', ''),
+(65, 5, 0, 'RokWeather Module', '', 'mod_rokweather', 'module', '', 0, '2.0.4', '0802', 'http://updates.rockettheme.com/joomla/292/a0cbba72', '', ''),
+(66, 5, 0, 'RokStock Module', '', 'mod_rokstock', 'module', '', 0, '2.0.2', '0802', 'http://updates.rockettheme.com/joomla/295/87c1121c', '', ''),
+(67, 5, 0, 'RokFeatureTable Module', '', 'mod_rokfeaturetable', 'module', '', 0, '1.7', '0802', 'http://updates.rockettheme.com/joomla/296/fb9111b3', '', ''),
+(68, 5, 0, 'RokMiniEvents3 Module', '', 'mod_rokminievents3', 'module', '', 0, '3.0.2', '0802', 'http://updates.rockettheme.com/joomla/297/1686051690', '', ''),
+(69, 5, 0, 'RokQuickCart Extension', '', 'com_rokquickcart', 'component', '', 1, '2.1.4', '0802', 'http://updates.rockettheme.com/joomla/298/ddfa10eb', '', ''),
+(70, 5, 0, 'RokNavMenu Module', '', 'mod_roknavmenu', 'module', '', 0, '2.0.8', '0802', 'http://updates.rockettheme.com/joomla/300/5a9aa468', '', ''),
+(71, 5, 0, 'RokCandy Extension', '', 'rokcandy', 'plugin', 'system', 0, '2.0.2', '0802', 'http://updates.rockettheme.com/joomla/302/2df8a4e2', '', ''),
+(72, 5, 0, 'RokComments Plugin', '', 'rokcomments', 'plugin', 'content', 0, '2.0.3', '0802', 'http://updates.rockettheme.com/joomla/303/d1fd7b76', '', ''),
+(73, 5, 0, 'RokSocialButtons Plugin', '', 'roksocialbuttons', 'plugin', 'content', 0, '1.5.3', '0802', 'http://updates.rockettheme.com/joomla/381/269989291', '', ''),
+(74, 10, 10049, 'pkg_gantry5', 'Gantry Framework', 'pkg_gantry5', 'package', '', 0, '5.2.0', '', 'http://updates.gantry.org/5.0/joomla/pkg_gantry5.xml', 'http://docs.gantry.org/gantry5', ''),
+(75, 11, 0, 'Hydrogen', 'Hydrogen Template', 'g5_hydrogen', 'template', '', 0, '5.2.0', '', 'http://updates.gantry.org/5.0/joomla/tpl_g5_hydrogen.xml', '', '');
 
 -- --------------------------------------------------------
 
@@ -2554,13 +2679,13 @@ CREATE TABLE IF NOT EXISTS `bxnaz_update_sites` (
 --
 
 INSERT INTO `bxnaz_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
-(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1444634378, ''),
-(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1444634378, ''),
-(3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 1444634376, ''),
-(4, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1444634376, ''),
-(5, 'RocketTheme Update Directory', 'collection', 'http://updates.rockettheme.com/joomla/updates.xml', 1, 1444634376, ''),
-(10, 'Gantry 5', 'extension', 'http://updates.gantry.org/5.0/joomla/pkg_gantry5.xml', 1, 1444634376, ''),
-(11, 'Gantry 5', 'collection', 'http://updates.gantry.org/5.0/joomla/list.xml', 1, 1444634376, '');
+(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1446435084, ''),
+(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1446435084, ''),
+(3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 1446435082, ''),
+(4, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1446435082, ''),
+(5, 'RocketTheme Update Directory', 'collection', 'http://updates.rockettheme.com/joomla/updates.xml', 1, 1446435082, ''),
+(10, 'Gantry 5', 'extension', 'http://updates.gantry.org/5.0/joomla/pkg_gantry5.xml', 1, 1446435082, ''),
+(11, 'Gantry 5', 'collection', 'http://updates.gantry.org/5.0/joomla/list.xml', 1, 1446435082, '');
 
 -- --------------------------------------------------------
 
@@ -2618,8 +2743,8 @@ CREATE TABLE IF NOT EXISTS `bxnaz_usergroups` (
 
 INSERT INTO `bxnaz_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 (1, 0, 1, 18, 'Public'),
-(2, 1, 8, 15, 'Registered'),
-(3, 2, 9, 14, 'Author'),
+(2, 1, 8, 15, 'Customer'),
+(3, 2, 9, 14, 'Business'),
 (4, 3, 10, 13, 'Editor'),
 (5, 4, 11, 12, 'Publisher'),
 (6, 1, 4, 7, 'Manager'),
@@ -2652,23 +2777,29 @@ CREATE TABLE IF NOT EXISTS `bxnaz_users` (
   `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
   `lastName` varchar(255) DEFAULT NULL,
   `firstName` varchar(255) DEFAULT NULL,
-  `timeExpired` datetime DEFAULT NULL,
-  `typeOfPayment` tinyint(4) DEFAULT NULL,
-  `numMonthPayment` int(11) DEFAULT NULL,
-  `transactionPayment` text,
+  `avatar` varchar(255) NOT NULL,
+  `facebookId` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_name` (`name`),
   KEY `idx_block` (`block`),
   KEY `username` (`username`),
   KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=428 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=438 ;
 
 --
 -- Dumping data for table `bxnaz_users`
 --
 
-INSERT INTO `bxnaz_users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`, `lastName`, `firstName`, `timeExpired`, `typeOfPayment`, `numMonthPayment`, `transactionPayment`) VALUES
-(427, 'Super User', 'myloyal', 'tuan@mywebcreations.dk', '$2y$10$YANdVzT4LAXSQM84Lirm7umX.KyxFsdA9B9yBe.anm1zN6v9K2vNK', 0, 1, '2015-10-08 11:11:49', '2015-10-12 09:26:33', '0', '', '0000-00-00 00:00:00', 0, '', '', 0, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `bxnaz_users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`, `lastName`, `firstName`, `avatar`, `facebookId`) VALUES
+(427, 'Adminstrator', 'myloyal', 'tuan@mywebcreations.dk', '$2y$10$YANdVzT4LAXSQM84Lirm7umX.KyxFsdA9B9yBe.anm1zN6v9K2vNK', 0, 1, '2015-10-08 11:11:49', '2015-11-02 04:15:24', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0, 'ccc', 'aaa', '', ''),
+(430, 'aaa werwerwe', 'aaa@aaa.com', 'aaa@aaa.com', '$2y$10$CVfg7U3zX9VO8aqRHWRnZu4/ed4GZPNBVf4a0UYnqMUuOJ1CsgMTK', 0, 1, '2015-10-18 23:40:57', '2015-10-18 17:01:14', '', '', '0000-00-00 00:00:00', 0, '', '', 0, 'werwerwe', 'aaa', '1745dc4d3ad132a15cf5dd185d5d604214391204.jpg', ''),
+(431, 'abc qweqwe', 'abc@abc.com', 'abc@abc.com', '', 0, 1, '2015-10-20 10:34:46', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', 0, '', '', 0, 'qweqwe', 'abc', '', '123456'),
+(432, '1 1', '11111111@gmail.coom', '11111111@gmail.coom', '$2y$10$9CMHeZtTzGDtqcQ.THgYx.pGtiqWLMe7mBBb2RN7s3XgFrv9xU1Pi', 1, 0, '2015-10-28 10:22:25', '0000-00-00 00:00:00', 'e54d837c3adaf0fe21a9a46acd4c4585', '{}', '0000-00-00 00:00:00', 0, '', '', 0, '1', '1', '', ''),
+(433, '1 1', '111111@fnaa.com', '111111@fnaa.com', '$2y$10$7h5K7tRpKMDKZs.rOe.WauB1yKISdWjtXYuFw/Zs9zS/Lw7lRvMAC', 1, 0, '2015-10-28 10:23:20', '0000-00-00 00:00:00', 'db79bbacaa37e414a69a233b287d5778', '{}', '0000-00-00 00:00:00', 0, '', '', 0, '1', '1', '', ''),
+(434, '1 1', '1@gmail.comaa', '1@gmail.comaa', '$2y$10$MYrWdqIQwFUmhcDEeX2fv.e.3SjKhrqwjQ15XOsiyqTQYD.WFH0Lu', 1, 0, '2015-10-28 10:33:14', '0000-00-00 00:00:00', '7b37e8228e34aa38b45e699bf0ca37f0', '{}', '0000-00-00 00:00:00', 0, '', '', 0, '1', '1', '', ''),
+(435, '1 1', 'vn@gmail.com', 'vn@gmail.com', '$2y$10$OkpssBMTwfLLL4Yxc2WWkeSBL4.33wbI8iA2JwVSvYHjLp/dJ17Xa', 1, 0, '2015-10-28 10:34:44', '0000-00-00 00:00:00', '2f2057736293953728d8d193da7e5783', '{}', '0000-00-00 00:00:00', 0, '', '', 0, '1', '1', '', ''),
+(436, '1 1', '1111@gmail.comm', '1111@gmail.comm', '$2y$10$dMy29lAwqndfwmEn0uK7nuIhrGNsSEcsiJPeePiLumgLxR17mUcci', 1, 0, '2015-10-28 10:35:40', '0000-00-00 00:00:00', '5c27d2ef6e7a268f0ccb126d7be6d9cc', '{}', '0000-00-00 00:00:00', 0, '', '', 0, '1', '1', '', ''),
+(437, '1 1', '1@fbasf.com', '1@fbasf.com', '$2y$10$D3xdlH4SD4QDuN3unqHEN.p2M4koEX5tNtLSzeIXIPtLKHtCI/89G', 1, 0, '2015-10-28 10:38:02', '0000-00-00 00:00:00', 'e9f02b803ac1ecbc359d0d114ed2c6e9', '{}', '0000-00-00 00:00:00', 0, '', '', 0, '1', '1', '', '');
 
 -- --------------------------------------------------------
 
@@ -2735,6 +2866,21 @@ CREATE TABLE IF NOT EXISTS `bxnaz_user_profiles` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bxnaz_user_tokens`
+--
+
+CREATE TABLE IF NOT EXISTS `bxnaz_user_tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `hwId` varchar(50) NOT NULL,
+  `type` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bxnaz_user_usergroup_map`
 --
 
@@ -2749,7 +2895,15 @@ CREATE TABLE IF NOT EXISTS `bxnaz_user_usergroup_map` (
 --
 
 INSERT INTO `bxnaz_user_usergroup_map` (`user_id`, `group_id`) VALUES
-(427, 8);
+(427, 8),
+(430, 2),
+(431, 2),
+(432, 2),
+(433, 2),
+(434, 2),
+(435, 2),
+(436, 2),
+(437, 2);
 
 -- --------------------------------------------------------
 
@@ -2784,18 +2938,31 @@ INSERT INTO `bxnaz_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `bxnaz_workingtime` (
-  `id` int(11) NOT NULL,
-  `idStore` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `businessId` int(11) DEFAULT NULL,
   `dateType` tinyint(4) DEFAULT NULL,
-  `from` time DEFAULT NULL,
-  `to` time DEFAULT NULL,
+  `fromTime` varchar(10) DEFAULT NULL,
+  `toTime` varchar(10) DEFAULT NULL,
   `close` tinyint(4) DEFAULT '0' COMMENT '0 : open ; 1 : close',
-  `startDate` datetime DEFAULT NULL,
-  `endDate` datetime DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+  `startDate` varchar(20) DEFAULT NULL,
+  `endDate` varchar(20) DEFAULT NULL,
+  `createdAt` varchar(20) DEFAULT NULL,
+  `updatedAt` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `bxnaz_workingtime`
+--
+
+INSERT INTO `bxnaz_workingtime` (`id`, `businessId`, `dateType`, `fromTime`, `toTime`, `close`, `startDate`, `endDate`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 2, '9:30', '17', 0, NULL, NULL, '1445920861', NULL),
+(2, 1, 3, '9:30', '17', 0, NULL, NULL, '1445920861', NULL),
+(3, 1, 4, '9:30', '17', 0, NULL, NULL, '1445920861', NULL),
+(4, 1, 5, '9:30', '17', 0, NULL, NULL, '1445920861', NULL),
+(5, 1, 6, '9:30', '17', 0, NULL, NULL, '1445920861', NULL),
+(6, 1, 7, '9:30', '12', 0, NULL, NULL, '1445920861', NULL),
+(7, 1, 8, '', '', 1, NULL, NULL, '1445920861', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

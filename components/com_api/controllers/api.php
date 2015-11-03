@@ -722,6 +722,8 @@ class ApiControllerApi extends JControllerLegacy {
 		$businessId = JRequest::getVar("businessId");
 		$businessType = JRequest::getVar("businessType");
 		
+		$return['result'] = 1;
+		$return['error'] = "";
 		$db = JFactory::getDBO();
 		$q = "SELECT firstname, lastname, avatar FROM #__users WHERE id = ".$customerId;
 		$db->setQuery($q);
@@ -866,6 +868,40 @@ class ApiControllerApi extends JControllerLegacy {
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Give stamp fail";
+		}
+		
+		die(json_encode($return));
+	}
+	
+	public function takeBackStamp(){
+		$customerId = JRequest::getVar("customerId");
+		$businessId = JRequest::getVar("businessId");
+		$businessName = JRequest::getVar("businessName");
+		$promotionId = JRequest::getVar("promotionId");
+		
+		$db = JFactory::getDBO();
+		$q = "INSERT INTO #__log_stamp(businessId, customerId, promotionId, type, numStamp, createdAt) VALUES ($businessId, $customerId, $promotionId, 1, 2, '".time()."')";
+		$db->setQuery($q);
+		if($db->execute()){
+			$q = "SELECT id FROM #__stamp WHERE customerId = $customerId AND businessId = $businessId AND promotionId = $promotionId";
+			$db->setQuery($q);
+			$id = $db->loadResult();
+			
+			$q = "UPDATE #__stamp SET numStamp = numStamp - 1 WHERE id = ".$id;
+			$db->setQuery($q);
+			$db->execute();
+			
+			$q = "SELECT numStamp FROM #__stamp WHERE customerId = $customerId AND businessId = $businessId AND promotionId = $promotionId";
+			$db->setQuery($q);
+			$newNumStamp = $db->loadResult();
+			
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['newNumStamp'] = $newNumStamp;
+			$this->pushNotification($customerId, "You have taken back 1 stamp from ".$businessName);
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Take back stamp fail";
 		}
 		
 		die(json_encode($return));
