@@ -24,21 +24,35 @@ class BusinessViewBusiness extends JViewLegacy
 	 *
 	 * @return  void
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
-		// Assign data to the view
-		$this->msg = $this->get('Msg');
-//                $this->msg = 'Hello World';
+		// Get the view data.
+		$this->data		= $this->get('Data');
+		$this->form		= $this->get('Form');
+		$this->state	= $this->get('State');
+		$this->params	= $this->state->get('params');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
-			JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
+			JError::raiseError(500, implode('<br />', $errors));
 
 			return false;
 		}
 
-		// Display the view
-		parent::display($tpl);
+		// Check for layout override
+		$active = JFactory::getApplication()->getMenu()->getActive();
+
+		if (isset($active->query['layout']))
+		{
+			$this->setLayout($active->query['layout']);
+		}
+
+		// Escape strings for HTML output
+		$this->pageclass_sfx = htmlspecialchars($this->params->get('pageclass_sfx'));
+
+		$this->prepareDocument();
+
+		return parent::display($tpl);
 	}
 }

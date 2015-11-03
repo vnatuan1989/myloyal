@@ -45,8 +45,41 @@ class BusinessModelBusiness extends JModelItem
 	 *
 	 * @return  string        Fetched String from Table for relevant Id
 	 */
+        public function display($tpl = null)
+	{
+		// Get the view data.
+		$this->data		= $this->get('Data');
+		$this->form		= $this->get('Form');
+		$this->state	= $this->get('State');
+		$this->params	= $this->state->get('params');
+
+		// Check for errors.
+		if (count($errors = $this->get('Errors')))
+		{
+			JError::raiseError(500, implode('<br />', $errors));
+
+			return false;
+		}
+
+		// Check for layout override
+		$active = JFactory::getApplication()->getMenu()->getActive();
+
+		if (isset($active->query['layout']))
+		{
+			$this->setLayout($active->query['layout']);
+		}
+
+		// Escape strings for HTML output
+		$this->pageclass_sfx = htmlspecialchars($this->params->get('pageclass_sfx'));
+
+		$this->prepareDocument();
+
+		return parent::display($tpl);
+	}
+        
 	public function getMsg($id = 1)
 	{
+            $user = JFactory::getUser(431);
             if (!is_array($this->messages))
 		{
 			$this->messages = array();
@@ -54,18 +87,25 @@ class BusinessModelBusiness extends JModelItem
 
 		if (!isset($this->messages[$id]))
 		{
-			// Request the selected id
-			$jinput = JFactory::getApplication()->input;
-			$id     = $jinput->get('id', 1, 'INT');
+			// load data for business
+                        $db    = JFactory::getDbo();
+                        $query = $db->getQuery(true);
 
-			// Get a TableHelloWorld instance
-			$table = $this->getTable();
-
-			// Load the message
-			$table->load($id);
-
+                        // Create the base select statement.
+                        $query->select('*')
+                        ->from($db->quoteName('#__business','a'))
+                        ->where($db->quoteName('a.userId') . ' = ' . $user->id);
+                        
+                        $db->setQuery($query);
 			// Assign the message
-			$this->messages[$id] = $table->businessName;
+			$this->messages[$id] = $db->loadAssoc();
+                        
+                        $queryDatetime = $db->getQuery(true);
+                        $queryDatetime->select('*')
+                        ->from($db->quoteName('#__workingtime','a'))
+                        ->where($db->quoteName('a.businessId') . ' = ' . $this->messages[$id]['id']);
+                        $db->setQuery($queryDatetime);
+                        $this->messages[$id]['workingtime'] = $db->loadAssocList();
 		}
 
 		return $this->messages[$id];

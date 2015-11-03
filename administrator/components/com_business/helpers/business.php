@@ -45,5 +45,25 @@ abstract class BusinessHelper
 			'index.php?option=com_business&view=checkins',
 			$vName == 'checkins'
 		);
+                JSubMenuHelper::addEntry(
+			JText::_('COM_BUSINESS_MENU_LIST_POINT'),
+			'index.php?option=com_business&view=points',
+			$vName == 'points'
+		);
+                JSubMenuHelper::addEntry(
+			JText::_('COM_BUSINESS_MENU_LIST_STAMP'),
+			'index.php?option=com_business&view=stamps',
+			$vName == 'stamps'
+		);
+                JSubMenuHelper::addEntry(
+			JText::_('COM_BUSINESS_MENU_LIST_LOG_STAMP'),
+			'index.php?option=com_business&view=logstamps',
+			$vName == 'logstamps'
+		);
+                JSubMenuHelper::addEntry(
+			JText::_('COM_BUSINESS_MENU_LIST_LOG_POINT'),
+			'index.php?option=com_business&view=logpoints',
+			$vName == 'logpoints'
+		);
 	}
 }

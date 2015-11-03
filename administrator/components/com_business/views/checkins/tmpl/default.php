@@ -13,7 +13,7 @@ JHtml::_('formbehavior.chosen', 'select');
 $listOrder     = $this->escape($this->filter_order);
 $listDirn      = $this->escape($this->filter_order_Dir);
 ?>
-<form action="index.php?option=com_business&view=promotions" method="post" id="adminForm" name="adminForm">
+<form action="index.php?option=com_business&view=checkins" method="post" id="adminForm" name="adminForm">
 <div class="row-fluid">		
 <!--    <div class="span6">			
         <?php //echo JText::_('COM_HELLOWORLD_HELLOWORLDS_FILTER'); ?>		
@@ -58,12 +58,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <th width="10%">
                         <?php echo JHtml::_('grid.sort', 'COM_BUSINESS_BUSINESSES_UPDATED_AT', 'updatedAt', $listDirn, $listOrder); ?>	
                 </th>
-                <th width="10%">
-                        <?php echo JHtml::_('grid.sort', 'COM_BUSINESS_BUSINESSES_PROMOTION_POINT', 'point', $listDirn, $listOrder); ?>	
-                </th>
-                <th width="10%">
-                        <?php echo JHtml::_('grid.sort', 'COM_BUSINESS_BUSINESSES_PROMOTION_STAMP', 'stamp', $listDirn, $listOrder); ?>	
-                </th>
+                
                 <th width="7%">
                         <?php echo JHtml::_('grid.sort', 'COM_HELLOWORLD_ID', 'id', $listDirn, $listOrder); ?>		
                 </th>
@@ -79,50 +74,23 @@ $listDirn      = $this->escape($this->filter_order_Dir);
     <tbody>
             <?php if (!empty($this->items)) : ?>
                     <?php foreach ($this->items as $i => $row) :
-                            $link = JRoute::_('index.php?option=com_business&task=promotion.edit&id=' . $row->id);				?>
+//                            $link = JRoute::_('index.php?option=com_business&task=promotion.edit&id=' . $row->id);				?>
                             <tr>
                                     <td><?php echo $this->pagination->getRowOffset($i); ?></td>
                                     <td>
                                             <?php echo JHtml::_('grid.id', $i, $row->id); ?>
                                     </td>
-                                    <td>
-                                            <a href="<?php echo $link; ?>" title="<?php echo $row->username;?>">								
-                                                <?php echo $row->username; ?>
-                                            </a>
+                                    <td>			
+                                            <?php echo $row->businessName; ?>  
                                     </td>
-                                    <td>
-                                            <a href="<?php echo $link; ?>" title="<?php echo $row->businessName; ?>">								
-                                                <?php echo $row->businessName; ?>
-                                            </a>
+                                    <td>						
+                                            <?php echo $row->username; ?>
                                     </td>
-                                    <td>
-                                            <a href="<?php echo $link; ?>" title="<?php echo $row->title;?>">								
-                                                <?php echo $row->title; ?>
-                                            </a>
+                                    <td>								
+                                            <?php echo ($row->createdAt != "") ? date('d-m-Y',$row->createdAt) : "NULL"; ?>
                                     </td>
-                                    <td>
-                                            <a href="<?php echo $link; ?>" title="<?php echo $row->type;?>">								
-                                                <?php 
-                                                   if($row->type == "1")
-                                                   {
-                                                       echo "Point to get free";
-                                                   }
-                                                   else
-                                                   {
-                                                       echo "Stamp to get free";
-                                                   }
-                                                ?>
-                                            </a>
-                                    </td>
-                                    <td>
-                                            <a href="<?php echo $link; ?>" title="<?php echo $row->point;?>">								
-                                                <?php echo $row->point; ?>
-                                            </a>
-                                    </td>
-                                    <td>
-                                            <a href="<?php echo $link; ?>" title="<?php echo $row->stamp;?>">								
-                                                <?php echo $row->stamp; ?>
-                                            </a>
+                                    <td>							
+                                            <?php echo ($row->updatedAt != "") ? date('d-m-Y',$row->updatedAt) : "NULL"; ?>
                                     </td>
                                     
                                     <td align="center">

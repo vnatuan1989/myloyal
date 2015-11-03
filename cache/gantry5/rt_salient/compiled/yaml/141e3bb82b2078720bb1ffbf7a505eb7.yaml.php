@@ -2,7 +2,7 @@
 return [
     '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
     'filename' => 'C:\\wamp\\www\\myloyalclone/templates/rt_salient/custom/config/24/index.yaml',
-    'modified' => 1445508246,
+    'modified' => 1446536534,
     'data' => [
         'name' => 24,
         'timestamp' => 0,
