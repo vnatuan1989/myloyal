@@ -285,7 +285,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		//register device
 		$url = 'https://cp.pushwoosh.com/json/1.3/registerDevice';
-		$send['request'] = array('application' => '234F7-B24E8', 'push_token'=>$token, 'language'=>'da', 'hwid'=>$hwId, 'timezone'=>3600, 'device_type'=>$type);
+		$send['request'] = array('application' => '9727D-054A0', 'push_token'=>$token, 'language'=>'da', 'hwid'=>$hwId, 'timezone'=>3600, 'device_type'=>$type);
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -304,7 +304,7 @@ class ApiControllerApi extends JControllerLegacy {
 		//set tags
 		
 		$url = 'https://cp.pushwoosh.com/json/1.3/setTags';
-		$send['request'] = array('application' => '234F7-B24E8', 'hwid'=>$hwId, 'tags'=>array('userId'=>$userId));
+		$send['request'] = array('application' => '9727D-054A0', 'hwid'=>$hwId, 'tags'=>array('userId'=>$userId));
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -339,7 +339,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		//unregister device
 		$url = 'https://cp.pushwoosh.com/json/1.3/unregisterDevice';
-		$send['request'] = array('application' => '234F7-B24E8', 'hwid'=>$hwId);
+		$send['request'] = array('application' => '9727D-054A0', 'hwid'=>$hwId);
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -361,7 +361,7 @@ class ApiControllerApi extends JControllerLegacy {
 	function getTags(){
 		$hw_id = JRequest::getVar('hw_id');
 		$url = 'https://cp.pushwoosh.com/json/1.3/getTags';
-		$send['request'] = array('auth'=>'8PaXOfTn9dzkNuqiMmup9jcmAKDppghCgAgvKqG5u0ArjTBgedOhVxMtzZIT0tibOUFJ3oPilAY1gWbSIt4E','application' => '64BD1-55924', 'hwid'=>$hw_id);
+		$send['request'] = array('auth'=>'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX','application' => '9727D-054A0', 'hwid'=>$hw_id);
 		$request = json_encode($send);
 	 
 		$ch = curl_init($url);
@@ -938,8 +938,8 @@ class ApiControllerApi extends JControllerLegacy {
 	}
 	
 	public function pushNotification($userId, $msg){
-		/*$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
-		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("234F7-B24E8") * T("userId", EQ, '.$userId.')');
+		$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
+		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("9727D-054A0") * T("userId", EQ, '.$userId.')');
 
 		$request = json_encode($send);
 	 
@@ -953,7 +953,7 @@ class ApiControllerApi extends JControllerLegacy {
 	 
 		$response = curl_exec($ch);
 		$info = curl_getinfo($ch);
-		curl_close($ch);*/
+		curl_close($ch);
 		//print "[PW] request: $request\n";
         //print "[PW] response: $response\n";
         //print "[PW] info: " . print_r($info, true);
