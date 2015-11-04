@@ -640,7 +640,8 @@ class UsersModelRegistration extends JModelForm
 
 		if ($useractivation == 1)
 		{
-			return "useractivate";
+			return $user->id;
+			//return "useractivate";
 		}
 		elseif ($useractivation == 2)
 		{

@@ -204,6 +204,9 @@ class UsersControllerRegistration extends UsersController
 		// Flush the data from the session.
 		$app->setUserState('com_users.registration.data', null);
 
+		//T.Trung
+		$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=payment&userid='.$return.'&package='.JRequest::getVar("package"), false));
+		//T.Trung end
 		// Redirect to the profile screen.
 		if ($return === 'adminactivate')
 		{
@@ -213,8 +216,7 @@ class UsersControllerRegistration extends UsersController
 		elseif ($return === 'useractivate')
 		{
 			$this->setMessage(JText::_('COM_USERS_REGISTRATION_COMPLETE_ACTIVATE'));
-			//$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
-			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=payment&userid=".."&package='.JRequest::getVar("package"), false));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
 		}
 		else
 		{

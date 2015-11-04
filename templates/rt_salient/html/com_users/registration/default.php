@@ -270,5 +270,6 @@ jQuery( document ).ready(function() {
                     </div>
                 </div>
             </div>
+			<input type="hidden" name="package" value="<?php echo JRequest::getVar("package");?>" />
 	</form>
 </div>
