@@ -213,7 +213,8 @@ class UsersControllerRegistration extends UsersController
 		elseif ($return === 'useractivate')
 		{
 			$this->setMessage(JText::_('COM_USERS_REGISTRATION_COMPLETE_ACTIVATE'));
-			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
+			//$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=payment&userid=".."&package='.JRequest::getVar("package"), false));
 		}
 		else
 		{
