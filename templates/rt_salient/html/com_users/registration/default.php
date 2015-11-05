@@ -42,15 +42,15 @@ function updateMarkerAddress(str) {
 }
 
 function initialize() {
-  var latLng = new google.maps.LatLng(-34.397, 150.644);
+  var latLng = new google.maps.LatLng(55.676097, 12.568337);
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
-    zoom: 8,
+    zoom: 12,
     center: latLng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
   var marker = new google.maps.Marker({
     position: latLng,
-    title: 'Point A',
+    title: 'Drag this point to your business',
     map: map,
     draggable: true
   });
