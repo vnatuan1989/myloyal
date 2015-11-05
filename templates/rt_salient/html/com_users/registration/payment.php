@@ -12,10 +12,14 @@ if($package == 3){
 	$amount = 500;
 }
 ?>
-<form action="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/Default.aspx" method="post">
+<form action="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/Default.aspx" method="post" id="paymetForm">
     <input name="merchantnumber" value="8021238">
-    <input name="amount" value="10495">
+    <input name="amount" value="<?php echo $amount*100;?>">
     <input name="currency" value="DKK">
     <input name="windowstate" value="3">
-    <input type="submit" value="Go to payment">
 </form>
+<script type="application/javascript">
+jQuery( document ).ready(function() {
+	jQuery("#paymetForm").submit();
+});
+</script>
