@@ -208,7 +208,7 @@ class UsersControllerRegistration extends UsersController
 		$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=payment&userid='.$return.'&package='.JRequest::getVar("package"), false));
 		//T.Trung end
 		// Redirect to the profile screen.
-		if ($return === 'adminactivate')
+		/*if ($return === 'adminactivate')
 		{
 			$this->setMessage(JText::_('COM_USERS_REGISTRATION_COMPLETE_VERIFY'));
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
@@ -222,7 +222,7 @@ class UsersControllerRegistration extends UsersController
 		{
 			$this->setMessage(JText::_('COM_USERS_REGISTRATION_SAVE_SUCCESS'));
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
-		}
+		}*/
 
 		return true;
 	}

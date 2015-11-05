@@ -1,7 +1,6 @@
 <?php
 defined('_JEXEC') or die;
 $package = JRequest::getVar("package");
-print_r($package);exit;
 if($package == 1){
 	$amount = 50;
 }
@@ -13,10 +12,14 @@ if($package == 3){
 }
 ?>
 <form action="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/Default.aspx" method="post" id="paymetForm">
-    <input name="merchantnumber" value="8021238">
-    <input name="amount" value="<?php echo $amount*100;?>">
-    <input name="currency" value="DKK">
-    <input name="windowstate" value="3">
+    <input type="hidden" name="merchantnumber" value="8021238">
+    <input type="hidden" name="amount" value="<?php echo $amount*100;?>">
+    <input type="hidden" name="currency" value="DKK">
+    <input type="hidden" name="windowstate" value="3">
+    <input type="hidden" name="orderid" value="<?php echo JRequest::getVar("userid");?>">
+    <input type="hidden" name="accepturl" value="<?php echo JURI::base();?>index.php?option=com_user&view=registration&layout=complete&package=<?php echo $package;?>">
+    <input type="hidden" name="cancelurl" value="<?php echo JURI::base();?>index.php?option=com_user&view=registration&layout=fail">
+    <input type="hidden" name="subscription" value="1">
 </form>
 <script type="application/javascript">
 jQuery( document ).ready(function() {
