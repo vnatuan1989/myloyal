@@ -28,7 +28,16 @@ class BusinessControllerBusiness extends JControllerForm
 //
 //                return false;
 //        }
-
+        $jinput = JFactory::getApplication()->input;
+//        $token = $jinput->getAlnum('token');
+//        
+//        // Check that the token is in a valid format.
+//        if ($token === null || strlen($token) !== 32)
+//        {
+//                JError::raiseError(403, JText::_('JINVALID_TOKEN'));
+//
+//                return false;
+//        }
         $app	= JFactory::getApplication();
         $model	= $this->getModel('Business', 'BusinessModel');
 
