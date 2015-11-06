@@ -105,7 +105,7 @@ class __TwigTemplate_55bf70c27f3d211c1a29eaf099f32dcc4c0628debf6962ae3eb2f460692
             if ($this->getAttribute($context["subcontent"], "img", array())) {
                 echo "<img src=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('GantryTwig')->urlFunc($this->getAttribute($context["subcontent"], "img", array())), "html", null, true);
-                echo "\" class=\"g-block-subcontent-img\" alt=\"";
+                echo "\" class=\"g-block-subcontent-img\" style=\"float: left;margin-right: 15px;\" alt=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["subcontent"], "title", array()));
                 echo "\" />";
             }

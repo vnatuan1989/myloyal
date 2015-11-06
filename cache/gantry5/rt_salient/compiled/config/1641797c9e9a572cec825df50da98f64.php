@@ -1,23 +1,23 @@
 <?php
 return [
     '@class' => 'Gantry\\Component\\Config\\CompiledConfig',
-    'timestamp' => 1446551211,
-    'checksum' => '5c80a048d0a9c2a7eeb3894abc44eedf',
+    'timestamp' => 1446827569,
+    'checksum' => 'a2361e87302f18183a0dca11d11fe064',
     'files' => [
         'templates/rt_salient/custom/config/23' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/23/index.yaml',
-                'modified' => 1446536534
+                'modified' => 1446827561
             ],
             'layout' => [
                 'file' => 'templates/rt_salient/custom/config/23/layout.yaml',
-                'modified' => 1444390072
+                'modified' => 1446827561
             ]
         ],
         'templates/rt_salient/custom/config/default' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/default/index.yaml',
-                'modified' => 1446536534
+                'modified' => 1446827561
             ],
             'particles/analytics' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/analytics.yaml',
@@ -769,10 +769,11 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 20,
                                         'extra' => [
                                             
-                                        ]
+                                        ],
+                                        'fixed' => '1',
+                                        'size' => 20
                                     ],
                                     'children' => [
                                         0 => [
@@ -797,7 +798,11 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 55
+                                        'extra' => [
+                                            
+                                        ],
+                                        'fixed' => '1',
+                                        'size' => 60
                                     ],
                                     'children' => [
                                         0 => [
@@ -806,7 +811,7 @@ return [
                                             'subtype' => 'menu',
                                             'title' => 'Menu',
                                             'attributes' => [
-                                                
+                                                'enabled' => 1
                                             ],
                                             'children' => [
                                                 
@@ -815,35 +820,6 @@ return [
                                     ]
                                 ],
                                 2 => [
-                                    'id' => 'e8914194-a484-4ce5-81c4-c745db47bf57',
-                                    'type' => 'block',
-                                    'subtype' => false,
-                                    'title' => 'Untitled',
-                                    'attributes' => [
-                                        'size' => 5,
-                                        'extra' => [
-                                            
-                                        ]
-                                    ],
-                                    'children' => [
-                                        0 => [
-                                            'id' => '40104d84-434d-41a9-b018-3502455593d5',
-                                            'type' => 'particle',
-                                            'subtype' => 'custom',
-                                            'title' => 'Off Canvas Toggle',
-                                            'attributes' => [
-                                                'enabled' => 1,
-                                                'html' => '<div class="g-offcanvas-toggle" data-offcanvas-toggle="">
-  <i class="fa fa-fw fa-indent"></i>
-</div>'
-                                            ],
-                                            'children' => [
-                                                
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                3 => [
                                     'id' => 'fed117b1-9b4e-4a58-ac96-0806fd4fd68f',
                                     'type' => 'block',
                                     'subtype' => false,

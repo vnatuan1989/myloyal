@@ -1,7 +1,7 @@
 <?php
 return [
     'file' => 'gantry-theme://css-compiled/custom_24.css',
-    'timestamp' => 1446540704,
+    'timestamp' => 1446827476,
     'md5' => '76409eda08dc6d5acbab915ed8c6e4a1',
     'variables' => [
         'above-background' => '#080808',
@@ -166,7 +166,7 @@ return [
         'gantry-theme://scss/salient/_above.scss' => 1441941680,
         'gantry-theme://scss/salient/_main.scss' => 1441941680,
         'gantry-theme://scss/salient/_sidebar.scss' => 1441941680,
-        'gantry-theme://scss/salient/_expanded.scss' => 1441941680,
+        'gantry-theme://scss/salient/_expanded.scss' => 1446808027,
         'gantry-theme://scss/salient/_extension.scss' => 1441941680,
         'gantry-theme://scss/salient/_bottom.scss' => 1441941680,
         'gantry-theme://scss/salient/_footer.scss' => 1441941680,

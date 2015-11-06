@@ -2,7 +2,7 @@
 return [
     '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
     'filename' => 'C:/wamp/www/myloyalclone/templates/rt_salient/custom/config/23/layout.yaml',
-    'modified' => 1444390072,
+    'modified' => 1446827561,
     'data' => [
         'preset' => [
             'image' => 'gantry-admin://images/layouts/default.png',
@@ -182,10 +182,11 @@ return [
                                 'subtype' => false,
                                 'title' => 'Untitled',
                                 'attributes' => [
-                                    'size' => 20,
                                     'extra' => [
                                         
-                                    ]
+                                    ],
+                                    'fixed' => '1',
+                                    'size' => 20
                                 ],
                                 'children' => [
                                     0 => [
@@ -210,7 +211,11 @@ return [
                                 'subtype' => false,
                                 'title' => 'Untitled',
                                 'attributes' => [
-                                    'size' => 55
+                                    'extra' => [
+                                        
+                                    ],
+                                    'fixed' => '1',
+                                    'size' => 60
                                 ],
                                 'children' => [
                                     0 => [
@@ -219,7 +224,7 @@ return [
                                         'subtype' => 'menu',
                                         'title' => 'Menu',
                                         'attributes' => [
-                                            
+                                            'enabled' => 1
                                         ],
                                         'children' => [
                                             
@@ -228,35 +233,6 @@ return [
                                 ]
                             ],
                             2 => [
-                                'id' => 'e8914194-a484-4ce5-81c4-c745db47bf57',
-                                'type' => 'block',
-                                'subtype' => false,
-                                'title' => 'Untitled',
-                                'attributes' => [
-                                    'size' => 5,
-                                    'extra' => [
-                                        
-                                    ]
-                                ],
-                                'children' => [
-                                    0 => [
-                                        'id' => '40104d84-434d-41a9-b018-3502455593d5',
-                                        'type' => 'particle',
-                                        'subtype' => 'custom',
-                                        'title' => 'Off Canvas Toggle',
-                                        'attributes' => [
-                                            'enabled' => 1,
-                                            'html' => '<div class="g-offcanvas-toggle" data-offcanvas-toggle="">
-  <i class="fa fa-fw fa-indent"></i>
-</div>'
-                                        ],
-                                        'children' => [
-                                            
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            3 => [
                                 'id' => 'fed117b1-9b4e-4a58-ac96-0806fd4fd68f',
                                 'type' => 'block',
                                 'subtype' => false,

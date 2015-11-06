@@ -2,7 +2,7 @@
 return [
     '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
     'filename' => 'C:\\wamp\\www\\myloyalclone/templates/rt_salient/custom/config/28/layout.yaml',
-    'modified' => 1446536534,
+    'modified' => 1446801881,
     'data' => [
         'preset' => [
             'image' => 'gantry-admin://images/layouts/home.png',
@@ -23,7 +23,40 @@ return [
                     ]
                 ],
                 'children' => [
-                    
+                    0 => [
+                        'id' => '3cb5a5e4-2efd-42af-9c3d-a23ab3cd139a',
+                        'type' => 'grid',
+                        'subtype' => false,
+                        'title' => 'Untitled',
+                        'attributes' => [
+                            
+                        ],
+                        'children' => [
+                            0 => [
+                                'id' => '1f321df2-5a13-460f-acac-ad0f93047ce8',
+                                'type' => 'block',
+                                'subtype' => false,
+                                'title' => 'Untitled',
+                                'attributes' => [
+                                    'size' => 100
+                                ],
+                                'children' => [
+                                    0 => [
+                                        'id' => 'dacc2ac4-3fe4-4c70-8758-2a8756dd86c9',
+                                        'type' => 'pagecontent',
+                                        'subtype' => 'system-messages',
+                                        'title' => 'System Messages',
+                                        'attributes' => [
+                                            
+                                        ],
+                                        'children' => [
+                                            
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
                 ]
             ],
             1 => [
@@ -39,7 +72,96 @@ return [
                     ]
                 ],
                 'children' => [
-                    
+                    0 => [
+                        'id' => '5fb6e824-8af0-4943-9073-faf539733fb7',
+                        'type' => 'grid',
+                        'subtype' => false,
+                        'title' => 'Untitled',
+                        'attributes' => [
+                            
+                        ],
+                        'children' => [
+                            0 => [
+                                'id' => '29d03ced-77d4-48f3-b30b-c1a1d89cc408',
+                                'type' => 'block',
+                                'subtype' => false,
+                                'title' => 'Untitled',
+                                'attributes' => [
+                                    'extra' => [
+                                        
+                                    ],
+                                    'fixed' => '1',
+                                    'size' => 20
+                                ],
+                                'children' => [
+                                    0 => [
+                                        'id' => '12b90203-1df6-4f9a-bb67-d82785169891',
+                                        'type' => 'particle',
+                                        'subtype' => 'logo',
+                                        'title' => 'Logo',
+                                        'attributes' => [
+                                            'enabled' => 1,
+                                            'image' => 'gantry-media://logo/logo.png'
+                                        ],
+                                        'children' => [
+                                            
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            1 => [
+                                'id' => '49ad3549-3dce-4833-9404-d1ccd8231d42',
+                                'type' => 'block',
+                                'subtype' => false,
+                                'title' => 'Untitled',
+                                'attributes' => [
+                                    'extra' => [
+                                        
+                                    ],
+                                    'fixed' => '1',
+                                    'size' => 60
+                                ],
+                                'children' => [
+                                    0 => [
+                                        'id' => '3aef27e4-4290-42ab-a217-157e025a66a2',
+                                        'type' => 'particle',
+                                        'subtype' => 'menu',
+                                        'title' => 'Menu',
+                                        'attributes' => [
+                                            'enabled' => 1,
+                                            'menu' => 'mainmenu'
+                                        ],
+                                        'children' => [
+                                            
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            2 => [
+                                'id' => '348ebece-59d2-40ff-b04b-7bd77a397c05',
+                                'type' => 'block',
+                                'subtype' => false,
+                                'title' => 'Untitled',
+                                'attributes' => [
+                                    'size' => 19.9999
+                                ],
+                                'children' => [
+                                    0 => [
+                                        'id' => '50532622-8356-4a4b-b1d1-0913dc02c334',
+                                        'type' => 'particle',
+                                        'subtype' => 'social',
+                                        'title' => 'Social',
+                                        'attributes' => [
+                                            
+                                        ],
+                                        'children' => [
+                                            
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
                 ]
             ],
             2 => [
@@ -169,40 +291,7 @@ return [
                     'boxed' => 0
                 ],
                 'children' => [
-                    0 => [
-                        'id' => 'a9d9f69d-80ee-4b42-a3a2-c20c959aef51',
-                        'type' => 'grid',
-                        'subtype' => false,
-                        'title' => 'Untitled',
-                        'attributes' => [
-                            
-                        ],
-                        'children' => [
-                            0 => [
-                                'id' => '02dcb079-fddb-4523-be8e-36e64d5ab222',
-                                'type' => 'block',
-                                'subtype' => false,
-                                'title' => 'Untitled',
-                                'attributes' => [
-                                    'size' => 100
-                                ],
-                                'children' => [
-                                    0 => [
-                                        'id' => '2e910757-8e9e-4db0-b395-7c7b5ea2e3c0',
-                                        'type' => 'pagecontent',
-                                        'subtype' => 'pagecontent',
-                                        'title' => 'Page Content',
-                                        'attributes' => [
-                                            
-                                        ],
-                                        'children' => [
-                                            
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                    
                 ]
             ],
             5 => [
@@ -273,10 +362,10 @@ return [
                                 'subtype' => false,
                                 'title' => 'Untitled',
                                 'attributes' => [
+                                    'size' => 5,
                                     'extra' => [
                                         
-                                    ],
-                                    'size' => 5
+                                    ]
                                 ],
                                 'children' => [
                                     0 => [
@@ -328,11 +417,11 @@ return [
                                 'subtype' => false,
                                 'title' => 'Untitled',
                                 'attributes' => [
+                                    'size' => 5,
                                     'extra' => [
                                         
                                     ],
-                                    'fixed' => '1',
-                                    'size' => 5
+                                    'fixed' => '1'
                                 ],
                                 'children' => [
                                     0 => [
