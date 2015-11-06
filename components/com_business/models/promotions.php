@@ -52,7 +52,7 @@ class BusinessModelPromotions extends JModelItem
             $jinput = JFactory::getApplication()->input;
             $id     = $jinput->get('id', 1, 'INT');
             
-            $user = JFactory::getUser(431);
+            $user = JFactory::getUser();
             
             if (!is_array($this->promotionById))
             {
@@ -82,7 +82,7 @@ class BusinessModelPromotions extends JModelItem
         
         public function getInfomation()
 	{
-            $user = JFactory::getUser(431);
+            $user = JFactory::getUser();
             if (!is_array($this->infomation))
             {
                     $this->infomation = array();
@@ -109,7 +109,7 @@ class BusinessModelPromotions extends JModelItem
         
 	public function getPromotions()
 	{
-            $user = JFactory::getUser(431);
+            $user = JFactory::getUser();
             if (!is_array($this->promotions))
             {
                     $this->promotions = array();
@@ -136,7 +136,7 @@ class BusinessModelPromotions extends JModelItem
 	}
         public function deletePromotion($id)
         {
-            $user = JFactory::getUser(431);
+            $user = JFactory::getUser();
             $db = JFactory::getDbo();
             $query = $db->getQuery(true);
             $query->select('c.*')
