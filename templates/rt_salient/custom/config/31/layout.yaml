@@ -58,9 +58,9 @@ children:
             subtype: false
             title: Untitled
             attributes:
+              size: 20
               extra: {  }
               fixed: '1'
-              size: 20
             children:
               -
                 id: f69641f7-55ac-40ae-b1f2-ac269bb72169
@@ -70,6 +70,7 @@ children:
                 attributes:
                   enabled: 1
                   rel: home
+                  image: 'gantry-media://logo/logo.png'
                   alt: salient
                 children: {  }
           -
@@ -78,9 +79,9 @@ children:
             subtype: false
             title: Untitled
             attributes:
+              size: 60
               extra: {  }
               fixed: '1'
-              size: 60
             children:
               -
                 id: 4490b5ef-1821-4af2-8fe0-116d641b5759
@@ -128,7 +129,7 @@ children:
                 subtype: module
                 title: 'Module Instance'
                 attributes:
-                  enabled: 1
+                  enabled: 0
                   module_id: '283'
                   chrome: ''
                   title: 'Module Instance'
@@ -193,7 +194,7 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 25
+              size: 5
             children:
               -
                 id: aca65835-9782-15a8-e6c9-737fcf1f93ea
@@ -203,95 +204,14 @@ children:
                 attributes:
                   class: ''
                   extra: {  }
-                children:
-                  -
-                    id: 3635ac74-5e98-6c25-9a7b-113756a9f6ea
-                    type: grid
-                    subtype: false
-                    title: Untitled
-                    attributes: {  }
-                    children:
-                      -
-                        id: f7f0e518-9382-4fd7-e3b1-2b3bb1bf7228
-                        type: block
-                        subtype: false
-                        title: Untitled
-                        attributes:
-                          size: 100
-                          variations: nopaddingall
-                          extra: {  }
-                        children:
-                          -
-                            id: 832cc644-f6c5-14d9-96ce-c0b3d2cbf7d8
-                            type: position
-                            subtype: false
-                            title: 'Slideshow A'
-                            attributes:
-                              enabled: 1
-                              key: slideshow-a
-                              title: 'Slideshow A'
-                            children: {  }
-                  -
-                    id: eab1e898-ac82-4819-bd24-5c3a5197c083
-                    type: grid
-                    subtype: false
-                    title: Untitled
-                    attributes: {  }
-                    children:
-                      -
-                        id: 7f60344b-f2c2-4574-9be0-46c43f172595
-                        type: block
-                        subtype: false
-                        title: Untitled
-                        attributes:
-                          size: 100
-                          variations: nopaddingall
-                          extra: {  }
-                        children:
-                          -
-                            id: d29f0ee3-f69d-4055-aa7f-0cd1be8bc680
-                            type: position
-                            subtype: position
-                            title: 'Slideshow A Below'
-                            attributes:
-                              enabled: 1
-                              key: slideshow-a-below
-                              title: 'Slideshow A Below'
-                            children: {  }
-                  -
-                    id: 70c787d2-39cc-49e6-8623-50c2a3086d43
-                    type: grid
-                    subtype: false
-                    title: Untitled
-                    attributes: {  }
-                    children:
-                      -
-                        id: cf241c23-35fb-443e-acbb-6a672d19b16f
-                        type: block
-                        subtype: false
-                        title: Untitled
-                        attributes:
-                          size: 100
-                          variations: nopaddingall
-                          extra: {  }
-                        children:
-                          -
-                            id: 4d713c5a-5f87-4b7c-a02e-836de7baaf2b
-                            type: position
-                            subtype: position
-                            title: 'Module Position'
-                            attributes:
-                              enabled: 1
-                              key: slideshow-a
-                              title: 'Module Position'
-                            children: {  }
+                children: {  }
           -
             id: b186da4c-b8f1-67ae-c725-47dc7f8f80ef
             type: block
             subtype: false
             title: Untitled
             attributes:
-              size: 50
+              size: 90
             children:
               -
                 id: e628a8f5-fe23-ba7a-6dfd-99b3709e654a
@@ -335,7 +255,7 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 25
+              size: 5
             children:
               -
                 id: 1d27062c-b652-55a8-049b-ad7177a5262a
@@ -345,88 +265,7 @@ children:
                 attributes:
                   class: ''
                   extra: {  }
-                children:
-                  -
-                    id: a11dcf1b-6a89-47cd-a4ea-b16491809a93
-                    type: grid
-                    subtype: false
-                    title: Untitled
-                    attributes: {  }
-                    children:
-                      -
-                        id: 4717a45f-afe3-4c96-81cd-e8d338995810
-                        type: block
-                        subtype: false
-                        title: Untitled
-                        attributes:
-                          size: 100
-                          variations: nopaddingall
-                          extra: {  }
-                        children:
-                          -
-                            id: ff34e80a-ad53-49ea-9c20-54408a2d05ec
-                            type: position
-                            subtype: position
-                            title: 'Slideshow C Above'
-                            attributes:
-                              enabled: 1
-                              key: slideshow-c-above
-                              title: 'Slideshow C Above'
-                            children: {  }
-                  -
-                    id: ecaba0dd-c832-33f5-00a6-a0edaf672773
-                    type: grid
-                    subtype: false
-                    title: Untitled
-                    attributes: {  }
-                    children:
-                      -
-                        id: 36e380e3-b9a4-4bca-f969-cbb8ed68297f
-                        type: block
-                        subtype: false
-                        title: Untitled
-                        attributes:
-                          size: 100
-                          variations: nopaddingall
-                          extra: {  }
-                        children:
-                          -
-                            id: 4d3d7209-6b65-3a37-4f1c-690c74c642b6
-                            type: position
-                            subtype: false
-                            title: 'Slideshow C'
-                            attributes:
-                              enabled: 1
-                              key: slideshow-c
-                              title: 'Slideshow C'
-                            children: {  }
-                  -
-                    id: 06368cfa-6ef6-481c-a7a3-d93e5a65db13
-                    type: grid
-                    subtype: false
-                    title: Untitled
-                    attributes: {  }
-                    children:
-                      -
-                        id: 4f1867d6-b75e-41e3-a4db-250ab829d95c
-                        type: block
-                        subtype: false
-                        title: Untitled
-                        attributes:
-                          size: 100
-                          variations: nopaddingall
-                          extra: {  }
-                        children:
-                          -
-                            id: 0d17b79d-7398-46bd-a37e-c7083ad8152a
-                            type: position
-                            subtype: position
-                            title: 'Slideshow C Below'
-                            attributes:
-                              enabled: 1
-                              key: slideshow-c-below
-                              title: 'Slideshow C Below'
-                            children: {  }
+                children: {  }
   -
     id: 2a3fffe7-b2c4-c8cf-76cc-c25f7c9828f4
     type: section
@@ -434,60 +273,7 @@ children:
     title: Showcase
     attributes:
       boxed: 0
-    children:
-      -
-        id: 848a08cb-d421-410b-b6d5-de3d716d5074
-        type: grid
-        subtype: false
-        title: Untitled
-        attributes: {  }
-        children:
-          -
-            id: 1b2345ba-99ad-4e81-af96-989c269577a8
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 100
-              extra: {  }
-            children:
-              -
-                id: 7f1d869b-e9bf-4d76-85e7-14c582c2c8d0
-                type: position
-                subtype: position
-                title: 'Showcase A'
-                attributes:
-                  enabled: 1
-                  key: showcase-a
-                  title: 'Showcase A'
-                children: {  }
-      -
-        id: d635e30a-fd14-45b4-85f2-c04bc44ca626
-        type: grid
-        subtype: false
-        title: Untitled
-        attributes: {  }
-        children:
-          -
-            id: df559045-615e-466c-9d9d-b3bb90c3555e
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 100
-              class: 'flush fp-showcase-b'
-              extra: {  }
-            children:
-              -
-                id: ac870f15-5731-44e4-be9c-42d98823cb61
-                type: position
-                subtype: position
-                title: 'Showcase B'
-                attributes:
-                  enabled: 1
-                  key: showcase-b
-                  title: 'Showcase B'
-                children: {  }
+    children: {  }
   -
     id: 5a754282-2da7-0a53-5111-a731c4b9443b
     type: section
@@ -495,71 +281,7 @@ children:
     title: Above
     attributes:
       boxed: 0
-    children:
-      -
-        id: 5c6e4708-9f0e-d724-674e-9e7c9df94f0b
-        type: grid
-        subtype: false
-        title: Untitled
-        attributes: {  }
-        children:
-          -
-            id: c687713b-e6ec-cc84-7ec5-26ae68113c09
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 33.3333
-              extra: {  }
-            children:
-              -
-                id: 80fffd7c-20cf-e3cc-e556-09001e263803
-                type: position
-                subtype: position
-                title: 'Above A'
-                attributes:
-                  enabled: 1
-                  key: above-a
-                  title: 'Above A'
-                children: {  }
-          -
-            id: 7e0d0ebf-ed03-0354-7b18-879e96af78ba
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 33.3333
-              extra: {  }
-            children:
-              -
-                id: ee448a16-f1a4-4bc0-b093-e0d54a7ddb97
-                type: position
-                subtype: position
-                title: 'Above B'
-                attributes:
-                  enabled: 1
-                  key: above-b
-                  title: 'Above B'
-                children: {  }
-          -
-            id: 50a6cb96-547b-5b94-7d69-1eaab4e42683
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 33.3333
-              extra: {  }
-            children:
-              -
-                id: 624dcf7b-e868-6ed5-bc8d-62b2005d0eb8
-                type: position
-                subtype: position
-                title: 'Above C'
-                attributes:
-                  enabled: 1
-                  key: above-c
-                  title: 'Above C'
-                children: {  }
+    children: {  }
   -
     id: 8888ddf8-c1d4-e8ab-88aa-c88f7c9828f8
     type: section
@@ -569,49 +291,7 @@ children:
       boxed: '0'
       class: ''
       extra: {  }
-    children:
-      -
-        id: 56784784-07ff-4d6b-8527-14b8eee88660
-        type: grid
-        subtype: false
-        title: Untitled
-        attributes: {  }
-        children:
-          -
-            id: 279c110a-e8d5-44b3-a791-53e3a1bf0267
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 50
-            children:
-              -
-                id: e19cf7ae-3c0c-44c5-bc2f-418546c81b33
-                type: spacer
-                subtype: spacer
-                title: Spacer
-                attributes: {  }
-                children: {  }
-          -
-            id: 1235255a-e6af-4a8a-b4f6-4ace42652f1d
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 50
-              class: 'nomarginall nopaddingall'
-              extra: {  }
-            children:
-              -
-                id: 25892811-602a-4059-8993-6313b332b572
-                type: position
-                subtype: position
-                title: 'Utility A'
-                attributes:
-                  enabled: 1
-                  key: utility-a
-                  title: 'Utility A'
-                children: {  }
+    children: {  }
   -
     id: 3b4dddf8-c1d4-e8ab-88aa-c88f7c9828f8
     type: section
@@ -621,49 +301,7 @@ children:
       boxed: '0'
       class: ''
       extra: {  }
-    children:
-      -
-        id: e3674784-07ff-4d6b-8527-14b8eee88660
-        type: grid
-        subtype: false
-        title: Untitled
-        attributes: {  }
-        children:
-          -
-            id: 2164e7de-f0e0-43a1-b7a8-9f8dfe300dd3
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 50
-            children:
-              -
-                id: 835a6459-07b4-41a4-aa35-62433782b238
-                type: spacer
-                subtype: spacer
-                title: Spacer
-                attributes: {  }
-                children: {  }
-          -
-            id: a186255a-e6af-4a8a-b4f6-4ace42652f1d
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 50
-              class: 'nomarginall nopaddingall'
-              extra: {  }
-            children:
-              -
-                id: 6a632811-602a-4059-8993-6313b332b572
-                type: position
-                subtype: position
-                title: 'Feature A'
-                attributes:
-                  enabled: 1
-                  key: feature-a
-                  title: 'Feature A'
-                children: {  }
+    children: {  }
   -
     id: 4bf3811a-a93a-15bc-6cd5-c72837ecaa12
     type: container
@@ -871,34 +509,7 @@ children:
     title: Expanded
     attributes:
       boxed: 0
-    children:
-      -
-        id: a1a078a4-98c7-4b5b-8bf8-b98b74b5595b
-        type: grid
-        subtype: false
-        title: Untitled
-        attributes: {  }
-        children:
-          -
-            id: aa7609b9-65a0-4229-99e2-56d4d1f7b9ef
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 100
-              variations: title1
-              extra: {  }
-            children:
-              -
-                id: 5714537d-fd60-4303-8830-65e7f8e1d933
-                type: position
-                subtype: position
-                title: 'Expanded A'
-                attributes:
-                  enabled: 1
-                  key: expanded-a
-                  title: 'Expanded A'
-                children: {  }
+    children: {  }
   -
     id: 68a0de11-cf1d-cbfa-84b0-a5a67990f9d8
     type: section
@@ -908,52 +519,7 @@ children:
       boxed: '0'
       class: fp-extension
       extra: {  }
-    children:
-      -
-        id: 37148976-54ce-4bbf-be3a-2000e0dc10ac
-        type: grid
-        subtype: false
-        title: Untitled
-        attributes: {  }
-        children:
-          -
-            id: 585b300f-7ff5-4d4b-a2dd-e9464aebbd74
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 50
-              extra: {  }
-            children:
-              -
-                id: bef7b580-fa7c-4a4c-a898-26fa53d06d36
-                type: position
-                subtype: position
-                title: 'Extension A'
-                attributes:
-                  enabled: 1
-                  key: extension-a
-                  title: 'Extension A'
-                children: {  }
-          -
-            id: 855572f3-e010-484f-b9f2-01d19273fadf
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 50
-              extra: {  }
-            children:
-              -
-                id: 66d74dbc-9d8d-4857-ac19-a0ef238c1d6d
-                type: position
-                subtype: position
-                title: 'Extension B'
-                attributes:
-                  enabled: 1
-                  key: extension-b
-                  title: 'Extension B'
-                children: {  }
+    children: {  }
   -
     id: 618a6182-88ab-bda8-88ba-e88ac28a3c8c
     type: section
@@ -963,7 +529,32 @@ children:
       boxed: 0
     children:
       -
-        id: e4ce9958-b458-4740-921e-9483f862dbd2
+        id: 14b799c3-ca38-4cda-8684-3ec529b18a4b
+        type: grid
+        subtype: false
+        title: Untitled
+        attributes: {  }
+        children:
+          -
+            id: ac87077a-76db-42e1-a1e7-b643275a32e0
+            type: block
+            subtype: false
+            title: Untitled
+            attributes:
+              extra: {  }
+              size: 100
+            children:
+              -
+                id: 1e17878c-147d-4b1b-826f-f38d717d2f9c
+                type: position
+                subtype: module
+                title: 'Module Instance'
+                attributes:
+                  enabled: 1
+                  module_id: '268'
+                children: {  }
+      -
+        id: bb912a9f-a1e3-45dd-86f5-fbf7ce53abdd
         type: grid
         subtype: false
         title: Untitled
@@ -975,9 +566,9 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 100
               variations: title1
               extra: {  }
+              size: 100
             children:
               -
                 id: 35e10c48-ac72-4fc2-86a6-febc3afe7bfc
@@ -985,9 +576,33 @@ children:
                 subtype: position
                 title: 'Bottom A'
                 attributes:
-                  enabled: 1
+                  enabled: 0
                   key: bottom-a
-                  title: 'Bottom A'
+                children: {  }
+      -
+        id: 985eadc2-6316-4f49-a8f8-91b714d400af
+        type: grid
+        subtype: false
+        title: Untitled
+        attributes: {  }
+        children:
+          -
+            id: e865c033-1e1f-4ff6-add2-842563e7d225
+            type: block
+            subtype: false
+            title: Untitled
+            attributes:
+              extra: {  }
+              size: 100
+            children:
+              -
+                id: 31debbe3-a3da-4ee2-8c02-79ac07c20f5f
+                type: position
+                subtype: module
+                title: 'Module Instance'
+                attributes:
+                  enabled: 1
+                  module_id: '285'
                 children: {  }
   -
     id: a9ae9244-8b06-ce7a-6775-fcf4d67259f7

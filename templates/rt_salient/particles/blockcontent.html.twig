@@ -20,7 +20,7 @@
 					<div class="g-content">
 						{% if subcontent.link %}<a href="{{ subcontent.link|e }}">{% endif %}
 						{% if subcontent.icon %}<i class="{{ subcontent.icon }} g-block-icons"></i>{% endif %}
-						{% if subcontent.img %}<img src="{{ url(subcontent.img) }}" class="g-block-subcontent-img" alt="{{ subcontent.title|e }}" />{% endif %}
+						{% if subcontent.img %}<img src="{{ url(subcontent.img) }}" class="g-block-subcontent-img" style="float: left;margin-right: 15px;" alt="{{ subcontent.title|e }}" />{% endif %}
 						{% if subcontent.link %}</a>{% endif %}
 						
 						{% if subcontent.subtitle %} <div class="g-subtitle">{% if subcontent.link %}<a href="{{ subcontent.link|e }}">{% endif %}{{ subcontent.subtitle|raw }}{% if subcontent.link %}</a>{% endif %}</div> {% endif %}

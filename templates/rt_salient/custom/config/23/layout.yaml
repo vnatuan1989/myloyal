@@ -123,8 +123,9 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 20
               extra: {  }
+              fixed: '1'
+              size: 20
             children:
               -
                 id: f69641f7-55ac-40ae-b1f2-ac269bb72169
@@ -142,32 +143,17 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 55
+              extra: {  }
+              fixed: '1'
+              size: 60
             children:
               -
                 id: 4490b5ef-1821-4af2-8fe0-116d641b5759
                 type: particle
                 subtype: menu
                 title: Menu
-                attributes: {  }
-                children: {  }
-          -
-            id: e8914194-a484-4ce5-81c4-c745db47bf57
-            type: block
-            subtype: false
-            title: Untitled
-            attributes:
-              size: 5
-              extra: {  }
-            children:
-              -
-                id: 40104d84-434d-41a9-b018-3502455593d5
-                type: particle
-                subtype: custom
-                title: 'Off Canvas Toggle'
                 attributes:
                   enabled: 1
-                  html: "<div class=\"g-offcanvas-toggle\" data-offcanvas-toggle=\"\">\n  <i class=\"fa fa-fw fa-indent\"></i>\n</div>"
                 children: {  }
           -
             id: fed117b1-9b4e-4a58-ac96-0806fd4fd68f
