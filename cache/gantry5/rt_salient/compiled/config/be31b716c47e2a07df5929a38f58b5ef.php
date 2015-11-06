@@ -1,161 +1,161 @@
 <?php
 return [
     '@class' => 'Gantry\\Component\\Config\\CompiledConfig',
-    'timestamp' => 1446540314,
-    'checksum' => '858bae02ce9341011ea66209fcdcaf53',
+    'timestamp' => 1446551716,
+    'checksum' => 'df8c0d45c567efa233f4f450e60e9a71',
     'files' => [
         'templates/rt_salient/custom/config/24' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/24/index.yaml',
-                'modified' => 1444647825
+                'modified' => 1446536534
             ],
             'layout' => [
                 'file' => 'templates/rt_salient/custom/config/24/layout.yaml',
-                'modified' => 1446447802
+                'modified' => 1445508245
             ]
         ],
         'templates/rt_salient/custom/config/default' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/default/index.yaml',
-                'modified' => 1444647825
+                'modified' => 1446536534
             ],
             'particles/analytics' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/analytics.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/animatedblock' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/animatedblock.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/assets' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/assets.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/blockcontent' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/blockcontent.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/branding' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/branding.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/contact' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/contact.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/contentlist' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/contentlist.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/copyright' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/copyright.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/custom' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/custom.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/date' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/date.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/horizontalmenu' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/horizontalmenu.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/imagegrid' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/imagegrid.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/infolist' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/infolist.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/logo' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/logo.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/menu' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/menu.yaml',
-                'modified' => 1444647825
+                'modified' => 1444386810
             ],
             'particles/mobile-menu' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/mobile-menu.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/module' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/module.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/newsletter' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/newsletter.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/pagecontent' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/pagecontent.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/position' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/position.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/promocontent' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/promocontent.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/promoimage' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/promoimage.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/simplecounter' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/simplecounter.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/social' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/social.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/spacer' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/spacer.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/system-messages' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/system-messages.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/testimonial' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/testimonial.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ],
             'particles/totop' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/totop.yaml',
-                'modified' => 1444647826
+                'modified' => 1444386810
             ]
         ],
         'templates/rt_salient/config/default' => [
             'menu' => [
                 'file' => 'templates/rt_salient/config/default/menu.yaml',
-                'modified' => 1444647825
+                'modified' => 1441941680
             ],
             'particles/copyright' => [
                 'file' => 'templates/rt_salient/config/default/particles/copyright.yaml',
-                'modified' => 1444647825
+                'modified' => 1441941680
             ],
             'particles/logo' => [
                 'file' => 'templates/rt_salient/config/default/particles/logo.yaml',
-                'modified' => 1444647825
+                'modified' => 1441941680
             ],
             'particles/social' => [
                 'file' => 'templates/rt_salient/config/default/particles/social.yaml',
-                'modified' => 1444647825
+                'modified' => 1441941680
             ],
             'particles/totop' => [
                 'file' => 'templates/rt_salient/config/default/particles/totop.yaml',
-                'modified' => 1444647825
+                'modified' => 1441941680
             ],
             'styles' => [
                 'file' => 'templates/rt_salient/config/default/styles.yaml',
-                'modified' => 1444647825
+                'modified' => 1441941680
             ]
         ]
     ],
@@ -1353,7 +1353,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.33330000000000126192389870993793010711669921875,
+                                        'size' => 33.333300000000001,
                                         'extra' => [
                                             
                                         ]
@@ -1381,7 +1381,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.33330000000000126192389870993793010711669921875,
+                                        'size' => 33.333300000000001,
                                         'extra' => [
                                             
                                         ]
@@ -1409,7 +1409,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.33330000000000126192389870993793010711669921875,
+                                        'size' => 33.333300000000001,
                                         'extra' => [
                                             
                                         ]
@@ -1703,7 +1703,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.33330000000000126192389870993793010711669921875,
+                                                                'size' => 33.333300000000001,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -1731,7 +1731,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.33330000000000126192389870993793010711669921875,
+                                                                'size' => 33.333300000000001,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -1759,7 +1759,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.33330000000000126192389870993793010711669921875,
+                                                                'size' => 33.333300000000001,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -2311,7 +2311,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.33330000000000126192389870993793010711669921875,
+                                        'size' => 33.333300000000001,
                                         'extra' => [
                                             
                                         ]
@@ -2341,7 +2341,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.33330000000000126192389870993793010711669921875
+                                        'size' => 33.333300000000001
                                     ],
                                     'children' => [
                                         0 => [
@@ -2364,7 +2364,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.33330000000000126192389870993793010711669921875,
+                                        'size' => 33.333300000000001,
                                         'extra' => [
                                             
                                         ]

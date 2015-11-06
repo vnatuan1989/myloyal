@@ -48,29 +48,34 @@ $doc->addStyleSheet($this->baseurl . '/templates/system/css/system.css');
 
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/bootstrap.min.css', $type = 'text/css');
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/style.css', $type = 'text/css');
+$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ddcss.css', $type = 'text/css');
+//$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/style1.css', $type = 'text/css');
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/jquery-ui-1.10.3.custom.min.css', $type = 'text/css');
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/font/css/font-awesome.min.css', $type = 'text/css');
 //
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/position.css', $type = 'text/css', $media = 'screen,projection');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/layout.css', $type = 'text/css', $media = 'screen,projection');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/print.css', $type = 'text/css', $media = 'print');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/general.css', $type = 'text/css', $media = 'screen,projection');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/' . htmlspecialchars($color) . '.css', $type = 'text/css', $media = 'screen,projection');
+//$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/position.css', $type = 'text/css', $media = 'screen,projection');
+//$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/layout.css', $type = 'text/css', $media = 'screen,projection');
+//$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/print.css', $type = 'text/css', $media = 'print');
+//$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/general.css', $type = 'text/css', $media = 'screen,projection');
+//$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/' . htmlspecialchars($color) . '.css', $type = 'text/css', $media = 'screen,projection');
 
 if ($this->direction == 'rtl')
 {
-	$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/template_rtl.css');
+//	$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/template_rtl.css');
 	if (file_exists(JPATH_SITE . '/templates/' . $this->template . '/css/' . $color . '_rtl.css'))
 	{
-		$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/' . htmlspecialchars($color) . '_rtl.css');
+//		$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/' . htmlspecialchars($color) . '_rtl.css');
 	}
 }
 
 JHtml::_('bootstrap.framework');
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/md_stylechanger.js', 'text/javascript');
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/hide.js', 'text/javascript');
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/respond.src.js', 'text/javascript');
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/template.js', 'text/javascript');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/md_stylechanger.js', 'text/javascript');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/hide.js', 'text/javascript');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/respond.src.js', 'text/javascript');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/template.js', 'text/javascript');
+////$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/ddslick.js', 'text/javascript');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/ddjs.js', 'text/javascript');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/jquery.js', 'text/javascript');
 
 ?>
 
