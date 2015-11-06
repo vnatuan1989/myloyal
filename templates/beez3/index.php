@@ -75,7 +75,9 @@ JHtml::_('bootstrap.framework');
 //$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/template.js', 'text/javascript');
 ////$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/ddslick.js', 'text/javascript');
 //$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/ddjs.js', 'text/javascript');
-//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/jquery.js', 'text/javascript');
+$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/jquery.js', 'text/javascript');
+$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/jquery.ui.datepicker-da.js', 'text/javascript');
+$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/jquery-ui-1.10.3.custom.min.js', 'text/javascript');
 
 ?>
 
