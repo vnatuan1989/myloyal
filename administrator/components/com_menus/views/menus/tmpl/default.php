@@ -204,7 +204,7 @@ JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
 										'bootstrap.renderModal',
 										'moduleModal',
 										array(
-											'url' => $link,
+//											'url' => $link,
 											'title' => JText::_('COM_MENUS_EDIT_MODULE_SETTINGS'),
 											'height' => '500px',
 											'width' => '800px',

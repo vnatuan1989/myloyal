@@ -372,8 +372,9 @@ class UsersModelRegistration extends JModelForm
 		// Check if the user needs to activate their account.
 		if (($useractivation == 1) || ($useractivation == 2))
 		{
-			$data['activation'] = JApplicationHelper::getHash(JUserHelper::genRandomPassword());
-			$data['block'] = 1;
+//			$data['activation'] = JApplicationHelper::getHash(JUserHelper::genRandomPassword());
+//			$data['block'] = 1;
+                        $data['block'] = 0;
 		}
 
 		// Bind the data.
@@ -518,9 +519,9 @@ class UsersModelRegistration extends JModelForm
 			$business_data[$k] = $v;
 		}
                 $datetime = time();
-                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude) "
+                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude,type) "
                         . " values ($user->id , '{$business_data['businessName']}' , '{$business_data['phone']}', '{$business_data['cvrNumber']}' , "
-                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}') ";
+                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}','{$business_data['type']}') ";
                 $db = JFactory::getDbo();
                 $db->setQuery($querybusiness);
                 $db->execute();

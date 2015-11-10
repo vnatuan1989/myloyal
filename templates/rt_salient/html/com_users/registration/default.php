@@ -227,7 +227,12 @@ jQuery( document ).ready(function() {
                         <div class="form-group">
                             <input id="jform_company_name" class="required form-control" type="text" aria-required="true" required="required" size="30" value="" name="jform[company_name]" placeholder="Firmanavn">
                         </div>
-                                        
+                        <div class="form-group">
+                            <select id="jform_company_name" class="form-control" name="jform[business_type]">
+                                <option  value="1" selected="selected">Point</option>
+                                <option  value="2">Stamp</option>
+                            </select>
+                        </div>                
                         <!-- group 2--> 
                         <p class="text-center"><?php echo JText::_('COM_USERS_REGISTER_TITLE_REGISTER2')?></p>
                         

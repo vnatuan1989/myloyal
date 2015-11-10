@@ -145,12 +145,14 @@ class UsersControllerRegistration extends UsersController
                 $data['email1'] = $requestData['email'];
                 $data['firstName'] = $requestData ['first_name'];
                 $data['lastName'] = $requestData ['second_name'];
+                
                 $data_business['cvrNumber'] = $requestData ['cvr_number'];
                 $data_business['businessName'] = $requestData ['company_name'];
                 $data_business['phone'] = $requestData ['telephone_number'];
                 $data_business['latitude'] = $requestData ['latitude'];
                 $data_business['address'] = $requestData ['businessaddress'];
                 $data_business['longitude'] = $requestData ['longitude'];
+                $data_business['type'] = $requestData ['business_type'];
                 
                 //
                 //

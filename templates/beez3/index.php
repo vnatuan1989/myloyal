@@ -9,6 +9,7 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+print_r('xxx');die;
 
 JLoader::import('joomla.filesystem.file');
 

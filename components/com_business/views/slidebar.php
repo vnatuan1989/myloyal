@@ -1,7 +1,7 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li>
-            <a href="<?php echo JRoute::_('index.php');?>"><i class="fa fa-home fa-lg"></i> My loyalty programs</a>
+            <a href="<?php echo JRoute::_('index.php');?>"><i class="fa fa-home fa-lg"></i> Back to home</a>
         </li>
         <li>
             <a href="<?php echo JRoute::_('index.php?option=com_business&view=business');?>"><i class="fa fa-map-marker fa-lg"></i> Business setting</a>
