@@ -11,10 +11,11 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
+defined('_JEXEC') or die;
 
 ?>
 
-<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
 <script type="text/javascript">
 var geocoder = new google.maps.Geocoder();
 var markers = [];
@@ -175,7 +176,7 @@ jQuery( document ).ready(function() {
 		});
     });
 });
-</script>-->
+</script>
 
 <script language="javascript">
     $(document).ready(function(e) {
@@ -197,6 +198,7 @@ jQuery( document ).ready(function() {
 }
 
 </style>
+<?php echo '123';die;   ?>
 
 <div id="wrapper">
         <?php require_once JPATH_SITE . "/components/com_business/views/slidebar.php";?>

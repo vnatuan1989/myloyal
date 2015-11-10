@@ -72,6 +72,7 @@ class BusinessModelBusiness extends JModelItem
         public function getBusiness()
 	{
             $user = JFactory::getUser();
+            
             if (!is_array($this->data))
             {
                     $this->data = array();
