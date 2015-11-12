@@ -53,6 +53,7 @@ class BusinessControllerBusiness extends JControllerForm
         $business['cvrNumber'] = $requestData['cvrNumber'];
         $business['shortName'] = $requestData['shortName'];
         $business['phone'] = $requestData['phone'];
+		$business['businessEmail'] = $requestData['businessEmail'];
         $business['website'] = $requestData['website'];
         $business['icon'] = $requestData['icon'];
         $business['address'] = $requestData['address'];

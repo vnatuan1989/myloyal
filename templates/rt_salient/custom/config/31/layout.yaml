@@ -99,13 +99,16 @@ children:
             title: Untitled
             attributes:
               size: 20
+              extra: {  }
             children:
               -
                 id: 9e409d9d-7c2f-4989-b6db-bafa3b49f77e
                 type: particle
                 subtype: social
                 title: Social
-                attributes: {  }
+                attributes:
+                  enabled: 1
+                  items: {  }
                 children: {  }
       -
         id: fe2408ce-3dfc-492d-9494-b214baa84fa6
@@ -541,8 +544,8 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              extra: {  }
               size: 100
+              extra: {  }
             children:
               -
                 id: 1e17878c-147d-4b1b-826f-f38d717d2f9c
@@ -552,6 +555,8 @@ children:
                 attributes:
                   enabled: 1
                   module_id: '268'
+                  title: 'Module Instance'
+                  key: module-instance
                 children: {  }
       -
         id: bb912a9f-a1e3-45dd-86f5-fbf7ce53abdd
@@ -566,9 +571,9 @@ children:
             subtype: false
             title: Untitled
             attributes:
+              size: 100
               variations: title1
               extra: {  }
-              size: 100
             children:
               -
                 id: 35e10c48-ac72-4fc2-86a6-febc3afe7bfc
@@ -578,6 +583,7 @@ children:
                 attributes:
                   enabled: 0
                   key: bottom-a
+                  title: 'Bottom A'
                 children: {  }
       -
         id: 985eadc2-6316-4f49-a8f8-91b714d400af
@@ -592,8 +598,8 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              extra: {  }
               size: 100
+              extra: {  }
             children:
               -
                 id: 31debbe3-a3da-4ee2-8c02-79ac07c20f5f
@@ -602,7 +608,9 @@ children:
                 title: 'Module Instance'
                 attributes:
                   enabled: 1
-                  module_id: '285'
+                  module_id: '286'
+                  title: 'Module Instance'
+                  key: module-instance
                 children: {  }
   -
     id: a9ae9244-8b06-ce7a-6775-fcf4d67259f7
@@ -773,8 +781,8 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 33.3333
               extra: {  }
+              size: 33.3333
             children:
               -
                 id: a87bf23d-8e40-4dda-92c2-bf98c960bfad
@@ -784,7 +792,7 @@ children:
                 attributes:
                   enabled: 1
                   rel: home
-                  image: 'gantry-media://logo/logo-footer.png'
+                  image: 'gantry-media://logo/logo.png'
                   alt: Salient
                   class: g-footer-logo
                 children: {  }
@@ -819,27 +827,7 @@ children:
                 title: Social
                 attributes:
                   enabled: 1
-                  items:
-                    -
-                      icon: 'fa fa-twitter fa-fw'
-                      text: ''
-                      link: 'http://twitter.com/rockettheme'
-                      name: Twitter
-                    -
-                      icon: 'fa fa-facebook fa-fw'
-                      text: ''
-                      link: 'http://facebook.com/rockettheme'
-                      name: Facebook
-                    -
-                      icon: 'fa fa-google fa-fw'
-                      text: ''
-                      link: 'https://plus.google.com/+rockettheme/about'
-                      name: Google
-                    -
-                      icon: 'fa fa-rss fa-fw'
-                      text: ''
-                      link: 'http://www.rockettheme.com/product-updates?rss'
-                      name: RSS
+                  items: {  }
                 children: {  }
   -
     id: e4a7e190-0847-5f74-c5ac-16aa482a19d4

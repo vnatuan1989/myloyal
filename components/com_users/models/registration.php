@@ -519,17 +519,20 @@ class UsersModelRegistration extends JModelForm
 			$business_data[$k] = $v;
 		}
                 $datetime = time();
-                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude,type) "
+//                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude,type) "
+//                        . " values ($user->id , '{$business_data['businessName']}' , '{$business_data['phone']}', '{$business_data['cvrNumber']}' , "
+//                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}','{$business_data['type']}') ";
+                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude) "
                         . " values ($user->id , '{$business_data['businessName']}' , '{$business_data['phone']}', '{$business_data['cvrNumber']}' , "
-                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}','{$business_data['type']}') ";
+                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}') ";
                 $db = JFactory::getDbo();
                 $db->setQuery($querybusiness);
                 $db->execute();
 		// Send the registration email.
-		$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
+		//$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
 
 		// Send Notification mail to administrators
-		if (($params->get('useractivation') < 2) && ($params->get('mail_to_admin') == 1))
+		/*if (($params->get('useractivation') < 2) && ($params->get('mail_to_admin') == 1))
 		{
 			$emailSubject = JText::sprintf(
 				'COM_USERS_EMAIL_ACCOUNT_DETAILS',
@@ -576,10 +579,10 @@ class UsersModelRegistration extends JModelForm
 					return false;
 				}
 			}
-		}
+		}*/
 
 		// Check for an error.
-		if ($return !== true)
+		/*if ($return !== true)
 		{
 			$this->setError(JText::_('COM_USERS_REGISTRATION_SEND_MAIL_FAILED'));
 
@@ -637,7 +640,7 @@ class UsersModelRegistration extends JModelForm
 			}
 
 			return false;
-		}
+		}*/
 
 		if ($useractivation == 1)
 		{

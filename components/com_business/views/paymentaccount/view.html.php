@@ -15,7 +15,7 @@ defined('_JEXEC') or die;
  *
  * @since  0.0.1
  */
-class BusinessViewPromotion extends JViewLegacy
+class BusinessViewPaymentaccount extends JViewLegacy
 {
 	/**
 	 * Display the Hello World view
@@ -24,21 +24,32 @@ class BusinessViewPromotion extends JViewLegacy
 	 *
 	 * @return  void
 	 */
-	function display($tpl = null)
-	{
-		// Assign data to the view
-		$this->msg = $this->get('Msg');
-//                $this->msg = 'Hello World';
+        
 
+	public function display($tpl = null)
+	{
+                
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
-			JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
+			JError::raiseError(500, implode('<br />', $errors));
 
 			return false;
 		}
 
-		// Display the view
-		parent::display($tpl);
+		// Check for layout override
+		$active = JFactory::getApplication()->getMenu()->getActive();
+
+		if (isset($active->query['layout']))
+		{
+			$this->setLayout($active->query['layout']);
+		}
+
+		// Escape strings for HTML output
+//		$this->pageclass_sfx = htmlspecialchars($this->params->get('pageclass_sfx'));
+//
+//		$this->prepareDocument();
+        
+		return parent::display($tpl);
 	}
 }

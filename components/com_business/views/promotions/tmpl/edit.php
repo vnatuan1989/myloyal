@@ -49,7 +49,7 @@ if(empty($this->promotionById))
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="">Type:</label>
-                                                <select class="form-control" name="jform[type]">
+                                                <select class="form-control" name="jform[type]" disabled="">
                                                     <?php foreach($this->listTypePromotion as $key=>$promotion){
                                                         if($this->promotionById['type'] == $key)
                                                             { 

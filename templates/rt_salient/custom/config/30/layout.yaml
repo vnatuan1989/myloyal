@@ -99,13 +99,16 @@ children:
             title: Untitled
             attributes:
               size: 20
+              extra: {  }
             children:
               -
                 id: 9e409d9d-7c2f-4989-b6db-bafa3b49f77e
                 type: particle
                 subtype: social
                 title: Social
-                attributes: {  }
+                attributes:
+                  enabled: 1
+                  items: {  }
                 children: {  }
       -
         id: fe2408ce-3dfc-492d-9494-b214baa84fa6
@@ -323,7 +326,7 @@ children:
                 subtype: position
                 title: 'Showcase B'
                 attributes:
-                  enabled: 1
+                  enabled: 0
                   key: showcase-b
                   title: 'Showcase B'
                 children: {  }
@@ -449,7 +452,7 @@ children:
                             subtype: position
                             title: 'Mainbar A'
                             attributes:
-                              enabled: 1
+                              enabled: 0
                               key: mainbar-a
                               title: 'Mainbar A'
                             children: {  }
@@ -586,7 +589,7 @@ children:
                 subtype: position
                 title: 'Expanded A'
                 attributes:
-                  enabled: 1
+                  enabled: 0
                   key: expanded-a
                   title: 'Expanded A'
                 children: {  }
@@ -631,7 +634,7 @@ children:
                 subtype: position
                 title: 'Bottom A'
                 attributes:
-                  enabled: 1
+                  enabled: 0
                   key: bottom-a
                   title: 'Bottom A'
                 children: {  }
@@ -688,7 +691,7 @@ children:
                             subtype: position
                             title: 'Footer A'
                             attributes:
-                              enabled: 1
+                              enabled: 0
                               key: footer-a
                               title: 'Footer A'
                             children: {  }
@@ -731,7 +734,7 @@ children:
                             subtype: position
                             title: 'Footside A'
                             attributes:
-                              enabled: 1
+                              enabled: 0
                               key: footside-a
                               title: 'Footside A'
                             children: {  }
@@ -759,7 +762,7 @@ children:
                             subtype: position
                             title: 'Footside B'
                             attributes:
-                              enabled: 1
+                              enabled: 0
                               key: footside-b
                               title: 'Footside B'
                             children: {  }
@@ -779,7 +782,7 @@ children:
                             subtype: position
                             title: 'Footside C'
                             attributes:
-                              enabled: 1
+                              enabled: 0
                               key: footside-c
                               title: 'Footside C'
                             children: {  }
@@ -804,8 +807,8 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 33.3333
               extra: {  }
+              size: 33.3333
             children:
               -
                 id: a87bf23d-8e40-4dda-92c2-bf98c960bfad
@@ -815,7 +818,7 @@ children:
                 attributes:
                   enabled: 1
                   rel: home
-                  image: 'gantry-media://logo/logo-footer.png'
+                  image: 'gantry-media://logo/logo.png'
                   alt: Salient
                   class: g-footer-logo
                 children: {  }
@@ -840,8 +843,8 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 33.3333
               extra: {  }
+              size: 33.3333
             children:
               -
                 id: 8b29da7f-e4de-4ded-a629-59a56e740783
@@ -850,27 +853,7 @@ children:
                 title: Social
                 attributes:
                   enabled: 1
-                  items:
-                    -
-                      icon: 'fa fa-twitter fa-fw'
-                      text: ''
-                      link: 'http://twitter.com/rockettheme'
-                      name: Twitter
-                    -
-                      icon: 'fa fa-facebook fa-fw'
-                      text: ''
-                      link: 'http://facebook.com/rockettheme'
-                      name: Facebook
-                    -
-                      icon: 'fa fa-google fa-fw'
-                      text: ''
-                      link: 'https://plus.google.com/+rockettheme/about'
-                      name: Google
-                    -
-                      icon: 'fa fa-rss fa-fw'
-                      text: ''
-                      link: 'http://www.rockettheme.com/product-updates?rss'
-                      name: RSS
+                  items: {  }
                 children: {  }
   -
     id: e4a7e190-0847-5f74-c5ac-16aa482a19d4

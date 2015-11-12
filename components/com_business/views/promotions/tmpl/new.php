@@ -45,10 +45,11 @@ JHtml::_('behavior.formvalidator');
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="">Type:</label>
-                                                <select class="form-control" name="jform[type]">
+                                                <select class="form-control" name="jform[type]" disabled>
                                                     <?php foreach($this->listTypePromotion as $key=>$promotion){
                                                     ?>
-                                                    <option value="<?php echo $key;?>"><?php echo $promotion;?></option>    
+                                                    <option value="<?php echo $key;?>" 
+                                                            <?php echo ($this->infomation["type"] == $key)?"selected='selected'":"";?>><?php echo $promotion;?></option>    
                                                     <?php      
                                                     }
                                                     ?>
@@ -87,6 +88,7 @@ JHtml::_('behavior.formvalidator');
                                     <input type="hidden" name="option" value="com_business" />
                                     <input type="hidden" name="jform[promotionid]" value="<?php echo $this->promotionById['id']?>" />
                                     <input type="hidden" name="jform[businessid]" value="<?php echo $this->infomation['id']?>" />
+                                    <input type="hidden" name="jform[promotion_type]" value="<?php echo $this->infomation["type"]?>" />
                                     <input type="hidden" name="task" value="promotions.newPromotion" />
                                 </form>
                             </div>

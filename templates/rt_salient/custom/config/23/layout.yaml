@@ -123,9 +123,9 @@ children:
             subtype: false
             title: Untitled
             attributes:
+              size: 20
               extra: {  }
               fixed: '1'
-              size: 20
             children:
               -
                 id: f69641f7-55ac-40ae-b1f2-ac269bb72169
@@ -135,6 +135,7 @@ children:
                 attributes:
                   enabled: 1
                   rel: home
+                  image: 'gantry-media://logo/logo.png'
                   alt: salient
                 children: {  }
           -
@@ -143,9 +144,9 @@ children:
             subtype: false
             title: Untitled
             attributes:
+              size: 60
               extra: {  }
               fixed: '1'
-              size: 60
             children:
               -
                 id: 4490b5ef-1821-4af2-8fe0-116d641b5759
@@ -162,13 +163,16 @@ children:
             title: Untitled
             attributes:
               size: 20
+              extra: {  }
             children:
               -
                 id: 9e409d9d-7c2f-4989-b6db-bafa3b49f77e
                 type: particle
                 subtype: social
                 title: Social
-                attributes: {  }
+                attributes:
+                  enabled: 1
+                  items: {  }
                 children: {  }
   -
     id: 34ddef6d-ca01-520a-7c37-5405831fb9b9
@@ -1173,8 +1177,8 @@ children:
             subtype: false
             title: Untitled
             attributes:
-              size: 33.3333
               extra: {  }
+              size: 33.3333
             children:
               -
                 id: a87bf23d-8e40-4dda-92c2-bf98c960bfad
@@ -1184,7 +1188,7 @@ children:
                 attributes:
                   enabled: 1
                   rel: home
-                  image: 'gantry-media://logo/logo-footer.png'
+                  image: 'gantry-media://logo/logo.png'
                   alt: Salient
                   class: g-footer-logo
                 children: {  }
@@ -1219,27 +1223,7 @@ children:
                 title: Social
                 attributes:
                   enabled: 1
-                  items:
-                    -
-                      icon: 'fa fa-twitter fa-fw'
-                      text: ''
-                      link: 'http://twitter.com/rockettheme'
-                      name: Twitter
-                    -
-                      icon: 'fa fa-facebook fa-fw'
-                      text: ''
-                      link: 'http://facebook.com/rockettheme'
-                      name: Facebook
-                    -
-                      icon: 'fa fa-google fa-fw'
-                      text: ''
-                      link: 'https://plus.google.com/+rockettheme/about'
-                      name: Google
-                    -
-                      icon: 'fa fa-rss fa-fw'
-                      text: ''
-                      link: 'http://www.rockettheme.com/product-updates?rss'
-                      name: RSS
+                  items: {  }
                 children: {  }
   -
     id: e4a7e190-0847-5f74-c5ac-16aa482a19d4

@@ -72,7 +72,7 @@ ul.list-social li {
 	padding: 40px 65px !important;
 	background: #fff;
 	border: 1px solid #e2e2e2;
-	min-height: 715px !important;
+	min-height: 635px !important;
 	margin-right: 10px ;
 }
 .map img {
@@ -811,3 +811,66 @@ ul.list-info {
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s !important;
     width: 100%;
 }
+
+//vnatuan
+.pack ul {
+ margin-top: 30px;
+ padding-left: 0;
+ list-style: none;
+}
+.pack ul li {
+ width: 33%;
+ display: inline-block;
+ border: 1px solid #e2e2e2;
+ text-align: center;
+ padding: 30px 0 20px;
+ background: #fff;
+ float: left;
+}
+.pack ul li:hover {
+ border-color: #f7901e;
+}
+.pack ul li p {
+ font-size: 14px;
+ color: black;
+}
+.f55 {
+ font-size: 55px;
+ color: #f7901e;
+}
+.f35 {
+ font-size: 35px;
+}
+.cf7901e {
+ color: #f7901e;
+}
+
+small {font-size: 14px; color: black; text-transform: uppercase;}
+.box-highline {
+ margin-bottom: 15px;
+}
+.box-highline p {
+ margin-bottom: 0;
+ padding: 8px 0;
+ font-size: 12px !important;
+ color: #888 !important;
+}
+
+.box-highline p:nth-child(odd) {
+ background-color: #f2eeec;
+}
+.box-highline p:nth-child(even)  {
+ background-color: #fff;
+}
+.btnGetstart {
+ background: #f7901e;
+ color: #fff !important;
+ text-transform: uppercase;
+ width: 80%;
+ padding: 10px 12px;
+}
+
+.btnGetstart:hover {
+ background: #ec8411;
+}
+//vnatuan

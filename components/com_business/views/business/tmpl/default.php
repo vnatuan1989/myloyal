@@ -11,7 +11,6 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
-defined('_JEXEC') or die;
 
 ?>
 
@@ -198,7 +197,6 @@ jQuery( document ).ready(function() {
 }
 
 </style>
-<?php echo '123';die;   ?>
 
 <div id="wrapper">
         <?php require_once JPATH_SITE . "/components/com_business/views/slidebar.php";?>
@@ -253,7 +251,7 @@ jQuery( document ).ready(function() {
                                             </div>
                                             <div class="form-group">
                                                 <label for="">What icon best represents your business?</label>
-                                                <select name="jform[icon]" id="jform_icon" class="form-group">
+                                                <select name="jform[icon]" id="jform_icon" class="form-control">
                                                     <?php foreach ($this->listIcon as $key=>$icon){
                                                         if($this->data['icon'] == $key)
                                                             { 

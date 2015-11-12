@@ -152,7 +152,7 @@ class UsersControllerRegistration extends UsersController
                 $data_business['latitude'] = $requestData ['latitude'];
                 $data_business['address'] = $requestData ['businessaddress'];
                 $data_business['longitude'] = $requestData ['longitude'];
-                $data_business['type'] = $requestData ['business_type'];
+//                $data_business['type'] = $requestData ['business_type'];
                 
                 //
                 //

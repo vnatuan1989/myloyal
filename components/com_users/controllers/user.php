@@ -70,6 +70,8 @@ class UsersControllerUser extends UsersController
 		// Perform the log in.
 		if (true === $app->login($credentials, $options))
 		{
+                        $user = JFactory::getUser();
+                        
 			// Success
 			if ($options['remember'] == true)
 			{
@@ -77,7 +79,20 @@ class UsersControllerUser extends UsersController
 			}
 
 			$app->setUserState('users.login.form.data', array());
-			$app->redirect(JRoute::_($app->getUserState('users.login.form.return'), false));
+                        foreach ($user->groups as $group)
+                        {
+                            if($group == "2")
+                            {
+                                $app->redirect(JUri::base() . "index.php?option=com_business&view=paymentaccount");
+//                                $options['return'] = "index.php?option=com_business&view=paymentaccount";
+                            }
+                            else
+                            {
+                                $app->redirect(JUri::base() . "index.php?option=com_business&view=paymentaccount");
+//                                $options['return'] = "index.php?option=com_business&view=business";
+                            }
+                        }
+//			$app->redirect(JRoute::_($app->getUserState('users.login.form.return'), false));
 		}
 		else
 		{

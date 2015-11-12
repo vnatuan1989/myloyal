@@ -10,6 +10,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+
 JLoader::import('joomla.filesystem.file');
 
 // Check modules
@@ -91,14 +92,18 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/
 		<meta name="apple-mobile-web-app-capable" content="YES" />
 
 		<jdoc:include type="head" />
-
+                
 		<!--[if IE 7]>
 		<link href="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/css/ie7only.css" rel="stylesheet" type="text/css" />
 		<![endif]-->
+                <script src='http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js'></script>
+                <script src='http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js'></script>
+
 	</head>
 	<body id="shadow">
                 <jdoc:include type="message" />
                 <jdoc:include type="component" />
 		<jdoc:include type="modules" name="debug" />
+                
 	</body>
 </html>

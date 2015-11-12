@@ -86,7 +86,7 @@ class BusinessControllerPromotions extends JControllerForm
         $requestData = $this->input->post->get('jform', array(), 'array');
         $promotion = array();
         $promotion['id'] = $requestData['promotionid'];
-        $promotion['type'] = $requestData['type'];
+        $promotion['type'] = $requestData['promotion_type'];
         switch ($requestData['type']){
             case "1":
                 $promotion['point'] = $requestData['pointorstamp'];

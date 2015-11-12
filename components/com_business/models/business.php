@@ -72,7 +72,6 @@ class BusinessModelBusiness extends JModelItem
         public function getBusiness()
 	{
             $user = JFactory::getUser();
-            
             if (!is_array($this->data))
             {
                     $this->data = array();
@@ -156,6 +155,7 @@ class BusinessModelBusiness extends JModelItem
             $object = new stdClass();
             $object->id = $business['id'];
             $object->businessName = $business['businessName'];
+			$object->businessEmail = $business['businessEmail'];
             $object->cvrNumber = $business['cvrNumber'];
             $object->shortName = $business['shortName'];
             $object->phone = $business['phone'];

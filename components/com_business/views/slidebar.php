@@ -1,7 +1,7 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li>
-            <a href="<?php echo JRoute::_('index.php');?>"><i class="fa fa-home fa-lg"></i> Back to home</a>
+            <a href="<?php echo JRoute::_('');?>"><i class="fa fa-home fa-lg"></i> Back to home</a>
         </li>
         <li>
             <a href="<?php echo JRoute::_('index.php?option=com_business&view=business');?>"><i class="fa fa-map-marker fa-lg"></i> Business setting</a>
@@ -13,7 +13,7 @@
             <a href="<?php echo JRoute::_('index.php?option=com_business&view=customers');?>"><i class="fa fa-users fa-lg"></i> My customers</a>
         </li>
         <li>
-            <a href="<?php echo JRoute::_('index.php?option=com_business&view=report');?>"><i class="fa fa-line-chart fa-lg"></i> My Reports</a>
+            <a href="<?php echo JRoute::_('index.php?option=com_business&view=reports');?>"><i class="fa fa-line-chart fa-lg"></i> My Reports</a>
         </li>
     </ul>
 </div>

@@ -3,7 +3,7 @@ timestamp: 0
 preset:
   image: 'gantry-admin://images/layouts/default.png'
   name: default
-  timestamp: 1441941680
+  timestamp: 1446851170
 positions:
   top-a: 'Top A'
   top-b: 'Top B'
