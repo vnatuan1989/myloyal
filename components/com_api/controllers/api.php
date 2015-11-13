@@ -16,6 +16,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$password = JRequest::getVar("password");
 		$confirmPassword = JRequest::getVar("confirmPassword");
 		$avatar = JRequest::getVar("avatar");
+		$newsletter = JRequest::getVar("newsletter");
 		
 		if($password != $confirmPassword){
 			$return["result"] = 0;
@@ -47,6 +48,34 @@ class ApiControllerApi extends JControllerLegacy {
 		$q = "INSERT INTO #__user_usergroup_map VALUES (".$db->insertid().", 2)";
 		$db->setQuery($q);
 		$db->execute();
+		
+		if($newsletter == 1){
+			$apikey = 'cc61713dd8a06d26cfe3f66a4bcab100-us12';
+            $auth = base64_encode( 'user:'.$apikey );
+
+            $data = array(
+                'apikey'        => $apikey,
+                'email_address' => $email,
+                'status'        => 'subscribed',
+                'merge_fields'  => array(
+                    'FNAME' => $name
+                )
+            );
+            $json_data = json_encode($data);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://us2.api.mailchimp.com/3.0/lists/92480b6fc3/members/');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Basic '.$auth));
+            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+			
+            $result = curl_exec($ch);
+			$return["mailchimp"] = $result;
+		}
 				
 		$return["result"] = 1;	
 		die(json_encode($return));	
@@ -408,7 +437,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['data'] = $stores;
 		} else {
 			$return['result'] = 0;
-			$return['error'] = "No result";
+			$return['error'] = "Butikker blev ikke fundet. Klik her for at opdatere.";
 		}
 		die(json_encode($return));
 	}
@@ -438,7 +467,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['data'] = $stores;
 		} else {
 			$return['result'] = 0;
-			$return['error'] = "No result";
+			$return['error'] = "Butikker blev ikke fundet. Klik her for at opdatere.";
 		}
 		die(json_encode($return));
 	}
@@ -477,7 +506,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['data'] = $stores;
 		} else {
 			$return['result'] = 0;
-			$return['error'] = "No result";
+			$return['error'] = "Butikker blev ikke fundet. Klik her for at opdatere.";
 		}
 		die(json_encode($return));
 	}
@@ -647,9 +676,11 @@ class ApiControllerApi extends JControllerLegacy {
 		$businessId = JRequest::getVar("businessId");
 		$page = JRequest::getVar("page", 1);
 		
+		$time = time()-(15*60);
+		
 		$limitstart = ($page-1)*20;
 		$db = JFactory::getDBO();
-		$q = "SELECT customerId, createdAt FROM (SELECT customerId, createdAt FROM #__checkin WHERE businessId = ".$businessId." ORDER BY createdAt DESC) a GROUP BY customerId ORDER BY createdAt DESC LIMIT ".$limitstart.", 20";
+		$q = "SELECT customerId, MAX(createdAt) as createdAt FROM (SELECT customerId, createdAt FROM #__checkin WHERE businessId = ".$businessId." AND createdAt > $time ORDER BY createdAt DESC) a GROUP BY customerId ORDER BY createdAt DESC";
 		$db->setQuery($q);
 		$users = $db->loadAssocList();
 		if($users){
@@ -673,7 +704,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['data'] = $users;
 		} else {
 			$return['result'] = 0;
-			$return['error'] = "No result";
+			$return['error'] = "Butikker blev ikke fundet. Klik her for at opdatere.";
 			$return['data'] = "";
 		}
 		die(json_encode($return));
@@ -712,7 +743,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['data'] = $users;
 		} else {
 			$return['result'] = 0;
-			$return['error'] = "No result";
+			$return['error'] = "Butikker blev ikke fundet. Klik her for at opdatere.";
 		}
 		die(json_encode($return));
 	}
@@ -957,5 +988,48 @@ class ApiControllerApi extends JControllerLegacy {
 		//print "[PW] request: $request\n";
         //print "[PW] response: $response\n";
         //print "[PW] info: " . print_r($info, true);
+	}
+	
+	public function getDeals(){
+		$lat = JRequest::getVar("lat");
+		$long = JRequest::getVar("long");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT id as businessId, businessName, icon, address, latitude, longitude, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 25 ORDER BY distance;";
+		$db->setQuery($q);
+		$stores = $db->loadAssocList();
+		
+		if($stores){
+			$data = array();
+			$i = 0;
+			foreach($stores as $store){
+				$q = "SELECT * FROM #__deals WHERE businessId = ".$store["businessId"];
+				$db->setQuery($q);
+				$deals = $db->loadAssocList();
+				if($deals){
+					foreach($deals as $deal){
+						$data[$i]['businessId'] = $store['businessId'];
+						$data[$i]['businessName'] = $store['businessName'];
+						$data[$i]['icon'] = JURI::base()."images/business/".$store['icon'];
+						$data[$i]['address'] = $store['address'];
+						$data[$i]['latitude'] = $store['latitude'];
+						$data[$i]['longitude'] = $store['longitude'];
+						$data[$i]['distance'] = $store['distance'];
+						$data[$i]['expire'] = date("d/m/Y", $deal["endDate"]);
+						$data[$i]['title'] = $deal["title"];
+						$data[$i]['content'] = $deal["content"];
+						
+						$i++;
+					}
+				}
+			}
+			$return['result'] = 1;
+			$return['error'] = "";
+			$return['data'] = $data;
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Butikker blev ikke fundet. Klik her for at opdatere.";
+		}
+		die(json_encode($return));
 	}
 }
