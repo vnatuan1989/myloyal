@@ -24,7 +24,7 @@ JHtml::_('behavior.formvalidator');
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h2 class="title"><i class="fa fa-home"></i> Complete Page</h2>
+                                <h2 class="title"><i class="fa fa-home"></i> Failed Page</h2>
                             </div>
                         </div>
                     </div>
@@ -32,8 +32,11 @@ JHtml::_('behavior.formvalidator');
                 <section class="main-content">
                     <div class="container">
                         <div class="business-setting mt50">
-                            <h2 class="text-center">Your action was completed .</h2>
-                            <a style="width: 40% ; margin-left: 30%;margin-right: 30%;" href="<?php echo JRoute::_("index.php?option=com_business&view=promotions")?>" class="btn btnCreatecampaign">Click here to go to old page.</a>    
+                            <h2 class="text-center">Your action was failed . We are sorry about that.</h2>
+                            
+                                <a style="width: 40% ; margin-left: 30%;margin-right: 30%;" href="<?php echo JRoute::_("index.php?option=com_business&view=deals")?>" class="btn btnCreatecampaign">Click here to go to old page.</a>
+                            
+                            
                         </div>
                     </div>
                 </section>

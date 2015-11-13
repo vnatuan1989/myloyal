@@ -33,7 +33,7 @@ JHtml::_('behavior.formvalidator');
                     <div class="container">
                         <div class="business-setting mt50">
                             <h2 class="text-center">Your action was completed .</h2>
-                            <a style="width: 40% ; margin-left: 30%;margin-right: 30%;" href="<?php echo JRoute::_("index.php?option=com_business&view=promotions")?>" class="btn btnCreatecampaign">Click here to go to old page.</a>    
+                            <a style="width: 40% ; margin-left: 30%;margin-right: 30%;" href="<?php echo JRoute::_("index.php?option=com_business&view=deals")?>" class="btn btnCreatecampaign">Click here to go to old page.</a>    
                         </div>
                     </div>
                 </section>
