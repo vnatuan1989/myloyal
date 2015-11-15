@@ -55,7 +55,7 @@ JHtml::_('behavior.formvalidator');
                                     ?>
                                     <tr>
                                         <td>
-                                            
+                                            <h3><?php echo $deals['title']?></h3>
                                             <p><?php echo $deals['content']?></p>
                                         </td>
                                         <td class="text-center"><?php echo date('d/m/Y',$deals['endDate']);?></td>

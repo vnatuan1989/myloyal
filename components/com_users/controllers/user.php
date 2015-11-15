@@ -81,15 +81,19 @@ class UsersControllerUser extends UsersController
 			$app->setUserState('users.login.form.data', array());
                         foreach ($user->groups as $group)
                         {
-                            print_r($group);die;
                             if($group == "2")
                             {
                                 $app->redirect(JUri::base() . "index.php?option=com_business&view=paymentaccount");
 //                                $options['return'] = "index.php?option=com_business&view=paymentaccount";
                             }
+                            if($group == "8")
+                            {
+                                $app->redirect(JUri::base() . "index.php/admin-business");
+//                                $options['return'] = "index.php?option=com_business&view=paymentaccount";
+                            }
                             else
                             {
-                                $app->redirect(JUri::base() . "index.php?option=com_business&view=business");
+                                $app->redirect(JUri::base() . "index.php/business");
 //                                $options['return'] = "index.php?option=com_business&view=business";
                             }
                         }
