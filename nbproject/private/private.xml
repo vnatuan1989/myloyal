@@ -3,15 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/myloyalclone/administrator/language/en-GB/en-GB.com_business.ini</file>
-            <file>file:/C:/wamp/www/myloyalclone/components/com_business/views/promotions/tmpl/fail.php</file>
-            <file>file:/C:/wamp/www/myloyalclone/media/gantry5/assets/css/style.css</file>
-            <file>file:/C:/wamp/www/myloyalclone/components/com_business/views/business/tmpl/default.php</file>
-            <file>file:/C:/wamp/www/myloyalclone/components/com_business/models/promotions.php</file>
-            <file>file:/C:/wamp/www/myloyalclone/components/com_business/views/slidebar.php</file>
-            <file>file:/C:/wamp/www/myloyalclone/components/com_business/models/business.php</file>
-            <file>file:/C:/wamp/www/myloyalclone/administrator/language/en-GB/en-GB.com_business.sys.ini</file>
-            <file>file:/C:/wamp/www/myloyalclone/templates/rt_salient/html/com_users/registration/default.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/adminbusiness/tmpl/default.xml</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/adminbusiness/tmpl/default.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/models/deals.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/models/promotions.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/deals/tmpl/edit.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/controller/promotions.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/slidebaradmin.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/deals/tmpl/fail.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/controller/deals.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/header.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/deals/tmpl/complete.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/adminbusiness/view.html.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/promotions/tmpl/default.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_users/views/login/tmpl/default_logout.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/deals/tmpl/default.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/models/adminbusiness.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/slidebar.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/deals/tmpl/new.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/deals/view.html.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/views/headeradmin.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_business/controller/adminbusiness.php</file>
+            <file>file:/C:/xampp/htdocs/myloyalclone/components/com_users/controllers/user.php</file>
         </group>
     </open-files>
 </project-private>
