@@ -1,161 +1,161 @@
 <?php
 return [
     '@class' => 'Gantry\\Component\\Config\\CompiledConfig',
-    'timestamp' => 1446827569,
-    'checksum' => 'a2361e87302f18183a0dca11d11fe064',
+    'timestamp' => 1447315613,
+    'checksum' => '23d6bcd2b86097c03a83df9085df2dd7',
     'files' => [
         'templates/rt_salient/custom/config/23' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/23/index.yaml',
-                'modified' => 1446827561
+                'modified' => 1447314213
             ],
             'layout' => [
                 'file' => 'templates/rt_salient/custom/config/23/layout.yaml',
-                'modified' => 1446827561
+                'modified' => 1447314213
             ]
         ],
         'templates/rt_salient/custom/config/default' => [
             'index' => [
                 'file' => 'templates/rt_salient/custom/config/default/index.yaml',
-                'modified' => 1446827561
+                'modified' => 1447314237
             ],
             'particles/analytics' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/analytics.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314255
             ],
             'particles/animatedblock' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/animatedblock.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314254
             ],
             'particles/assets' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/assets.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314253
             ],
             'particles/blockcontent' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/blockcontent.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314253
             ],
             'particles/branding' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/branding.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314252
             ],
             'particles/contact' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/contact.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314252
             ],
             'particles/contentlist' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/contentlist.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314251
             ],
             'particles/copyright' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/copyright.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314250
             ],
             'particles/custom' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/custom.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314249
             ],
             'particles/date' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/date.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314249
             ],
             'particles/horizontalmenu' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/horizontalmenu.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314248
             ],
             'particles/imagegrid' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/imagegrid.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314248
             ],
             'particles/infolist' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/infolist.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314247
             ],
             'particles/logo' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/logo.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314246
             ],
             'particles/menu' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/menu.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314246
             ],
             'particles/mobile-menu' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/mobile-menu.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314245
             ],
             'particles/module' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/module.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314244
             ],
             'particles/newsletter' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/newsletter.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314244
             ],
             'particles/pagecontent' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/pagecontent.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314243
             ],
             'particles/position' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/position.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314243
             ],
             'particles/promocontent' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/promocontent.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314242
             ],
             'particles/promoimage' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/promoimage.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314241
             ],
             'particles/simplecounter' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/simplecounter.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314241
             ],
             'particles/social' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/social.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314240
             ],
             'particles/spacer' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/spacer.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314239
             ],
             'particles/system-messages' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/system-messages.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314239
             ],
             'particles/testimonial' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/testimonial.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314238
             ],
             'particles/totop' => [
                 'file' => 'templates/rt_salient/custom/config/default/particles/totop.yaml',
-                'modified' => 1444386810
+                'modified' => 1447314238
             ]
         ],
         'templates/rt_salient/config/default' => [
             'menu' => [
                 'file' => 'templates/rt_salient/config/default/menu.yaml',
-                'modified' => 1441941680
+                'modified' => 1447314207
             ],
             'particles/copyright' => [
                 'file' => 'templates/rt_salient/config/default/particles/copyright.yaml',
-                'modified' => 1441941680
+                'modified' => 1447314210
             ],
             'particles/logo' => [
                 'file' => 'templates/rt_salient/config/default/particles/logo.yaml',
-                'modified' => 1441941680
+                'modified' => 1447314209
             ],
             'particles/social' => [
                 'file' => 'templates/rt_salient/config/default/particles/social.yaml',
-                'modified' => 1441941680
+                'modified' => 1447314208
             ],
             'particles/totop' => [
                 'file' => 'templates/rt_salient/config/default/particles/totop.yaml',
-                'modified' => 1441941680
+                'modified' => 1447314207
             ],
             'styles' => [
                 'file' => 'templates/rt_salient/config/default/styles.yaml',
-                'modified' => 1441941680
+                'modified' => 1447314205
             ]
         ]
     ],
@@ -659,7 +659,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -687,7 +687,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -715,7 +715,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -769,11 +769,11 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
+                                        'size' => 20,
                                         'extra' => [
                                             
                                         ],
-                                        'fixed' => '1',
-                                        'size' => 20
+                                        'fixed' => '1'
                                     ],
                                     'children' => [
                                         0 => [
@@ -784,6 +784,7 @@ return [
                                             'attributes' => [
                                                 'enabled' => 1,
                                                 'rel' => 'home',
+                                                'image' => 'gantry-media://logo/logo.png',
                                                 'alt' => 'salient'
                                             ],
                                             'children' => [
@@ -798,11 +799,11 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
+                                        'size' => 60,
                                         'extra' => [
                                             
                                         ],
-                                        'fixed' => '1',
-                                        'size' => 60
+                                        'fixed' => '1'
                                     ],
                                     'children' => [
                                         0 => [
@@ -825,7 +826,10 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 20
+                                        'size' => 20,
+                                        'extra' => [
+                                            
+                                        ]
                                     ],
                                     'children' => [
                                         0 => [
@@ -834,7 +838,10 @@ return [
                                             'subtype' => 'social',
                                             'title' => 'Social',
                                             'attributes' => [
-                                                
+                                                'enabled' => 1,
+                                                'items' => [
+                                                    
+                                                ]
                                             ],
                                             'children' => [
                                                 
@@ -870,7 +877,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -898,7 +905,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -926,7 +933,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -976,7 +983,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1004,7 +1011,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1032,7 +1039,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1086,7 +1093,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1114,7 +1121,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1142,7 +1149,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1192,7 +1199,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1220,7 +1227,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1248,7 +1255,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1298,7 +1305,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1326,7 +1333,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1354,7 +1361,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1404,7 +1411,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1432,7 +1439,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1460,7 +1467,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1595,7 +1602,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.333300000000001,
+                                                                'size' => 33.33330000000000126192389870993793010711669921875,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -1623,7 +1630,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.333399999900003,
+                                                                'size' => 33.33339999990000279694868368096649646759033203125,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -1651,7 +1658,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.333300000000001,
+                                                                'size' => 33.33330000000000126192389870993793010711669921875,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -1799,7 +1806,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1827,7 +1834,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1855,7 +1862,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1905,7 +1912,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -1933,7 +1940,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333399999999997,
+                                        'size' => 33.3333999999999974761522025801241397857666015625,
                                         'extra' => [
                                             
                                         ]
@@ -1961,7 +1968,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -2011,7 +2018,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -2039,7 +2046,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -2067,7 +2074,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -2144,7 +2151,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.333300000000001,
+                                                                'size' => 33.33330000000000126192389870993793010711669921875,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -2172,7 +2179,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.333300000000001,
+                                                                'size' => 33.33330000000000126192389870993793010711669921875,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -2200,7 +2207,7 @@ return [
                                                             'subtype' => false,
                                                             'title' => 'Untitled',
                                                             'attributes' => [
-                                                                'size' => 33.333300000000001,
+                                                                'size' => 33.33330000000000126192389870993793010711669921875,
                                                                 'extra' => [
                                                                     
                                                                 ]
@@ -2317,10 +2324,10 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
                                         'extra' => [
                                             
-                                        ]
+                                        ],
+                                        'size' => 33.33330000000000126192389870993793010711669921875
                                     ],
                                     'children' => [
                                         0 => [
@@ -2331,7 +2338,7 @@ return [
                                             'attributes' => [
                                                 'enabled' => 1,
                                                 'rel' => 'home',
-                                                'image' => 'gantry-media://logo/logo-footer.png',
+                                                'image' => 'gantry-media://logo/logo.png',
                                                 'alt' => 'Salient',
                                                 'class' => 'g-footer-logo'
                                             ],
@@ -2347,7 +2354,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001
+                                        'size' => 33.33330000000000126192389870993793010711669921875
                                     ],
                                     'children' => [
                                         0 => [
@@ -2370,7 +2377,7 @@ return [
                                     'subtype' => false,
                                     'title' => 'Untitled',
                                     'attributes' => [
-                                        'size' => 33.333300000000001,
+                                        'size' => 33.33330000000000126192389870993793010711669921875,
                                         'extra' => [
                                             
                                         ]
@@ -2384,30 +2391,7 @@ return [
                                             'attributes' => [
                                                 'enabled' => 1,
                                                 'items' => [
-                                                    0 => [
-                                                        'icon' => 'fa fa-twitter fa-fw',
-                                                        'text' => '',
-                                                        'link' => 'http://twitter.com/rockettheme',
-                                                        'name' => 'Twitter'
-                                                    ],
-                                                    1 => [
-                                                        'icon' => 'fa fa-facebook fa-fw',
-                                                        'text' => '',
-                                                        'link' => 'http://facebook.com/rockettheme',
-                                                        'name' => 'Facebook'
-                                                    ],
-                                                    2 => [
-                                                        'icon' => 'fa fa-google fa-fw',
-                                                        'text' => '',
-                                                        'link' => 'https://plus.google.com/+rockettheme/about',
-                                                        'name' => 'Google'
-                                                    ],
-                                                    3 => [
-                                                        'icon' => 'fa fa-rss fa-fw',
-                                                        'text' => '',
-                                                        'link' => 'http://www.rockettheme.com/product-updates?rss',
-                                                        'name' => 'RSS'
-                                                    ]
+                                                    
                                                 ]
                                             ],
                                             'children' => [
