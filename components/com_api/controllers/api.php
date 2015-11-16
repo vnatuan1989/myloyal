@@ -525,7 +525,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['error'] = "";
 			$db->setQuery("SELECT userId FROM #__business WHERE id = $businessId");
 			$businessUserId = $db->loadResult();
-			$this->pushNotification($businessUserId, $customerFirstName." ".$customerLastName." have checked in your store.", 1, $businessId);
+			$return['push'] = $this->pushNotification($businessUserId, $customerFirstName." ".$customerLastName." have checked in your store.", 1, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Error when checkin";
@@ -830,7 +830,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newPoint'] = $newPoint;
-			$this->pushNotification($customerId, "You have received ".$point." points from ".$businessName, 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, "You have received ".$point." points from ".$businessName, 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Give point fail";
@@ -860,7 +860,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newPoint'] = $newPoint;
-			$this->pushNotification($customerId, "You have redeemed ".$point." points from ".$businessName, 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$point." points of you", 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Redeem point fail";
@@ -896,7 +896,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$this->pushNotification($customerId, "You have received 1 stamp from ".$businessName, 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, "You have received 1 stamp from ".$businessName, 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Give stamp fail";
@@ -930,7 +930,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$this->pushNotification($customerId, "You have taken back 1 stamp from ".$businessName, 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, $businessName." have taken back 1 stamp of you", 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Take back stamp fail";
@@ -961,7 +961,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$this->pushNotification($customerId, "You have redeemed ".$promotionStamp." stamps from ".$businessName, 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$promotionStamp." stamps of you", 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Redeem stamp fail";
@@ -974,10 +974,10 @@ class ApiControllerApi extends JControllerLegacy {
 		$data['businessId'] = $businessId;
 		$data = json_encode($data);
 		$customData['custom'] = $data;
-		$customData = json_encode($customData);print_r($customData);exit;
+		$customData = json_encode($customData);
 		
 		$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
-		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("9727D-054A0") * T("userId", EQ, '.$userId.')', 'data'=>$customData);
+		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("9727D-054A0") * T("userId", EQ, '.$userId.')', 'data'=>$data);
 
 		$request = json_encode($send);
 	 
@@ -992,6 +992,8 @@ class ApiControllerApi extends JControllerLegacy {
 		$response = curl_exec($ch);
 		$info = curl_getinfo($ch);
 		curl_close($ch);
+		
+		return $response;
 		//print "[PW] request: $request\n";
         //print "[PW] response: $response\n";
         //print "[PW] info: " . print_r($info, true);
