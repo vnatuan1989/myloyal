@@ -58,7 +58,8 @@ class ApiControllerApi extends JControllerLegacy {
                 'email_address' => $email,
                 'status'        => 'subscribed',
                 'merge_fields'  => array(
-                    'FNAME' => $name
+                    'FNAME' => $firstName,
+					'LNAME' => $lastName,
                 )
             );
             $json_data = json_encode($data);
@@ -523,9 +524,9 @@ class ApiControllerApi extends JControllerLegacy {
 		if($db->execute()){
 			$return['result'] = 1;
 			$return['error'] = "";
-			$db->setQuery("SELECT userId FROM #__business WHERE id = $businessId");
-			$businessUserId = $db->loadResult();
-			$return['push'] = $this->pushNotification($businessUserId, $customerFirstName." ".$customerLastName." have checked in your store.", 1, $businessId);
+			$db->setQuery("SELECT userId, type FROM #__business WHERE id = $businessId");
+			$business = $db->loadObject();
+			$return['push'] = $this->pushNotification($business->userId, $customerFirstName." ".$customerLastName." have checked in your store.", 1, $businessId, $business->type);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Error when checkin";
@@ -554,6 +555,23 @@ class ApiControllerApi extends JControllerLegacy {
 		$return['data'] = $data;
 		$return['data']['workingTime'] = $times;
 		
+		die(json_encode($return));
+	}
+	
+	public function getBusinessSimple(){
+		$businessId = JRequest::getVar("businessId");
+		
+		$db = JFactory::getDBO();
+		$q = "SELECT id as businessId, businessName, businessEmail, address, city, icon, latitude, longitude, type FROM #__business WHERE id = ".$businessId;
+		$db->setQuery($q);
+		$data = $db->loadAssoc();
+		
+		$return['result'] = 1;
+		$return['error'] = "";
+		if($data['icon']){
+			$data['icon'] = JURI::base()."images/business/".$data['icon'];
+		}
+		$return['data'] = $data;
 		die(json_encode($return));
 	}
 	
@@ -827,10 +845,14 @@ class ApiControllerApi extends JControllerLegacy {
 			$q = "SELECT point FROM #__point WHERE customerId = $customerId AND businessId = $businessId";
 			$db->setQuery($q);
 			$newPoint = $db->loadResult();
+			
+			$db->setQuery("SELECT type FROM #__business WHERE id = $businessId");
+			$businessType = $db->loadResult();
+			
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newPoint'] = $newPoint;
-			$return['push'] = $this->pushNotification($customerId, "You have received ".$point." points from ".$businessName, 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, "You have received ".$point." points from ".$businessName, 2, $businessId, $businessType);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Give point fail";
@@ -857,10 +879,13 @@ class ApiControllerApi extends JControllerLegacy {
 			$db->setQuery($q);
 			$newPoint = $db->loadResult();
 			
+			$db->setQuery("SELECT type FROM #__business WHERE id = $businessId");
+			$businessType = $db->loadResult();
+			
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newPoint'] = $newPoint;
-			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$point." points of you", 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$point." points of you", 2, $businessId, $businessType);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Redeem point fail";
@@ -893,10 +918,14 @@ class ApiControllerApi extends JControllerLegacy {
 			$q = "SELECT numStamp FROM #__stamp WHERE customerId = $customerId AND businessId = $businessId AND promotionId = $promotionId";
 			$db->setQuery($q);
 			$newNumStamp = $db->loadResult();
+			
+			$db->setQuery("SELECT type FROM #__business WHERE id = $businessId");
+			$businessType = $db->loadResult();
+			
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$return['push'] = $this->pushNotification($customerId, "You have received 1 stamp from ".$businessName, 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, "You have received 1 stamp from ".$businessName, 2, $businessId, $businessType);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Give stamp fail";
@@ -927,10 +956,13 @@ class ApiControllerApi extends JControllerLegacy {
 			$db->setQuery($q);
 			$newNumStamp = $db->loadResult();
 			
+			$db->setQuery("SELECT type FROM #__business WHERE id = $businessId");
+			$businessType = $db->loadResult();
+			
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$return['push'] = $this->pushNotification($customerId, $businessName." have taken back 1 stamp of you", 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, $businessName." have taken back 1 stamp of you", 2, $businessId, $businessType);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Take back stamp fail";
@@ -958,10 +990,13 @@ class ApiControllerApi extends JControllerLegacy {
 			$db->setQuery($q);
 			$newNumStamp = $db->loadResult();
 			
+			$db->setQuery("SELECT type FROM #__business WHERE id = $businessId");
+			$businessType = $db->loadResult();
+			
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$promotionStamp." stamps of you", 2, $businessId);
+			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$promotionStamp." stamps of you", 2, $businessId, $businessType);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Redeem stamp fail";
@@ -969,9 +1004,10 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
-	public function pushNotification($userId, $msg, $pushType, $businessId){
+	public function pushNotification($userId, $msg, $pushType, $businessId, $businessType){
 		$data['pushType'] = $pushType;
 		$data['businessId'] = $businessId;
+		$data['businessType'] = $businessType;
 		$data = json_encode($data);
 		$customData['custom'] = $data;
 		$customData = json_encode($customData);
