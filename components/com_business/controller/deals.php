@@ -57,7 +57,9 @@ class BusinessControllerDeals extends JControllerForm
         $result = $model->updateDeals($deals);
         if($result == true)
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals&layout=complete', false));
+            $this->setMessage(JText::_('Dine ændringen er nu gemt!'));
+            $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals', false));
+//            $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals&layout=complete', false));
         }
         else
         {
@@ -84,7 +86,9 @@ class BusinessControllerDeals extends JControllerForm
         $result = $model->newDeals($deals);
         if($result == true)
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals&layout=complete', false));
+            $this->setMessage(JText::_('Dine ændringen er nu gemt!'));
+            $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals', false));
+//            $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals&layout=complete', false));
         }
         else
         {

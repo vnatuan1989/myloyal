@@ -10,8 +10,7 @@
 defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
-JHtml::_('behavior.formvalidator');
-
+JHtml::_('behavior.formvalidator'); 
 ?>
 <script>
     $(document).ready(function() {
@@ -53,7 +52,7 @@ JHtml::_('behavior.formvalidator');
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h2 class="title"><i class="fa fa-home"></i> My Reports</h2>
+                                <h2 class="title"><i class="fa fa-home"></i> Statistiker</h2>
                             </div>
                         </div>
                     </div>
@@ -61,7 +60,7 @@ JHtml::_('behavior.formvalidator');
                 <section class="main-content">
                     <div class="container">
                         <div class="myreport mt50">
-                            <h2 class="text-center">Reports period</h2>
+                            <h2 class="text-center">Statistik Periode</h2>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -78,7 +77,7 @@ JHtml::_('behavior.formvalidator');
                             </div>                             
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btnSubmit" onclick="loadReport()">Submit</button>
+                                    <button type="button" class="btn btnSubmit" onclick="loadReport()">Vis</button>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +91,7 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h1 class="panel-title">No. of cutomer checkins during period.</h1>
+                                            <h1 class="panel-title">Antal af check-in’s i perioden.</h1>
                                         </div>
                                         <div class="panel-body">
                                             <div id="line-chart"></div>
@@ -103,7 +102,7 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h1 class="panel-title">No. of points awarded during period. </h1>
+                                            <h1 class="panel-title">Antal point givet i perioden. </h1>
                                         </div>
                                         <div class="panel-body">
                                             <div id="line-chart2"></div>
@@ -115,7 +114,7 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h1 class="panel-title">No. of stamps awarded during period. </h1>
+                                            <h1 class="panel-title">Antal kampagner givet i perioden. </h1>
                                         </div>
                                         <div class="panel-body">
                                             <div id="line-chart3"></div>
@@ -129,7 +128,7 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h1 class="panel-title">No. of rewards redeemed during period. (point) </h1>
+                                            <h1 class="panel-title">Antal point indløst i perioden. </h1>
                                         </div>
                                         <div class="panel-body">
                                             <div id="line-chart4"></div>
@@ -141,7 +140,7 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h1 class="panel-title">No. of rewards redeemed during period. (stamp) </h1>
+                                            <h1 class="panel-title">Antal kampagner indløst i perioden.</h1>
                                         </div>
                                         <div class="panel-body">
                                             <div id="line-chart5"></div>
@@ -152,7 +151,7 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h1 class="panel-title">Total for period.</h1>
+                                            <h1 class="panel-title">Total for perioden.</h1>
                                         </div>
                                         <div class="panel-body">
                                             <table class="table checkins">
@@ -180,13 +179,23 @@ JHtml::_('behavior.formvalidator');
     {
         var fromTime = $('#fromTime').val();
         var toTime = $('#toTime').val();
-        if(fromTime >= toTime)
+        var myDate = new Date();
+        
+        var toDate = (myDate.getMonth() + 1) + '/' + (myDate.getFullYear());
+        if(toTime > toDate)
         {
-            alert("From Time < To Time");
+            alert("To Time > Real Time");
         }
         else
         {
-            window.location = "<?php echo JRoute::_("index.php?option=com_business&view=reports")?>" + '&fromTime=' + fromTime + "&toTime=" + toTime;
+            if(fromTime >= toTime)
+            {
+                alert("From Time < To Time");
+            }
+            else
+            {
+                window.location = "<?php echo JRoute::_("index.php?option=com_business&view=reports")?>" + '&fromTime=' + fromTime + "&toTime=" + toTime;
+            }
         }
     }
 </script>
@@ -234,7 +243,7 @@ Morris.Line({
   data: checkinmonth,
   xkey: 'm',
   ykeys: ['a'],
-  labels: ['2014', '2015'],
+  labels: ['2015', '2015'],
   resize: true,
   pointFillColors:['#ffffff'],
   pointStrokeColors: ['black'],
@@ -253,7 +262,7 @@ Morris.Line({
   data: numStampsawarded,
   xkey: 'm',
   ykeys: ['a'],
-  labels: ['2014', '2015'],
+  labels: ['2015', '2015'],
   resize: true,
   pointFillColors:['#ffffff'],
   pointStrokeColors: ['black'],
@@ -272,7 +281,7 @@ Morris.Line({
   data: numRewardsredeemedstamp,
   xkey: 'm',
   ykeys: ['a'],
-  labels: ['2014', '2015'],
+  labels: ['2015', '2015'],
   resize: true,
   pointFillColors:['#ffffff'],
   pointStrokeColors: ['black'],
@@ -291,7 +300,7 @@ Morris.Line({
   data: numPointawarded,
   xkey: 'm',
   ykeys: ['a'],
-  labels: ['2014', '2015'],
+  labels: ['2015', '2015'],
   resize: true,
   pointFillColors:['#ffffff'],
   pointStrokeColors: ['black'],
@@ -310,7 +319,7 @@ Morris.Line({
   data: numRewardsredeemedpoint,
   xkey: 'm',
   ykeys: ['a'],
-  labels: ['2014', '2015'],
+  labels: ['2015', '2015'],
   resize: true,
   pointFillColors:['#ffffff'],
   pointStrokeColors: ['black'],

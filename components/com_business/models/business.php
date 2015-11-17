@@ -25,6 +25,7 @@ class BusinessModelBusiness extends JModelItem
         protected $workingtime;
         protected $userinfo;
         
+        
 	/**
 	 * Method to get a table object, load it if necessary.
 	 *

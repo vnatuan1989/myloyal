@@ -30,9 +30,10 @@ JHtml::_('behavior.formvalidator');
             <div class="content">
                 <section class="main-title">
                     <div class="container-fluid">
+                        
                         <div class="row">
                             <div class="col-lg-12">
-                                <h2 class="title"><i class="fa fa-home"></i> My deals</h2>
+                                <h2 class="title"><i class="fa fa-home"></i> Mine Tilbud</h2>
                             </div>
                         </div>
                     </div>
@@ -40,13 +41,13 @@ JHtml::_('behavior.formvalidator');
                 <section class="main-content">
                     <div class="container-fluid">
                         <div class="myloyalty-programs">
-                            <h2 class="text-center">Create and edit my deals</h2>  
+                            <h2 class="text-center">Opret og rediger dine tilbud</h2>  
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th><strong>My deals descripton</strong></th>
-                                        <th class="text-center"><strong>Vnde dag</strong></th>
-                                        <th class="text-center"><strong>Delete</strong></th>
+                                        <th><strong>Tilbud beskrivelse</strong></th>
+                                        <th class="text-center"><strong>Gyldig Til</strong></th>
+                                        <th class="text-center"><strong>Slet</strong></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -71,7 +72,7 @@ JHtml::_('behavior.formvalidator');
 <!--                                                    <button class="btn btnCreatecampaign" type="submit">Create promotion</button>
                                             <input type="hidden" name="option" value="com_business" />
                                             <input type="hidden" name="task" value="business.save" />-->
-                                            <a href="<?php echo JRoute::_("index.php?option=com_business&view=deals&layout=new")?>" class="btn btnCreatecampaign">Create deals</a>
+                                            <a href="<?php echo JRoute::_("index.php?option=com_business&view=deals&layout=new")?>" class="btn btnCreatecampaign">OPRET TILBUD</a>
                                         </td>
                                     </tr>
                                 </tbody>

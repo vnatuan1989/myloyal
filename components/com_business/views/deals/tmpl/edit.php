@@ -34,7 +34,7 @@ if(empty($this->dealsById))
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h2 class="title"><i class="fa fa-home"></i> My Deals</h2>
+                                <h2 class="title"><i class="fa fa-home"></i> Mine Tilbud</h2>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@ if(empty($this->dealsById))
                 <section class="main-content">
                     <div class="container-fluid">
                         <div class="myloyalty-programs">
-                            <h2 class="text-center">Edit deals</h2>  
+                            <h2 class="text-center">Rediger Tilbud</h2>  
                             <div class="frm-promotions">
                                 <form class="frm-business-setting" id="contact-form" action="<?php echo JRoute::_('index.php?option=com_business&task=deals.edit'); ?>" method="post" class="form-validate form-horizontal" enctype="multipart/form-data">
                                     
@@ -54,7 +54,7 @@ if(empty($this->dealsById))
                                                     <input type="text" value="<?php echo $this->dealsById['title'];?>" class="form-control" name="jform[title]">
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label for="">Valid until:</label>
+                                                    <label for="">Gyldig Til:</label>
                                                     <input type="text" class="form-control date_input" name="jform[endDate]" value="<?php echo date('d/m/Y',$this->dealsById['endDate']);?>">
                                                 </div>
                                             </div>
@@ -67,7 +67,7 @@ if(empty($this->dealsById))
                                         <textarea id="input" class="form-control" required="required" rows="3" name="jform[content]"><?php echo $this->dealsById['content'];?></textarea>
                                     </div>
                                     
-                                    <button type="submit" class="btn btnSubmit">Submit</button>
+                                    <button type="submit" class="btn btnSubmit">Gem</button>
                                     <input type="hidden" name="option" value="com_business" />
                                     <input type="hidden" name="jform[dealsid]" value="<?php echo $this->dealsById['id']?>" />
                                     <input type="hidden" name="task" value="deals.edit" />

@@ -16,7 +16,7 @@
         $fullhours[] = $opt_value;
     }
 ?>
-<p class="mt30"><strong>Opening hours:</strong></p>
+<p class="mt30"><strong>Åbningstider:</strong></p>
 <div class="form-group">
     <?php foreach($this->listDate as $key=>$date){
         $nameFrom = "jform[fromTime_".$key."]";

@@ -17,6 +17,15 @@ defined('_JEXEC') or die;
  */
 class BusinessControllerBusiness extends JControllerForm
 {
+    public $listNameIcon = array(
+            "Beer" => "beer.png",
+            "Coffee" => "coffee.png",
+            "Fitness" => "fitness.png",
+            "Harisalon" => "hairsalon.png",
+            "Hotel" => "hotel.png",
+            "Restaurant" => "restaurant.png",
+            "Shop" => "shop.png"
+        );
     public function save($key = null, $urlVar = NULL)
     {
 //        JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
@@ -43,7 +52,7 @@ class BusinessControllerBusiness extends JControllerForm
 
         // Get the user data.
         $requestData = $this->input->post->get('jform', array(), 'array');
-        
+        $icon = $this->input->post->get('jform_icon');
         $business = array();
         $workingtime = array();
         $userinfo = array();
@@ -53,15 +62,16 @@ class BusinessControllerBusiness extends JControllerForm
         $business['cvrNumber'] = $requestData['cvrNumber'];
         $business['shortName'] = $requestData['shortName'];
         $business['phone'] = $requestData['phone'];
-		$business['businessEmail'] = $requestData['businessEmail'];
+        $business['businessEmail'] = $requestData['businessEmail'];
         $business['website'] = $requestData['website'];
-        $business['icon'] = $requestData['icon'];
+        $business['icon'] = $this->listNameIcon[$icon];
         $business['address'] = $requestData['address'];
         $business['postnr'] = $requestData['postnr'];
         $business['postnrBy'] = $requestData['postnrBy'];
         $business['country'] = $requestData['country'];
         $business['latitude'] = $requestData['latitude'];
         $business['longitude'] = $requestData['longitude'];
+        
         
         $resultBusiness = $model->updateBusiness($business);
         
@@ -90,7 +100,9 @@ class BusinessControllerBusiness extends JControllerForm
         
         if($resultBusiness == TRUE && $resultUserinfo == TRUE && $resultWorkingtime == TRUE)
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_business&view=business&layout=complete', false));
+            $this->setMessage(JText::_('Dine ændringen er nu gemt!'));
+            $this->setRedirect(JRoute::_('index.php?option=com_business&view=business', false));
+//            $this->setRedirect(JRoute::_('index.php?option=com_business&view=business&layout=complete', false));
         }
         else
         {

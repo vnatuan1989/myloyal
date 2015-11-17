@@ -182,7 +182,7 @@ class BusinessModelPromotions extends JModelItem
         public function newPromotion($promotion)
         {
             $object = new stdClass();
-            $object->id = $promotion['id'];
+//            $object->id = $promotion['id'];
             $object->type = $promotion['type'];
             $object->point = $promotion['point'];
             $object->stamp = $promotion['stamp'];

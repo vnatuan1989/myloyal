@@ -31,6 +31,8 @@ class BusinessViewCustomers extends JViewLegacy
 	{
 		// Get the view data.
 		$this->customers		= $this->get('Customers');
+                $this->customersById		= $this->get('CustomerById');
+                $this->data		= $this->get('Business');
 
 		$this->state	= $this->get('State');
 		$this->params	= $this->state->get('params');

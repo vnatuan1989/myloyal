@@ -22,6 +22,8 @@ class BusinessModelCustomers extends JModelItem
 	 */
         
         protected $customers;
+        protected $customersById;
+        protected $data;
         
 
 	/**
@@ -111,4 +113,59 @@ class BusinessModelCustomers extends JModelItem
                 }
             }
         }
+        public function getBusiness()
+	{
+            $user = JFactory::getUser();
+            if (!is_array($this->data))
+            {
+                    $this->data = array();
+            }
+
+            if (isset($this->data))
+            {
+                    // load data for business
+                    $db    = JFactory::getDbo();
+                    $query = $db->getQuery(true);
+
+                    // Create the base select statement.
+                    $query->select('*')
+                    ->from($db->quoteName('#__business','a'))
+                    ->where($db->quoteName('a.userId') . ' = ' . $user->id);
+
+                    $db->setQuery($query);
+                    // Assign the message
+                    $this->data = $db->loadAssoc();
+            }
+            return $this->data;
+	}
+        public function getCustomerById()
+	{
+            $jinput = JFactory::getApplication()->input;
+            $customerId     = $jinput->get('customerid', 1, 'INT');
+            
+            $user = JFactory::getUser();
+            
+            if (!is_array($this->customersById))
+            {
+                    $this->customersById = array();
+            }
+
+            if (isset($this->customersById))
+            {
+                    // load data for business
+                    $db    = JFactory::getDbo();
+                    $query = $db->getQuery(true);
+
+                    // Create the base select statement.
+                    $query->select('a.*')
+                    ->from($db->quoteName('#__users','a'))
+                    ->where($db->quoteName('a.id') . ' = ' . $customerId);
+
+                    $db->setQuery($query);
+                    // Assign the message
+                    $this->customersById = $db->loadAssoc();
+            }
+            
+            return $this->customersById;
+	}
 }

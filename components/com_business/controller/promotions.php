@@ -33,7 +33,9 @@ class BusinessControllerPromotions extends JControllerForm
         
         if($result == true)
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=complete', false));
+            $this->setMessage(JText::_('Dine ændringen er nu gemt!'));
+            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions', false));
+//            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=complete', false));
         }
         else
         {
@@ -70,7 +72,9 @@ class BusinessControllerPromotions extends JControllerForm
         $result = $model->updatePromotion($promotion);
         if($result == true)
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=complete', false));
+            $this->setMessage(JText::_('Dine ændringen er nu gemt!'));
+            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions', false));
+//            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=complete', false));
         }
         else
         {
@@ -85,9 +89,9 @@ class BusinessControllerPromotions extends JControllerForm
         $model	= $this->getModel('Promotions', 'BusinessModel');
         $requestData = $this->input->post->get('jform', array(), 'array');
         $promotion = array();
-        $promotion['id'] = $requestData['promotionid'];
+//        $promotion['id'] = $requestData['promotionid'];
         $promotion['type'] = $requestData['promotion_type'];
-        switch ($requestData['type']){
+        switch ($requestData['promotion_type']){
             case "1":
                 $promotion['point'] = $requestData['pointorstamp'];
                 $promotion['stamp'] = "";
@@ -106,15 +110,26 @@ class BusinessControllerPromotions extends JControllerForm
         $promotion['endDate'] = $this->stringToTime($requestData['endDate']);
         $promotion['createdAt'] = time();
         $promotion['updatedAt'] = time();
-        
-        $result = $model->newPromotion($promotion);
-        if($result == true)
+        $allpromotion = $model->getPromotions();
+        $total = count($allpromotion);
+        if($total >= "4")
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=complete', false));
+            $this->setMessage(JText::_('You can not create promotion because your promotions is maximum now .'),'warning');
+            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=fail', false));
         }
         else
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=fail', false));
+            $result = $model->newPromotion($promotion);
+            if($result == true)
+            {
+                $this->setMessage(JText::_('Dine ændringen er nu gemt!'));
+                $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions', false));
+    //            $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=complete', false));
+            }
+            else
+            {
+                $this->setRedirect(JRoute::_('index.php?option=com_business&view=promotions&layout=fail', false));
+            }
         }
     }
     

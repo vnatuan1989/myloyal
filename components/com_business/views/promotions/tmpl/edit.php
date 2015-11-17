@@ -34,7 +34,7 @@ if(empty($this->promotionById))
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h2 class="title"><i class="fa fa-home"></i> My promotions</h2>
+                                <h2 class="title"><i class="fa fa-home"></i> Mine Kampagner</h2>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@ if(empty($this->promotionById))
                 <section class="main-content">
                     <div class="container-fluid">
                         <div class="myloyalty-programs">
-                            <h2 class="text-center">Edit promotion</h2>  
+                            <h2 class="text-center">Rediger Kampagner</h2>  
                             <div class="frm-promotions">
                                 <form class="frm-business-setting" id="contact-form" action="<?php echo JRoute::_('index.php?option=com_business&task=promotions.edit'); ?>" method="post" class="form-validate form-horizontal" enctype="multipart/form-data">
                                     <div class="form-group">
@@ -85,18 +85,18 @@ if(empty($this->promotionById))
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label for="">Vnde dag:</label>
+                                                <label for="">Gyldig Fra:</label>
                                                 <input type="text" class="form-control date_input" name="jform[startDate]" value="<?php echo date('d/m/Y',$this->promotionById['startDate']);?>">
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="">Valid until:</label>
+                                                <label for="">Gyldig Fra:</label>
                                                 <input type="text" class="form-control date_input" name="jform[endDate]" value="<?php echo date('d/m/Y',$this->promotionById['endDate']);?>">
                                             </div>
                                         </div>
                                         
                                     </div>
                                     
-                                    <button type="submit" class="btn btnSubmit">Submit</button>
+                                    <button type="submit" class="btn btnSubmit">Gem</button>
                                     <input type="hidden" name="option" value="com_business" />
                                     <input type="hidden" name="jform[promotionid]" value="<?php echo $this->promotionById['id']?>" />
                                     <input type="hidden" name="task" value="promotions.edit" />

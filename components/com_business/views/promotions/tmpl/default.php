@@ -30,6 +30,7 @@ JHtml::_('behavior.formvalidator');
             <div class="content">
                 <section class="main-title">
                     <div class="container-fluid">
+                        
                         <div class="row">
                             <div class="col-lg-12">
                                 <h2 class="title"><i class="fa fa-home"></i> My promotions</h2>
@@ -40,14 +41,14 @@ JHtml::_('behavior.formvalidator');
                 <section class="main-content">
                     <div class="container-fluid">
                         <div class="myloyalty-programs">
-                            <h2 class="text-center">Create and edit my promotions</h2>  
+                            <h2 class="text-center">Opret og rediger dine kampagner</h2>  
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th><strong>My promotion descripton</strong></th>
-                                        <th class="text-center"><strong>Valiq until</strong></th>
-                                        <th class="text-center"><strong>Vnde dag</strong></th>
-                                        <th class="text-center"><strong>Delete</strong></th>
+                                        <th><strong>Kampagne beskrivelse</strong></th>
+                                        <th class="text-center"><strong>Gyldig Fra</strong></th>
+                                        <th class="text-center"><strong>Gyldig Til</strong></th>
+                                        <th class="text-center"><strong>Slet</strong></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -63,7 +64,7 @@ JHtml::_('behavior.formvalidator');
                                         <td class="text-center"><?php echo date('d/m/Y',$promotion['endDate']);?></td>
                                         <td class="text-center"><a style="cursor: pointer;" onclick="deleteFunction(<?php echo $promotion['id']?>)" ><i class="fa fa-trash-o"></i></a></td>
                                         <!--<td class="text-center"><a onclick="deleteFunction(<?php echo $promotion['id']?>)" href="<?php echo JRoute::_("index.php?option=com_business&task=promotions.delete&id=").$promotion['id']?>"><i class="fa fa-trash-o"></i></a></td>-->
-                                        <td><a href="<?php echo JRoute::_("index.php?option=com_business&view=promotions&layout=edit&id=").$promotion['id']?>" class="btn btnEdit">Edit</a></td>
+                                        <td><a href="<?php echo JRoute::_("index.php?option=com_business&view=promotions&layout=edit&id=").$promotion['id']?>" class="btn btnEdit">Rediger</a></td>
                                     </tr>
                                     <?php
                                     }?>
@@ -73,7 +74,7 @@ JHtml::_('behavior.formvalidator');
 <!--                                                    <button class="btn btnCreatecampaign" type="submit">Create promotion</button>
                                             <input type="hidden" name="option" value="com_business" />
                                             <input type="hidden" name="task" value="business.save" />-->
-                                            <a href="<?php echo JRoute::_("index.php?option=com_business&view=promotions&layout=new")?>" class="btn btnCreatecampaign">Create promotion</a>
+                                            <a href="<?php echo JRoute::_("index.php?option=com_business&view=promotions&layout=new")?>" class="btn btnCreatecampaign">OPRET KAMPAGNE</a>
                                         </td>
                                     </tr>
                                 </tbody>
