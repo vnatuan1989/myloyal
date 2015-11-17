@@ -522,9 +522,9 @@ class UsersModelRegistration extends JModelForm
 //                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude,type) "
 //                        . " values ($user->id , '{$business_data['businessName']}' , '{$business_data['phone']}', '{$business_data['cvrNumber']}' , "
 //                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}','{$business_data['type']}') ";
-                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude) "
+                $querybusiness = "insert into #__business (userId,businessName,phone,cvrNumber,createdAt,updatedAt,latitude,address,longitude,city,country,icon) "
                         . " values ($user->id , '{$business_data['businessName']}' , '{$business_data['phone']}', '{$business_data['cvrNumber']}' , "
-                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}') ";
+                        . "'$datetime' , '$datetime' , '{$business_data['latitude']}' , '{$business_data['address']}' , '{$business_data['longitude']}' , '{$business_data['city']}' , '{$business_data['country']}','coffee.png') ";
                 $db = JFactory::getDbo();
                 $db->setQuery($querybusiness);
                 $db->execute();

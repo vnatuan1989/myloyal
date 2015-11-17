@@ -74,7 +74,7 @@ JHtml::_('bootstrap.framework');
 //$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/hide.js', 'text/javascript');
 //$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/respond.src.js', 'text/javascript');
 //$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/template.js', 'text/javascript');
-////$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/ddslick.js', 'text/javascript');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/ddslick.js', 'text/javascript');
 //$doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/ddjs.js', 'text/javascript');
 $doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/jquery.js', 'text/javascript');
 $doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/jquery.ui.datepicker-da.js', 'text/javascript');
@@ -98,6 +98,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/javascript/
 		<![endif]-->
                 <script src='http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js'></script>
                 <script src='http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js'></script>
+                <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
 
 	</head>
 	<body id="shadow">

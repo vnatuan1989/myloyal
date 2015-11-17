@@ -180,7 +180,8 @@ jQuery( document ).ready(function() {
 			jQuery("#jform_telephone_number").val(data.phone);
 			jQuery("#jform_company_name").val(data.name);
 			jQuery("#jform_email").val(data.email);
-			jQuery("#jform_businessaddress").val(data.address+""+data.city);
+			jQuery("#jform_businessaddress").val(data.address+", "+data.city);
+                        jQuery("#jform_city").val(data.city);
 			
 		});
     });
@@ -272,6 +273,7 @@ jQuery( document ).ready(function() {
 <!--                        <a class="btn" href="<?php echo JRoute::_('');?>" title="<?php echo JText::_('JCANCEL');?>"><?php echo JText::_('JCANCEL');?></a>-->
                         <input type="hidden" name="option" value="com_users" />
                         <input type="hidden" name="task" value="registration.register" />
+                        <input type="hidden" name="jform[city]" id="jform_city" value="" />
                     </div>
                 </div>
             </div>

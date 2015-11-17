@@ -1,7 +1,7 @@
 <?php
 return [
     'file' => 'gantry-theme://css-compiled/salient-joomla_23.css',
-    'timestamp' => 1447315616,
+    'timestamp' => 1447582951,
     'md5' => '9b5b63327cb0ee337ad6a46e7f16ea64',
     'variables' => [
         'above-background' => '#080808',

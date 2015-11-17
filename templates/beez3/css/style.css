@@ -97,10 +97,15 @@ h2 {font-family: "Helvetica Neue", Helvetica,Arial,sans-serif;font-weight: norma
 
 .fl {float: left;} .fr {float: right;} .text-right {text-align: right;} .text-left {text-align: left;} .mt50 {margin-top: 50px;}
 
-.name {
+/*.name {
     float: left;
     margin-top: 30px;
     margin-left: 75px;
+}*/
+.name {
+    float: left;
+    margin-top: 30px;
+    margin-left: 0px;
 }
 
 .header {
