@@ -428,7 +428,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$i = 0;
 			foreach($stores as $store){
 				if($store['icon']){
-					$stores[$i]['icon'] = JURI::base().$store['icon'];
+					$stores[$i]['icon'] = JURI::base()."images/business/".$store['icon'];
 				}
 				$i++;
 			}
@@ -458,7 +458,7 @@ class ApiControllerApi extends JControllerLegacy {
 			foreach($stores as $store){
 				$stores[$i]['distance'] = $this->distance($store['latitude'], $store['longitude'], $lat, $long);
 				if($store['icon']){
-					$stores[$i]['icon'] = JURI::base().$store['icon'];
+					$stores[$i]['icon'] = JURI::base()."images/business/".$store['icon'];
 				}
 				$i++;
 			}
@@ -497,7 +497,7 @@ class ApiControllerApi extends JControllerLegacy {
 			foreach($stores as $store){
 				$stores[$i]['distance'] = $this->distance($store['latitude'], $store['longitude'], $lat, $long);
 				if($store['icon']){
-					$stores[$i]['icon'] = JURI::base().$store['icon'];
+					$stores[$i]['icon'] = JURI::base()."images/business/".$store['icon'];
 				}
 				$i++;
 			}
@@ -525,7 +525,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['error'] = "";
 			$db->setQuery("SELECT userId FROM #__business WHERE id = $businessId");
 			$businessUserId = $db->loadResult();
-			$this->pushNotification($businessUserId, $customerFirstName." ".$customerLastName." have checked in your store.");
+			$return['push'] = $this->pushNotification($businessUserId, $customerFirstName." ".$customerLastName." have checked in your store.", 1, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Error when checkin";
@@ -549,7 +549,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$return['result'] = 1;
 		$return['error'] = "";
 		if($data['icon']){
-			$data['icon'] = JURI::base().$data['icon'];
+			$data['icon'] = JURI::base()."images/business/".$data['icon'];
 		}
 		$return['data'] = $data;
 		$return['data']['workingTime'] = $times;
@@ -575,7 +575,7 @@ class ApiControllerApi extends JControllerLegacy {
 				$return['result'] = 1;
 				$return['error'] = "";
 				for($i=0; $i<count($promotions); $i++){
-					$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+					$promotions[$i]['icon'] = JURI::base()."images/promotion/".$promotions[$i]['icon'];
 				}
 				$return['promotions'] = $promotions;
 			} else {
@@ -594,7 +594,7 @@ class ApiControllerApi extends JControllerLegacy {
 				foreach($promotions as $promotion){
 					$db->setQuery("SELECT numStamp FROM #__stamp WHERE promotionId = ".$promotion['id']." AND customerId = ".$customerId);
 					$promotions[$i]['myStamp'] = $db->loadResult();
-					$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+					$promotions[$i]['icon'] = JURI::base()."images/promotion/".$promotions[$i]['icon'];
 					$i++;
 				}
 				$return['promotions'] = $promotions;
@@ -639,6 +639,7 @@ class ApiControllerApi extends JControllerLegacy {
 			
 			$return['result'] = 1;
 			$return['error'] = "";
+			$return['userId'] = $user->id;
 			$return['businessId'] = $data->id;
 			$return['businessName'] = $data->businessName;
 			$return['businessType'] = $data->type;
@@ -704,7 +705,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['data'] = $users;
 		} else {
 			$return['result'] = 0;
-			$return['error'] = "Butikker blev ikke fundet. Klik her for at opdatere.";
+			$return['error'] = "Der er ingen som har checket ind i butikken endnu.";
 			$return['data'] = "";
 		}
 		die(json_encode($return));
@@ -760,7 +761,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$db->setQuery($q);
 		$customer = $db->loadAssoc();
 		if($customer['avatar']){
-			$customer['avatar'] = JURI::base().$customer['avatar'];
+			$customer['avatar'] = JURI::base()."images/avatar/".$customer['avatar'];
 		}
 		$q = "SELECT createdAt FROM #__checkin WHERE customerId = ".$customerId." AND businessId = ".$businessId." ORDER BY createdAt DESC LIMIT 1";
 		$db->setQuery($q);
@@ -778,7 +779,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$promotions = $db->loadAssocList();
 			
 			for($i=0; $i<count($promotions); $i++){
-				$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+				$promotions[$i]['icon'] = JURI::base()."images/promotion/".$promotions[$i]['icon'];
 			}
 			$return['promotions'] = $promotions;
 		} else {
@@ -792,7 +793,7 @@ class ApiControllerApi extends JControllerLegacy {
 				foreach($promotions as $promotion){
 					$db->setQuery("SELECT numStamp FROM #__stamp WHERE promotionId = ".$promotion['id']." AND customerId = ".$customerId);
 					$promotions[$i]['customerStamp'] = $db->loadResult();
-					$promotions[$i]['icon'] = JURI::base().$promotions[$i]['icon'];
+					$promotions[$i]['icon'] = JURI::base()."images/promotion/".$promotions[$i]['icon'];
 					$i++;
 				}
 				$return['promotions'] = $promotions;
@@ -829,7 +830,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newPoint'] = $newPoint;
-			$this->pushNotification($customerId, "You have received ".$point." points from ".$businessName);
+			$return['push'] = $this->pushNotification($customerId, "You have received ".$point." points from ".$businessName, 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Give point fail";
@@ -859,7 +860,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newPoint'] = $newPoint;
-			$this->pushNotification($customerId, "You have redeemed ".$point." points from ".$businessName);
+			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$point." points of you", 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Redeem point fail";
@@ -895,7 +896,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$this->pushNotification($customerId, "You have received 1 stamp from ".$businessName);
+			$return['push'] = $this->pushNotification($customerId, "You have received 1 stamp from ".$businessName, 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Give stamp fail";
@@ -929,7 +930,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$this->pushNotification($customerId, "You have taken back 1 stamp from ".$businessName);
+			$return['push'] = $this->pushNotification($customerId, $businessName." have taken back 1 stamp of you", 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Take back stamp fail";
@@ -960,7 +961,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['result'] = 1;
 			$return['error'] = "";
 			$return['newNumStamp'] = $newNumStamp;
-			$this->pushNotification($customerId, "You have redeemed ".$promotionStamp." stamps from ".$businessName);
+			$return['push'] = $this->pushNotification($customerId, $businessName. " have redeemed ".$promotionStamp." stamps of you", 2, $businessId);
 		} else {
 			$return['result'] = 0;
 			$return['error'] = "Redeem stamp fail";
@@ -968,9 +969,15 @@ class ApiControllerApi extends JControllerLegacy {
 		die(json_encode($return));
 	}
 	
-	public function pushNotification($userId, $msg){
+	public function pushNotification($userId, $msg, $pushType, $businessId){
+		$data['pushType'] = $pushType;
+		$data['businessId'] = $businessId;
+		$data = json_encode($data);
+		$customData['custom'] = $data;
+		$customData = json_encode($customData);
+		
 		$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
-		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("9727D-054A0") * T("userId", EQ, '.$userId.')');
+		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("9727D-054A0") * T("userId", EQ, '.$userId.')', 'data'=>$data);
 
 		$request = json_encode($send);
 	 
@@ -985,6 +992,8 @@ class ApiControllerApi extends JControllerLegacy {
 		$response = curl_exec($ch);
 		$info = curl_getinfo($ch);
 		curl_close($ch);
+		
+		return $response;
 		//print "[PW] request: $request\n";
         //print "[PW] response: $response\n";
         //print "[PW] info: " . print_r($info, true);
