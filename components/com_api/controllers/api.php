@@ -1077,4 +1077,14 @@ class ApiControllerApi extends JControllerLegacy {
 		}
 		die(json_encode($return));
 	}
+	
+	public function testSendForDeal(){
+		$businessId = JRequest::getVar("businessId");
+		$db = JFactory::getDBO();
+		$db->setQuery("SELECT DISTINCT(customerId) FROM #__checkin WHERE businessId = $businessId");
+		$ids = $db->loadColumn();
+		foreach($ids as $id){
+			
+		}
+	}
 }
