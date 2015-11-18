@@ -231,4 +231,15 @@ class UsersControllerRegistration extends UsersController
 
 		return true;
 	}
+	
+	public function setType(){
+		$type = JRequest::getVar("type");
+		$businessId = JRequest::getVar("businessId");
+		
+		$db = JFactory::getDBO();
+		$db->setQuery("UPDATE #__business SET type = $type WHERE id = $businessId");
+		$db->execute();
+		
+		$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete'));
+	}
 }
