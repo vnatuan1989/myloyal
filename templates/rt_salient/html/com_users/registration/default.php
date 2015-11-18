@@ -246,6 +246,9 @@ jQuery( document ).ready(function() {
                         <div class="form-group">
                             <input id="jform_password2" class="validate-password required form-control" type="password" aria-required="true" required="required" size="30" value="" name="jform[password2]" placeholder="Gentag Kodeord">
                         </div>
+                        <div class="form-group">
+                            <input id="jform_noter" class="validate-password required form-control" type="text" aria-required="true" required="required" size="30" value="" name="jform[noter]" placeholder="Noter">
+                        </div>
 		<?php echo JHtml::_('form.token');?>
             </div>
            
