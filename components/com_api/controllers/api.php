@@ -123,6 +123,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$confirmPassword = JRequest::getVar("confirmPassword");
 		$avatar = JRequest::getVar("avatar");
 		$removeAvatar = JRequest::getVar("removeAvatar");
+		$post = JRequest::getVar("post");
 		
 		if($password != $confirmPassword){
 			$return["result"] = 0;
@@ -162,7 +163,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		$db = JFactory::getDBO();
 		$name = $firstName." ".$lastName;
-		$q = "UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."'".$passStr.$avatarStr." WHERE id = ".$userId;
+		$q = "UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."', post = $post".$passStr.$avatarStr." WHERE id = ".$userId;
 		$db->setQuery($q);
 		if($db->execute()){
 			$db->setQuery("SELECT * FROM #__users WHERE id = $userId");
@@ -216,7 +217,7 @@ class ApiControllerApi extends JControllerLegacy {
 				$return["result"] = 0;
 				$return["error"] = "You can't use this email, it is in use";
 			} else {
-				$q = "INSERT INTO #__users(name, username, email, sendEmail, registerDate, lastName, firstName, facebookId) VALUES ('".$name."', '".$email."', '".$email."', 1, NOW(), '".$firstName."', '".$lastName."', '".$facebookId."')";
+				$q = "INSERT INTO #__users(name, username, email, sendEmail, registerDate, lastName, firstName, facebookId, post) VALUES ('".$name."', '".$email."', '".$email."', 1, NOW(), '".$firstName."', '".$lastName."', '".$facebookId."', 1)";
 				$db->setQuery($q);
 				$db->execute();
 				
@@ -543,7 +544,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$db->setQuery($q);
 		$times = $db->loadAssocList();
 		
-		$q = "SELECT businessName, businessEmail, address, city, icon, latitude, longitude, type FROM #__business WHERE id = ".$businessId;
+		$q = "SELECT businessName, businessEmail, address, city, icon, latitude, longitude, type, phone, website FROM #__business WHERE id = ".$businessId;
 		$db->setQuery($q);
 		$data = $db->loadAssoc();
 		
@@ -1013,7 +1014,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$customData = json_encode($customData);
 		
 		$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
-		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("9727D-054A0") * T("userId", EQ, '.$userId.')', 'data'=>$data);
+		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$msg, 'devices_filter'=>'A("9727D-054A0") * (T("userId", EQ, '.$userId.') + T("userId", EQ, '.$userId.'))', 'data'=>$data);
 
 		$request = json_encode($send);
 	 
@@ -1080,11 +1081,32 @@ class ApiControllerApi extends JControllerLegacy {
 	
 	public function testSendForDeal(){
 		$businessId = JRequest::getVar("businessId");
+		
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT DISTINCT(customerId) FROM #__checkin WHERE businessId = $businessId");
 		$ids = $db->loadColumn();
 		foreach($ids as $id){
-			
+			$arr[] = 'T("userId", EQ, '.$id.')';
 		}
+		$str = implode("+", $arr);
+		
+		$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
+		$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>'Testing to send group notification when create a deal', 'devices_filter'=>'A("9727D-054A0") * ('.$str.')', 'data'=>$data);
+
+		$request = json_encode($send);
+	 
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+		curl_setopt($ch, CURLOPT_HEADER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+	 
+		$response = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		curl_close($ch);
+		
+		print_r($response);exit;
 	}
 }

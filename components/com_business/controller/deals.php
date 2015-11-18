@@ -86,6 +86,36 @@ class BusinessControllerDeals extends JControllerForm
         $result = $model->newDeals($deals);
         if($result == true)
         {
+			$businessId = $deals['businessId'];
+		
+			$db = JFactory::getDBO();
+			$db->setQuery("SELECT businessName FROM #__business WHERE id = $businessId");
+			$businessName = $db->loadResult();
+			
+			$db->setQuery("SELECT DISTINCT(customerId) FROM #__checkin WHERE businessId = $businessId");
+			$ids = $db->loadColumn();
+			foreach($ids as $id){
+				$arr[] = 'T("userId", EQ, '.$id.')';
+			}
+			$str = implode("+", $arr);
+			
+			$url = 'https://cp.pushwoosh.com/json/1.3/createTargetedMessage';
+			$send['request'] = array('auth' => 'C4jIJrQCJLlubwb7pPvBDsdcA9SdGSIkRynZC2vZ0J4y7jkEuUiq6GjDK7LFVMeifC72FuSVtRqjzDqXpEYX', 'send_date'=>'now', 'content'=>$businessName.' kører nu et nyt tilbud!"', 'devices_filter'=>'A("9727D-054A0") * ('.$str.')', 'data'=>$data);
+	
+			$request = json_encode($send);
+		 
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+			curl_setopt($ch, CURLOPT_HEADER, true);
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+		 
+			$response = curl_exec($ch);
+			$info = curl_getinfo($ch);
+			curl_close($ch);
+		
             $this->setMessage(JText::_('Dine ændringen er nu gemt!'));
             $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals', false));
 //            $this->setRedirect(JRoute::_('index.php?option=com_business&view=deals&layout=complete', false));
