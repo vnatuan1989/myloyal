@@ -603,8 +603,11 @@ class ApiControllerApi extends JControllerLegacy {
 		$businessType = JRequest::getVar("businessType");
 		
 		$db = JFactory::getDBO();
-		/*$db->setQuery("SELECT type FROM #__business WHERE id = ".$businessId);*/
+		
 		if($businessType == 1){
+			$db->setQuery("SELECT pointDescription FROM #__business WHERE id = ".$businessId);
+			$return['pointDescription'] = $db->loadResult();
+			
 			$return['myPoint'] = $this->_getPoint($customerId, $businessId);
 			
 			$q = "SELECT id, title, content, point, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
@@ -683,6 +686,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['businessId'] = $data->id;
 			$return['businessName'] = $data->businessName;
 			$return['businessType'] = $data->type;
+			$return['firstTime'] = $user->firstTime;
 			
 		} else {
 			$return["result"] = 0;
@@ -738,6 +742,12 @@ class ApiControllerApi extends JControllerLegacy {
 					$users[$i]['avatar'] = "";
 				}
 				$users[$i]['elapsed'] = $this->_timeElapsedString($user['createdAt']);
+				if(in_array($user['customerId'], $this->getBestCustomer())){
+					$users[$i]['star'] = 1;
+				} else {
+					$users[$i]['star'] = 0;
+				}
+				
 				$i++;
 			}
 			$return['result'] = 1;
@@ -773,6 +783,12 @@ class ApiControllerApi extends JControllerLegacy {
 				$users[$i]['createdAt'] = $db->loadResult();
 				$users[$i]['elapsed'] = $this->_timeElapsedString($users[$i]['createdAt']);
 				$users[$i]['customerId'] = $user['id'];
+				if(in_array($user['id'], $this->getBestCustomer())){
+					$users[$i]['star'] = 1;
+				} else {
+					$users[$i]['star'] = 0;
+				}
+				die('rtyrty');
 				$i++;
 			}
 			function cmp_by_createdAt($a, $b) {
@@ -1062,7 +1078,7 @@ class ApiControllerApi extends JControllerLegacy {
 		$long = JRequest::getVar("long");
 		
 		$db = JFactory::getDBO();
-		$q = "SELECT id as businessId, businessName, icon, address, latitude, longitude, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 25 ORDER BY distance;";
+		$q = "SELECT id as businessId, businessName, icon, address, latitude, longitude, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(".$long.") ) + sin( radians(".$lat.") ) * sin( radians( latitude ) ) ) ) AS distance FROM #__business HAVING distance < 10000 ORDER BY distance;";
 		$db->setQuery($q);
 		$stores = $db->loadAssocList();
 		
@@ -1129,5 +1145,22 @@ class ApiControllerApi extends JControllerLegacy {
 		curl_close($ch);
 		
 		print_r($response);exit;
+	}
+	
+	public function getBestCustomer(){
+		$businessId = JRequest::getVar("businessId");
+		
+		$db = JFactory::getDBO();
+		$db->setQuery("SELECT COUNT(*) as num FROM #__checkin WHERE businessId = $businessId GROUP BY customerId , businessId");
+		$all = $db->loadObjectList();
+		
+		$amount = count($all);
+		$limit = round($amount*0.1);
+		$db->setQuery("SELECT COUNT(*) as num , customerId FROM #__checkin WHERE businessId = $businessId GROUP BY customerId , businessId ORDER BY num DESC LIMIT $limit");
+		$userIds = $db->loadObjectList();
+		foreach($userIds as $userId){
+			$arr[] = $userId->customerId;
+		}
+		return $arr;
 	}
 }
