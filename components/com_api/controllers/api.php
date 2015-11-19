@@ -211,6 +211,11 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['email'] = $user->email;
 			$return['avatar'] = "";
 			$return['facebook_id'] = $facebookId;
+			
+			$db->setQuery("SELECT post FROM #__users WHERE facebookId = '".$facebookId."'");	
+			$post = $db->loadResult();
+			$return['post'] = $post;
+		
 		} else {
 			$db->setQuery("SELECT id FROM #__users WHERE email = '".$email."'");
 			if($db->loadResult()){
@@ -233,6 +238,7 @@ class ApiControllerApi extends JControllerLegacy {
 				$return['email'] = $email;
 				$return['avatar'] = "";
 				$return['facebook_id'] = $facebookId;
+				$return['post'] = 1;
 			}
 		}
 		die(json_encode($return));

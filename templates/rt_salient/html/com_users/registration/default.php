@@ -172,11 +172,13 @@ jQuery( document ).ready(function() {
 		var cvr = jQuery("#jform_cvr_number").val();
 		jQuery.getJSON("http://cvrapi.dk/api?search="+cvr+"&country=dk", function(data){
 			var name = data.owners[0].name;
-			var lastName = name.split(" ").pop();
-			jQuery("#jform_second_name").val(lastName);
-			var lastIndex = name.lastIndexOf(" ");
-			var firstName = name.substring(0, lastIndex);
-			jQuery("#jform_first_name").val(firstName);
+			if(name){
+				var lastName = name.split(" ").pop();
+				jQuery("#jform_second_name").val(lastName);
+				var lastIndex = name.lastIndexOf(" ");
+				var firstName = name.substring(0, lastIndex);
+				jQuery("#jform_first_name").val(firstName);
+			}
 			jQuery("#jform_telephone_number").val(data.phone);
 			jQuery("#jform_company_name").val(data.name);
 			jQuery("#jform_email").val(data.email);
