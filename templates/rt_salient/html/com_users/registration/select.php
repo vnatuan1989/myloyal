@@ -68,7 +68,7 @@ jQuery( document ).ready(function() {
                                     <li>Integer vitae libero ac risus egestas</li>
                                     <li>Vestibulum commodo felis quis tortor</li>
                                 </ul>
-                                <a href="index.php?option=com_users&task=user.setType&type=1&businessId=<?php echo $businessId;?>" class="btn btnGetgoing pull-right">vælge Points</a>
+                                <a href="index.php?option=com_users&task=registration.setType&type=1&businessId=<?php echo $businessId;?>" class="btn btnGetgoing pull-right">vælge Points</a>
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12 text-center">
@@ -93,7 +93,7 @@ jQuery( document ).ready(function() {
                                     <li>Integer vitae libero ac risus egestas</li>
                                     <li>Vestibulum commodo felis quis tortor</li>
                                 </ul>
-                                <a href="index.php?option=com_users&task=user.setType&type=2&businessId=<?php echo $businessId;?>" class="btn btnGetgoing">vælge stampel</a>
+                                <a href="index.php?option=com_users&task=registration.setType&type=2&businessId=<?php echo $businessId;?>" class="btn btnGetgoing">vælge stampel</a>
                             </div>
                         </div>
                     </div>

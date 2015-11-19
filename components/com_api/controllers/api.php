@@ -123,7 +123,6 @@ class ApiControllerApi extends JControllerLegacy {
 		$confirmPassword = JRequest::getVar("confirmPassword");
 		$avatar = JRequest::getVar("avatar");
 		$removeAvatar = JRequest::getVar("removeAvatar");
-		$post = JRequest::getVar("post");
 		
 		if($password != $confirmPassword){
 			$return["result"] = 0;
@@ -163,7 +162,7 @@ class ApiControllerApi extends JControllerLegacy {
 		
 		$db = JFactory::getDBO();
 		$name = $firstName." ".$lastName;
-		$q = "UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."', post = $post".$passStr.$avatarStr." WHERE id = ".$userId;
+		$q = "UPDATE #__users SET name = '".$name."', firstName = '".$firstName."', lastName = '".$lastName."'".$passStr.$avatarStr." WHERE id = ".$userId;
 		$db->setQuery($q);
 		if($db->execute()){
 			$db->setQuery("SELECT * FROM #__users WHERE id = $userId");
@@ -240,6 +239,22 @@ class ApiControllerApi extends JControllerLegacy {
 				$return['facebook_id'] = $facebookId;
 				$return['post'] = 1;
 			}
+		}
+		die(json_encode($return));
+	}
+	
+	public function changePostSetting(){
+		$status = JRequest::getVar("status");
+		$userId = JRequest::getVar("userId");
+		
+		$db = JFactory::getDBO();
+		$db->setQuery("UPDATE #__users SET post = $status WHERE id = $userId");
+		if($db->execute()){
+			$return['result'] = 1;
+			$return['error'] = "";
+		} else {
+			$return['result'] = 0;
+			$return['error'] = "Change fail";
 		}
 		die(json_encode($return));
 	}
