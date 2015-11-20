@@ -65,7 +65,7 @@ class ApiControllerApi extends JControllerLegacy {
             $json_data = json_encode($data);
 
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://us2.api.mailchimp.com/3.0/lists/92480b6fc3/members/');
+            curl_setopt($ch, CURLOPT_URL, 'https://us12.api.mailchimp.com/3.0/lists/92480b6fc3/members/');
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Basic '.$auth));
             curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -78,7 +78,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return["mailchimp"] = $result;
 		}
 				
-		$return["result"] = 1;	
+		$return["result"] = 1;
 		die(json_encode($return));	
 	}
 	
@@ -107,7 +107,7 @@ class ApiControllerApi extends JControllerLegacy {
 			$return['email'] = $user->email;
 			$return['avatar'] = JURI::base()."images/avatar/".$user->avatar;
 			$return['facebookId'] = "";
-			
+			$return['firstTime'] = $user->firstTime;
 		} else {
 			$return["result"] = 0;
 			$return["error"] = "Email or password is incorrect";
@@ -214,7 +214,8 @@ class ApiControllerApi extends JControllerLegacy {
 			$db->setQuery("SELECT post FROM #__users WHERE facebookId = '".$facebookId."'");	
 			$post = $db->loadResult();
 			$return['post'] = $post;
-		
+			$return['firstTime'] = 1;
+			
 		} else {
 			$db->setQuery("SELECT id FROM #__users WHERE email = '".$email."'");
 			if($db->loadResult()){
@@ -238,6 +239,7 @@ class ApiControllerApi extends JControllerLegacy {
 				$return['avatar'] = "";
 				$return['facebook_id'] = $facebookId;
 				$return['post'] = 1;
+				$return['firstTime'] = 0;
 			}
 		}
 		die(json_encode($return));
@@ -699,20 +701,20 @@ class ApiControllerApi extends JControllerLegacy {
 		$etime = time() - $ptime;
 		if ($etime < 10)
 		{
-			return 'just now';
+			return 'lige nu';
 		}
-		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
-					30 * 24 * 60 * 60       =>  'month',
-					24 * 60 * 60            =>  'day',
-					60 * 60                 =>  'hour',
-					60                      =>  'minute',
-					1                       =>  'second'
+		$a = array( 12 * 30 * 24 * 60 * 60  =>  'år',
+					30 * 24 * 60 * 60       =>  'måneder',
+					24 * 60 * 60            =>  'dage',
+					60 * 60                 =>  'timer',
+					60                      =>  'minutter',
+					1                       =>  'sekunder'
 					);
 		foreach ($a as $secs => $str){
 			$d = $etime / $secs;
 			if ($d >= 1){
 				$r = round($d);
-				return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
+				return $r . ' ' . $str . ($r > 1 ? '' : '') . ' siden';
 			}
 		}
 	}
@@ -731,11 +733,12 @@ class ApiControllerApi extends JControllerLegacy {
 		if($users){
 			$i = 0;
 			foreach($users as $user){
-				$q = "SELECT firstname, lastname, avatar FROM #__users WHERE id = ".$user['customerId'];
+				$q = "SELECT firstname, lastname, avatar, facebookId FROM #__users WHERE id = ".$user['customerId'];
 				$db->setQuery($q);
 				$tmp = $db->loadObject();
 				$users[$i]['firstname'] = $tmp->firstname;
 				$users[$i]['lastname'] = $tmp->lastname;
+				$users[$i]['facebookId'] = $tmp->facebookId;
 				if($tmp->avatar){
 					$users[$i]['avatar'] = JURI::base()."images/avatar/".$tmp->avatar;
 				} else {
@@ -762,11 +765,12 @@ class ApiControllerApi extends JControllerLegacy {
 	}
 	
 	public function searchCustomer(){
+		$businessId = JRequest::getVar("businessId");
 		$keyword = JRequest::getVar("keyword");
 		$keyword = strtolower($keyword);
 		
 		$db = JFactory::getDBO();
-		$q = "SELECT id, firstname, lastname, avatar FROM #__users WHERE LOWER(`firstname`) LIKE '%".$keyword."%' OR LOWER(`lastname`) LIKE '%".$keyword."%'";
+		$q = "SELECT id, firstname, lastname, avatar, facebookId FROM #__users WHERE LOWER(`firstname`) LIKE '%".$keyword."%' OR LOWER(`lastname`) LIKE '%".$keyword."%'";
 		$db->setQuery($q);
 		$users = $db->loadAssocList();
 		
@@ -788,7 +792,6 @@ class ApiControllerApi extends JControllerLegacy {
 				} else {
 					$users[$i]['star'] = 0;
 				}
-				die('rtyrty');
 				$i++;
 			}
 			function cmp_by_createdAt($a, $b) {
@@ -829,7 +832,6 @@ class ApiControllerApi extends JControllerLegacy {
 			$db->setQuery($q);
 			$customer['customerPoint'] = $db->loadResult();	
 			$return['customer'] = $customer;
-			
 			$q = "SELECT id, title, content, point, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
 			$db->setQuery($q);
 			$promotions = $db->loadAssocList();
@@ -838,6 +840,10 @@ class ApiControllerApi extends JControllerLegacy {
 				$promotions[$i]['icon'] = JURI::base()."images/promotion/".$promotions[$i]['icon'];
 			}
 			$return['promotions'] = $promotions;
+			
+			$q = "SELECT pointDescription FROM #__business WHERE id = ".$businessId;
+			$db->setQuery($q);
+			$return['pointDescription'] = $db->loadResult();	
 		} else {
 			$return['customer'] = $customer;
 			$q = "SELECT id, title, content, stamp, icon FROM #__promotion WHERE businessId = ".$businessId." AND endDate > ".time();
@@ -1162,5 +1168,17 @@ class ApiControllerApi extends JControllerLegacy {
 			$arr[] = $userId->customerId;
 		}
 		return $arr;
+	}
+	
+	public function setFirstTime(){
+		$userId = JRequest::getVar("userId");
+		
+		$db = JFactory::getDBO();
+		$db->setQuery("UPDATE #__users SET firstTime = 1 WHERE id = $userId");
+		$db->execute();
+		
+		$return['result'] = 1;
+		$return['error'] = "";
+		die(json_encode($return));
 	}
 }
